@@ -21,7 +21,7 @@
     <artifactId>favourite-lyrics</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>favourite-lyrics</name>
-    <description>Spring Hexagonal Architecture Demo Project</description>
+    <description>Favourite Lyrics App</description>
 
     <properties>
         <java.version>13</java.version>

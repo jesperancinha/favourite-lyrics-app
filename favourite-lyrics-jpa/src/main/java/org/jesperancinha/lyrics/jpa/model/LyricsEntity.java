@@ -32,5 +32,4 @@ public class LyricsEntity {
     @Column
     private String participatingArtist;
 
-
 }

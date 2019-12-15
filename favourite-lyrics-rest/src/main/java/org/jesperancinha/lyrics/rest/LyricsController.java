@@ -28,4 +28,7 @@ public interface LyricsController {
     @GetMapping("/lyrics")
     ResponseEntity<List<LyricsDto>> getLyrics();
 
+    @GetMapping("/lyrics/random")
+    ResponseEntity<LyricsDto> getRandomLyric();
+
 }
