@@ -30,7 +30,7 @@ public class LyricsEntity {
     private String lyrics;
 
     @Column
-    private String author;
+    private String participatingArtist;
 
 
 }

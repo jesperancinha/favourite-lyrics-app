@@ -30,19 +30,19 @@ public class LyricsJpaAdapter implements LyricsPersistencePort {
 
     @Override
     public void removeLyrics(LyricsDto lyricsDto) {
-        lyricsRepository.deleteAllByAuthor(lyricsDto.getAuthor());
+        lyricsRepository.deleteAllByParticipatingArtist(lyricsDto.getParticipatingArtist());
     }
 
     @Override
     public void updateLyrics(LyricsDto lyricsDto) {
-        final LyricsEntity byAuthor = lyricsRepository.findByAuthor(lyricsDto.getAuthor());
-        if (Objects.nonNull(byAuthor)) {
-            byAuthor.setLyrics(lyricsDto.getLyrics());
-            lyricsRepository.save(byAuthor);
+        final LyricsEntity byParticipatingArtist = lyricsRepository.findByParticipatingArtist(lyricsDto.getParticipatingArtist());
+        if (Objects.nonNull(byParticipatingArtist)) {
+            byParticipatingArtist.setLyrics(lyricsDto.getLyrics());
+            lyricsRepository.save(byParticipatingArtist);
         } else {
             final LyricsEntity byLyrics = lyricsRepository.findByLyrics(lyricsDto.getLyrics());
             if (Objects.nonNull(byLyrics)) {
-                byLyrics.setAuthor(lyricsDto.getAuthor());
+                byLyrics.setParticipatingArtist(lyricsDto.getParticipatingArtist());
                 lyricsRepository.save(byLyrics);
             }
         }
@@ -65,14 +65,14 @@ public class LyricsJpaAdapter implements LyricsPersistencePort {
 
     private LyricsEntity getLyricsEntity(LyricsDto lyricsDto) {
         return LyricsEntity.builder()
-                .author(lyricsDto.getAuthor())
+                .participatingArtist(lyricsDto.getParticipatingArtist())
                 .lyrics(lyricsDto.getLyrics())
                 .build();
     }
 
     private LyricsDto getLyrics(LyricsEntity lyricsEntity) {
         return LyricsDto.builder()
-                .author(lyricsEntity.getAuthor())
+                .participatingArtist(lyricsEntity.getParticipatingArtist())
                 .lyrics(lyricsEntity.getLyrics())
                 .build();
     }

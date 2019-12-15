@@ -29,7 +29,7 @@ public class LyricsDemoApplicationLauncherTest {
     @Test
     void givenLyrics_whenAddAndUpdateAndThenRemoveLyrics_thenEntity() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
-                .author(TEST_ARTIST_NAME)
+                .participatingArtist(TEST_ARTIST_NAME)
                 .lyrics(TEST_LYRICS)
                 .build();
 
@@ -42,8 +42,8 @@ public class LyricsDemoApplicationLauncherTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.author").exists())
-                .andExpect(jsonPath("$.author").value(TEST_ARTIST_NAME))
+                .andExpect(jsonPath("$.participatingArtist").exists())
+                .andExpect(jsonPath("$.participatingArtist").value(TEST_ARTIST_NAME))
                 .andExpect(jsonPath("$.lyrics").exists())
                 .andExpect(jsonPath("$.lyrics").value(TEST_LYRICS));
 
@@ -58,8 +58,8 @@ public class LyricsDemoApplicationLauncherTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.author").exists())
-                .andExpect(jsonPath("$.author").value(TEST_ARTIST_NAME))
+                .andExpect(jsonPath("$.participatingArtist").exists())
+                .andExpect(jsonPath("$.participatingArtist").value(TEST_ARTIST_NAME))
                 .andExpect(jsonPath("$.lyrics").exists())
                 .andExpect(jsonPath("$.lyrics").value(TEST_LYRICS_2));
 
@@ -72,7 +72,7 @@ public class LyricsDemoApplicationLauncherTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.author").doesNotExist())
+                .andExpect(jsonPath("$.participatingArtist").doesNotExist())
                 .andExpect(jsonPath("$.lyrics").doesNotExist());
     }
 
@@ -82,24 +82,24 @@ public class LyricsDemoApplicationLauncherTest {
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(5)))
-                .andExpect(jsonPath("$[0].author").exists())
-                .andExpect(jsonPath("$[0].author").value("William Orbit"))
+                .andExpect(jsonPath("$[0].participatingArtist").exists())
+                .andExpect(jsonPath("$[0].participatingArtist").value("William Orbit"))
                 .andExpect(jsonPath("$[0].lyrics").exists())
                 .andExpect(jsonPath("$[0].lyrics").value("Sky fits heaven so fly it"))
-                .andExpect(jsonPath("$[1].author").exists())
-                .andExpect(jsonPath("$[1].author").value("Ava Max"))
+                .andExpect(jsonPath("$[1].participatingArtist").exists())
+                .andExpect(jsonPath("$[1].participatingArtist").value("Ava Max"))
                 .andExpect(jsonPath("$[1].lyrics").exists())
                 .andExpect(jsonPath("$[1].lyrics").value("Baby I'm torn"))
-                .andExpect(jsonPath("$[2].author").exists())
-                .andExpect(jsonPath("$[2].author").value("Faun"))
+                .andExpect(jsonPath("$[2].participatingArtist").exists())
+                .andExpect(jsonPath("$[2].participatingArtist").value("Faun"))
                 .andExpect(jsonPath("$[2].lyrics").exists())
                 .andExpect(jsonPath("$[2].lyrics").value("Wenn wir uns wiedersehen"))
-                .andExpect(jsonPath("$[3].author").exists())
-                .andExpect(jsonPath("$[3].author").value("Abel"))
+                .andExpect(jsonPath("$[3].participatingArtist").exists())
+                .andExpect(jsonPath("$[3].participatingArtist").value("Abel"))
                 .andExpect(jsonPath("$[3].lyrics").exists())
                 .andExpect(jsonPath("$[3].lyrics").value("Het is al lang verleden tijd"))
-                .andExpect(jsonPath("$[4].author").exists())
-                .andExpect(jsonPath("$[4].author").value("Billie Eilish"))
+                .andExpect(jsonPath("$[4].participatingArtist").exists())
+                .andExpect(jsonPath("$[4].participatingArtist").value("Billie Eilish"))
                 .andExpect(jsonPath("$[4].lyrics").exists())
                 .andExpect(jsonPath("$[4].lyrics").value("Chest always so puff guy"));
     }
@@ -109,8 +109,8 @@ public class LyricsDemoApplicationLauncherTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.author").exists())
-                .andExpect(jsonPath("$.author").value("William Orbit"))
+                .andExpect(jsonPath("$.participatingArtist").exists())
+                .andExpect(jsonPath("$.participatingArtist").value("William Orbit"))
                 .andExpect(jsonPath("$.lyrics").exists())
                 .andExpect(jsonPath("$.lyrics").value("Sky fits heaven so fly it"));
     }
@@ -120,7 +120,7 @@ public class LyricsDemoApplicationLauncherTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/7")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.author").doesNotExist())
+                .andExpect(jsonPath("$.participatingArtist").doesNotExist())
                 .andExpect(jsonPath("$.lyrics").doesNotExist());
     }
 }

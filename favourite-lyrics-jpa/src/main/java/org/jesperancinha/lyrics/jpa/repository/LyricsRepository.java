@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LyricsRepository extends JpaRepository<LyricsEntity, Long> {
 
-    void deleteAllByAuthor(String name);
+    void deleteAllByParticipatingArtist(String name);
 
-    LyricsEntity findByAuthor(String Name);
+    LyricsEntity findByParticipatingArtist(String Name);
 
     LyricsEntity findByLyrics(String Lyrics);
 }

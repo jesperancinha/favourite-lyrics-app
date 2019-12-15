@@ -42,7 +42,7 @@ public class LyricsControllerImplTest {
     @Test
     void givenLyrics_whenAddLyrics_thenEntityIsPortedToService() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
-                .author(TEST_AUTHOR)
+                .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
 
@@ -59,7 +59,7 @@ public class LyricsControllerImplTest {
     @Test
     void givenLyrics_whenUpdateLyrics_thenEntityUpdateIsPortedToService() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
-                .author(TEST_AUTHOR)
+                .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
 
@@ -75,7 +75,7 @@ public class LyricsControllerImplTest {
     @Test
     void givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToService() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
-                .author(TEST_AUTHOR)
+                .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
 
@@ -91,7 +91,7 @@ public class LyricsControllerImplTest {
     @Test
     void givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToService() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
-                .author(TEST_AUTHOR)
+                .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
         when(lyricsServicePort.getAllLyrics()).thenReturn(Collections.singletonList(testLyricsDto));
@@ -99,9 +99,9 @@ public class LyricsControllerImplTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].author")
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].participatingArtist")
                         .exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].author")
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].participatingArtist")
                         .value(TEST_AUTHOR))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].lyrics")
                         .exists())
@@ -114,7 +114,7 @@ public class LyricsControllerImplTest {
     @Test
     void givenArtisId_whenCallingGetLyricsById_thenFindByIdToService() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
-                .author(TEST_AUTHOR)
+                .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
         when(lyricsServicePort.getLyricsById(1L)).thenReturn(testLyricsDto);
@@ -122,9 +122,9 @@ public class LyricsControllerImplTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.author")
+                .andExpect(MockMvcResultMatchers.jsonPath("$.participatingArtist")
                         .exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.author")
+                .andExpect(MockMvcResultMatchers.jsonPath("$.participatingArtist")
                         .value(TEST_AUTHOR))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lyrics")
                         .exists())
@@ -139,7 +139,7 @@ public class LyricsControllerImplTest {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.author")
+                .andExpect(MockMvcResultMatchers.jsonPath("$.participatingArtist")
                         .doesNotExist());
 
         verify(lyricsServicePort, only()).getLyricsById(1L);

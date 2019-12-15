@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         final LyricsServicePort lyricsServicePort = new LyricsServiceAdapter(createMockLyricsPersistencePort());
         final LyricsDto lyricsDto = LyricsDto.builder()
-                .author("Aretha Franklin")
+                .participatingArtist("Aretha Franklin")
                 .lyrics("find out what it means to me")
                 .build();
         lyricsServicePort.addLyrics(lyricsDto);
@@ -29,12 +29,12 @@ public class Main {
         assert allLyricsDtos.size() == 1;
         final LyricsDto lyricsDto1 = allLyricsDtos.get(0);
         assert lyricsDto1
-                .getAuthor()
+                .getParticipatingArtist()
                 .equals("Gloria Gaynor");
         assert lyricsDto1
                 .getLyrics()
                 .equals("First I was afraid, I was petrified");
-        assert lyricsDtoById.getAuthor()
+        assert lyricsDtoById.getParticipatingArtist()
                 .equals("Alesha Dixon");
         assert lyricsDtoById.getLyrics()
                 .equals("Does he wash up? Never wash up");
@@ -60,7 +60,7 @@ public class Main {
             @Override
             public List<LyricsDto> getAllLyrics() {
                 final LyricsDto lyricsDto = LyricsDto.builder()
-                        .author("Gloria Gaynor")
+                        .participatingArtist("Gloria Gaynor")
                         .lyrics("First I was afraid, I was petrified")
                         .build();
                 return Collections.singletonList(lyricsDto);
@@ -69,7 +69,7 @@ public class Main {
             @Override
             public LyricsDto getLyricsById(Long lyricsId) {
                 return LyricsDto.builder()
-                        .author("Alesha Dixon")
+                        .participatingArtist("Alesha Dixon")
                         .lyrics("Does he wash up? Never wash up")
                         .build();
             }

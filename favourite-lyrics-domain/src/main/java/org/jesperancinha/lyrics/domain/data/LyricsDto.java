@@ -13,6 +13,6 @@ public class LyricsDto {
 
     private String lyrics;
 
-    private String author;
+    private String participatingArtist;
 
 }
