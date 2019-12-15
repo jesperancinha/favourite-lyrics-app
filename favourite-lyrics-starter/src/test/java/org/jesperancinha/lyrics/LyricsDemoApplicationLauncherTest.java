@@ -101,7 +101,7 @@ public class LyricsDemoApplicationLauncherTest {
                 .andExpect(jsonPath("$[4].participatingArtist").exists())
                 .andExpect(jsonPath("$[4].participatingArtist").value("Billie Eilish"))
                 .andExpect(jsonPath("$[4].lyrics").exists())
-                .andExpect(jsonPath("$[4].lyrics").value("Chest always so puff guy"));
+                .andExpect(jsonPath("$[4].lyrics").value("Chest always so puffed guy"));
     }
 
     @Test
