@@ -15,3 +15,13 @@ OpenJDK 64-Bit Server VM AdoptOpenJDK (build 13.0.1+9, mixed mode, sharing)
 
 You need to have this version installed.
 I've achieved this by using [SDK-MAN](https://sdkman.io/)
+
+## References
+
+-   http://www.planetb.ca/syntax-highlight-word
+-   https://alistair.cockburn.us/hexagonal-architecture/
+-   https://www.getpostman.com/
+-   https://spring.io/guides/gs/serving-web-content/
+-   https://junit.org/junit5/docs/current/user-guide/
+-   https://site.mockito.org/
+-   https://joel-costigliola.github.io/assertj/
