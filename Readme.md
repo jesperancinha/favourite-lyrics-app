@@ -20,13 +20,13 @@ I've achieved this by using [SDK-MAN](https://sdkman.io/)
 
 ## References
 
--   http://www.planetb.ca/syntax-highlight-word
--   https://alistair.cockburn.us/hexagonal-architecture/
--   https://www.getpostman.com/
--   https://spring.io/guides/gs/serving-web-content/
--   https://junit.org/junit5/docs/current/user-guide/
--   https://site.mockito.org/
--   https://joel-costigliola.github.io/assertj/
+-   [PlantB Code Highlighter](http://www.planetb.ca/syntax-highlight-word)
+-   [Hexagonal Architecture by Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
+-   [Postman](https://www.getpostman.com/)
+-   [Serving Web Content Spring IO](https://spring.io/guides/gs/serving-web-content/)
+-   [JUnit](https://junit.org/junit5/docs/current/user-guide/)
+-   [Mockito](https://site.mockito.org/)
+-   [AssertJ](https://joel-costigliola.github.io/assertj/)
 
 ## About me
 
