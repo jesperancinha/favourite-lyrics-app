@@ -1,10 +1,14 @@
 # Favourite lyrics app
-![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)
+[![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)](https://gitlab.com/jesperancinha/favourite-lyrics-app/pipelines)
 
 This project is an implementation of a Favourite lyrics app.
 It contains an implementation to be used as an example of Hexagonal Architecture implemented in Java and Spring.
 
 This is a part of a series of studies I am making about DDD(Domain driven architecture)
+
+This project is also the official support project of my article on medium:
+
+[Hexagonal Architecture](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
 
 ## Settings
 
