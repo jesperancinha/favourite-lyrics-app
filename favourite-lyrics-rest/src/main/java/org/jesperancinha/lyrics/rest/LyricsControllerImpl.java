@@ -1,7 +1,7 @@
 package org.jesperancinha.lyrics.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jesperancinha.lyrics.core.port.LyricsServicePort;
+import org.jesperancinha.lyrics.core.port.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -15,36 +15,36 @@ import java.util.Random;
 @RestController
 public class LyricsControllerImpl implements LyricsController {
 
-    private final LyricsServicePort lyricsServicePort;
+    private final LyricsService lyricsService;
 
     private final Random random = new Random();
 
-    public LyricsControllerImpl(LyricsServicePort lyricsServicePort) {
-        this.lyricsServicePort = lyricsServicePort;
+    public LyricsControllerImpl(LyricsService lyricsService) {
+        this.lyricsService = lyricsService;
     }
 
     @Override
     public ResponseEntity<Void> addLyrics(LyricsDto lyricsDto) {
-        lyricsServicePort.addLyrics(lyricsDto);
+        lyricsService.addLyrics(lyricsDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<String> removeLyrics(LyricsDto lyricsDto) {
-        lyricsServicePort.removeLyrics(lyricsDto);
+        lyricsService.removeLyrics(lyricsDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<String> updateLyrics(LyricsDto lyricsDto) {
-        lyricsServicePort.updateLyrics(lyricsDto);
+        lyricsService.updateLyrics(lyricsDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<LyricsDto> getLyricsById(Long lyricsId) {
         try {
-            return new ResponseEntity<>(lyricsServicePort.getLyricsById(lyricsId), HttpStatus.OK);
+            return new ResponseEntity<>(lyricsService.getLyricsById(lyricsId), HttpStatus.OK);
         } catch (LyricsNotFoundException ex) {
             log.error("Error!", ex);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,12 +53,12 @@ public class LyricsControllerImpl implements LyricsController {
 
     @Override
     public ResponseEntity<List<LyricsDto>> getLyrics() {
-        return new ResponseEntity<>(lyricsServicePort.getAllLyrics(), HttpStatus.OK);
+        return new ResponseEntity<>(lyricsService.getAllLyrics(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<LyricsDto> getRandomLyric() {
-        final List<LyricsDto> allLyrics = lyricsServicePort.getAllLyrics();
+        final List<LyricsDto> allLyrics = lyricsService.getAllLyrics();
         final int size = allLyrics.size();
         return new ResponseEntity<>(allLyrics.get(random.nextInt(size)), HttpStatus.OK);
     }

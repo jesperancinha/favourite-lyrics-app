@@ -17,10 +17,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class LyricsServiceAdapterTest {
+public class LyricsServiceImplTest {
 
     @InjectMocks
-    private LyricsServiceAdapter lyricsServicePort;
+    private LyricsServiceImpl lyricsServicePort;
 
     @Mock
     private LyricsPersistencePort lyricsPersistencePort;

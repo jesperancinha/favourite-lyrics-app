@@ -1,7 +1,7 @@
 package org.jesperancinha.lyrics.test;
 
-import org.jesperancinha.lyrics.core.adapter.LyricsServiceAdapter;
-import org.jesperancinha.lyrics.core.port.LyricsServicePort;
+import org.jesperancinha.lyrics.core.adapter.LyricsServiceImpl;
+import org.jesperancinha.lyrics.core.port.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 
@@ -16,16 +16,16 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        final LyricsServicePort lyricsServicePort = new LyricsServiceAdapter(createMockLyricsPersistencePort());
+        final LyricsService lyricsService = new LyricsServiceImpl(createMockLyricsPersistencePort());
         final LyricsDto lyricsDto = LyricsDto.builder()
                 .participatingArtist("Aretha Franklin")
                 .lyrics("find out what it means to me")
                 .build();
-        lyricsServicePort.addLyrics(lyricsDto);
-        lyricsServicePort.updateLyrics(lyricsDto);
-        lyricsServicePort.removeLyrics(lyricsDto);
-        final List<LyricsDto> allLyricsDtos = lyricsServicePort.getAllLyrics();
-        final LyricsDto lyricsDtoById = lyricsServicePort.getLyricsById(1L);
+        lyricsService.addLyrics(lyricsDto);
+        lyricsService.updateLyrics(lyricsDto);
+        lyricsService.removeLyrics(lyricsDto);
+        final List<LyricsDto> allLyricsDtos = lyricsService.getAllLyrics();
+        final LyricsDto lyricsDtoById = lyricsService.getLyricsById(1L);
         assert allLyricsDtos.size() == 1;
         final LyricsDto lyricsDto1 = allLyricsDtos.get(0);
         assert lyricsDto1

@@ -1,6 +1,6 @@
 package org.jesperancinha.lyrics.core.adapter;
 
-import org.jesperancinha.lyrics.core.port.LyricsServicePort;
+import org.jesperancinha.lyrics.core.port.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 import org.springframework.stereotype.Service;
@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class LyricsServiceAdapter implements LyricsServicePort {
+public class LyricsServiceImpl implements LyricsService {
 
     private final LyricsPersistencePort lyricsPersistencePort;
 
-    public LyricsServiceAdapter(LyricsPersistencePort lyricsPersistencePort) {
+    public LyricsServiceImpl(LyricsPersistencePort lyricsPersistencePort) {
         this.lyricsPersistencePort = lyricsPersistencePort;
     }
 

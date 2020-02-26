@@ -4,7 +4,7 @@ import org.jesperancinha.lyrics.domain.data.LyricsDto;
 
 import java.util.List;
 
-public interface LyricsServicePort {
+public interface LyricsService {
 
     void addLyrics(LyricsDto lyricsDto);
 

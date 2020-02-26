@@ -1,7 +1,6 @@
 package org.jesperancinha.lyrics.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.jesperancinha.lyrics.core.port.LyricsServicePort;
+import org.jesperancinha.lyrics.core.port.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ public class LyricsControllerImplTest {
     private MockMvc mvc;
 
     @MockBean
-    private LyricsServicePort lyricsServicePort;
+    private LyricsService lyricsService;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -52,7 +51,7 @@ public class LyricsControllerImplTest {
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
-        verify(lyricsServicePort, only()).addLyrics(testLyricsDto);
+        verify(lyricsService, only()).addLyrics(testLyricsDto);
     }
 
 
@@ -69,7 +68,7 @@ public class LyricsControllerImplTest {
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(lyricsServicePort, only()).updateLyrics(testLyricsDto);
+        verify(lyricsService, only()).updateLyrics(testLyricsDto);
     }
 
     @Test
@@ -85,7 +84,7 @@ public class LyricsControllerImplTest {
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(lyricsServicePort, only()).removeLyrics(testLyricsDto);
+        verify(lyricsService, only()).removeLyrics(testLyricsDto);
     }
 
     @Test
@@ -94,7 +93,7 @@ public class LyricsControllerImplTest {
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
-        when(lyricsServicePort.getAllLyrics()).thenReturn(Collections.singletonList(testLyricsDto));
+        when(lyricsService.getAllLyrics()).thenReturn(Collections.singletonList(testLyricsDto));
 
         mvc.perform(MockMvcRequestBuilders.get("/lyrics")
                 .accept(APPLICATION_JSON))
@@ -108,7 +107,7 @@ public class LyricsControllerImplTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].lyrics")
                         .value(TEST_LYRICS));
 
-        verify(lyricsServicePort, only()).getAllLyrics();
+        verify(lyricsService, only()).getAllLyrics();
     }
 
     @Test
@@ -117,7 +116,7 @@ public class LyricsControllerImplTest {
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
-        when(lyricsServicePort.getLyricsById(1L)).thenReturn(testLyricsDto);
+        when(lyricsService.getLyricsById(1L)).thenReturn(testLyricsDto);
 
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
                 .accept(APPLICATION_JSON))
@@ -131,7 +130,7 @@ public class LyricsControllerImplTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lyrics")
                         .value(TEST_LYRICS));
 
-        verify(lyricsServicePort, only()).getLyricsById(1L);
+        verify(lyricsService, only()).getLyricsById(1L);
     }
 
     @Test
@@ -142,7 +141,7 @@ public class LyricsControllerImplTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.participatingArtist")
                         .doesNotExist());
 
-        verify(lyricsServicePort, only()).getLyricsById(1L);
+        verify(lyricsService, only()).getLyricsById(1L);
     }
 
 }
