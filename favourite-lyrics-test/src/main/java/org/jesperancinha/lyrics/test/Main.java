@@ -1,7 +1,7 @@
 package org.jesperancinha.lyrics.test;
 
-import org.jesperancinha.lyrics.core.adapter.LyricsServiceImpl;
-import org.jesperancinha.lyrics.core.port.LyricsService;
+import org.jesperancinha.lyrics.core.service.LyricsServiceImpl;
+import org.jesperancinha.lyrics.core.service.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 

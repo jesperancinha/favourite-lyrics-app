@@ -1,7 +1,7 @@
 package org.jesperancinha.lyrics.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jesperancinha.lyrics.core.port.LyricsService;
+import org.jesperancinha.lyrics.core.service.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException;
 import org.springframework.http.HttpStatus;

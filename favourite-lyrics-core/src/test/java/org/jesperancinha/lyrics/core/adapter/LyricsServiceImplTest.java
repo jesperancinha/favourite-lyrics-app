@@ -1,5 +1,6 @@
 package org.jesperancinha.lyrics.core.adapter;
 
+import org.jesperancinha.lyrics.core.service.LyricsServiceImpl;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 import org.junit.jupiter.api.Test;

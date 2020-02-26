@@ -1,4 +1,4 @@
-package org.jesperancinha.lyrics.core.port;
+package org.jesperancinha.lyrics.core.service;
 
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 

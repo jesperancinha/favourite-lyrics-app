@@ -1,6 +1,5 @@
-package org.jesperancinha.lyrics.core.adapter;
+package org.jesperancinha.lyrics.core.service;
 
-import org.jesperancinha.lyrics.core.port.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 import org.springframework.stereotype.Service;
