@@ -25,6 +25,13 @@ OpenJDK 64-Bit Server VM AdoptOpenJDK (build 13.0.1+9, mixed mode, sharing)
 You need to have this version installed.
 I've achieved this by using [SDK-MAN](https://sdkman.io/)
 
+## Run Codecov
+
+```bash
+mvn clean test -Dconsolerizer.show=false
+bash <(curl -s https://codecov.io/bash)
+```
+
 ## References
 
 -   [PlantB Code Highlighter](http://www.planetb.ca/syntax-highlight-word)

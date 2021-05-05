@@ -36,3 +36,9 @@ build/
 ### SDK ###
 Snap.**.trc
 javacore.**.txt
+
+# Coveralls
+.coveralls.yml
+
+# Codecov
+codecov.yml
