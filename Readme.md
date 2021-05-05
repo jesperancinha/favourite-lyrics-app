@@ -1,6 +1,6 @@
 # Favourite lyrics app
 
-[![codecov](https://codecov.io/gl/jesperancinha/favourite-lyrics-app/branch/\x6d6173746572/graph/badge.svg?token=7IA2J24R6H)](https://codecov.io/gl/jesperancinha/favourite-lyrics-app)
+[![codecov](https://codecov.io/gl/jesperancinha/favourite-lyrics-app/branch/master/graph/badge.svg?token=7IA2J24R6H)](https://codecov.io/gl/jesperancinha/favourite-lyrics-app)
 [![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)](https://gitlab.com/jesperancinha/favourite-lyrics-app/pipelines)
 
 This project is an implementation of a Favourite lyrics app.
@@ -34,6 +34,8 @@ I've achieved this by using [SDK-MAN](https://sdkman.io/)
 mvn clean test -Dconsolerizer.show=false
 bash <(curl -s https://codecov.io/bash)
 ```
+
+NOTE: In GitLab pipelines, only protected branches and tags can access protected environment variables.
 
 ## References
 
