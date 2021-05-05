@@ -32,6 +32,7 @@
         <mockito-all.version>1.10.19</mockito-all.version>
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
         <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
+        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -108,4 +109,29 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

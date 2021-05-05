@@ -1,4 +1,6 @@
 # Favourite lyrics app
+
+[![codecov](https://codecov.io/gl/jesperancinha/favourite-lyrics-app/branch/\x6d6173746572/graph/badge.svg?token=7IA2J24R6H)](https://codecov.io/gl/jesperancinha/favourite-lyrics-app)
 [![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)](https://gitlab.com/jesperancinha/favourite-lyrics-app/pipelines)
 
 This project is an implementation of a Favourite lyrics app.
