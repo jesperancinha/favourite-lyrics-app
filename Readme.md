@@ -15,6 +15,9 @@ This project is also the official support project of my article on medium:
 ## Settings
 
 This application has been tested to run with Java 13. The release being used is 13.0.1.hs-adpt, which is also known as:
+```bash
+sdk use java 13.0.1.hs-adpt
+```
 
 ```bash
 openjdk 13.0.1 2019-10-15
