@@ -17,6 +17,7 @@ variables:
   # when running from the command line.
   # `installAtEnd` and `deployAtEnd` are only effective with recent version of the corresponding plugins.
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  CODECOV_TOKEN: $CODECOV_TOKEN
 
 # This template uses jdk13 for verifying and deploying images
 image: maven:3.6.3-jdk-13
