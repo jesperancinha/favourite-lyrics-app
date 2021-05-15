@@ -1,5 +1,9 @@
 # Favourite lyrics app
 
+[![Generic badge](https://img.shields.io/static/v1.svg?label=GitLab&message=Favourite%20Lyrics%20App&color=informational)](https://gitlab.com/jesperancinha/bridge-logistics)
+[![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
+
+
 [![codecov](https://codecov.io/gl/jesperancinha/favourite-lyrics-app/branch/master/graph/badge.svg?token=7IA2J24R6H)](https://codecov.io/gl/jesperancinha/favourite-lyrics-app)
 [![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)](https://gitlab.com/jesperancinha/favourite-lyrics-app/pipelines)
 
