@@ -14,6 +14,7 @@ This is a part of a series of studies I am making about DDD(Domain driven archit
 
 This project is also the official support project of my article on medium:
 
+[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/medium-20.png "Medium")](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
 [Hexagonal Architecture](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
 
 ## Settings
