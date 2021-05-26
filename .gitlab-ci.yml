@@ -18,6 +18,7 @@ variables:
   # `installAtEnd` and `deployAtEnd` are only effective with recent version of the corresponding plugins.
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   CODECOV_TOKEN: $CODECOV_TOKEN
+  CODECOV_TOKEN: $CODECOV_TOKEN
 
 # This template uses jdk13 for verifying and deploying images
 image: maven:3.6.3-jdk-13
@@ -51,7 +52,7 @@ deploy:jdk13:
     - if [ ! -f ci_settings.xml ];
         then echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/project/packages/maven_repository.html#creating-maven-packages-with-gitlab-cicd for instructions.";
       fi
-    - 'mvn clean install'
+    - 'mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}'
     - 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
   only:
     - master
