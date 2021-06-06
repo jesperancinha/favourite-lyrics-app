@@ -56,6 +56,6 @@ deploy:jdk13:
       fi
     - 'mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}'
     - 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
-    - 'bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java $(find **/jacoco*.xml -printf '-r %p ')'
+    - 'bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java $(find **/jacoco*.xml -printf ''-r %p '')'
   only:
     - master
