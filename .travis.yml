@@ -1,0 +1,14 @@
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
+jobs:
+  include:
+    - language: java
+      stage: Favourite Lyrics App
+      jdk:
+        - openjdk13
+      cache:
+        directories:
+        - .autoconf
+        - $HOME/.m2

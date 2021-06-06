@@ -18,7 +18,9 @@ variables:
   # `installAtEnd` and `deployAtEnd` are only effective with recent version of the corresponding plugins.
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   CODECOV_TOKEN: $CODECOV_TOKEN
-  CODECOV_TOKEN: $CODECOV_TOKEN
+  COVERALLS_TOKEN: $COVERALLS_TOKEN
+  CODACY_PROJECT_TOKEN: $CODACY_PROJECT_TOKEN
+
 
 # This template uses jdk13 for verifying and deploying images
 image: maven:3.6.3-jdk-13
@@ -54,5 +56,6 @@ deploy:jdk13:
       fi
     - 'mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}'
     - 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
+    - 'bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java $(find **/jacoco*.xml -printf '-r %p ')'
   only:
     - master
