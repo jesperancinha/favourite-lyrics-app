@@ -47,7 +47,8 @@ This project is also the official support project of my article on medium:
 
 This application has been tested to run with Java 13. The release being used is 13.0.1.hs-adpt, which is also known as:
 ```bash
-sdk use java 13.0.1.hs-adpt
+sdk install java 16.0.1.hs-adpt
+sdk use java 16.0.1.hs-adpt
 ```
 
 ```bash

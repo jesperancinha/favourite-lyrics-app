@@ -24,9 +24,11 @@
     <description>Favourite Lyrics App</description>
 
     <properties>
-        <java.version>13</java.version>
+        <java.version>16</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <h2.version>1.4.200</h2.version>
-        <lombok.version>1.18.10</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
         <spring-tx.version>5.2.2.RELEASE</spring-tx.version>
         <assertj-core.version>3.13.2</assertj-core.version>
         <mockito-all.version>1.10.19</mockito-all.version>
