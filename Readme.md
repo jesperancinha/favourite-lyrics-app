@@ -52,9 +52,9 @@ sdk use java 16.0.1.hs-adpt
 ```
 
 ```bash
-openjdk 13.0.1 2019-10-15
-OpenJDK Runtime Environment AdoptOpenJDK (build 13.0.1+9)
-OpenJDK 64-Bit Server VM AdoptOpenJDK (build 13.0.1+9, mixed mode, sharing)
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-16.0.1+9 (build 16.0.1+9)
+OpenJDK 64-Bit Server VM AdoptOpenJDK-16.0.1+9 (build 16.0.1+9, mixed mode, sharing)
 ``` 
 
 You need to have this version installed.
