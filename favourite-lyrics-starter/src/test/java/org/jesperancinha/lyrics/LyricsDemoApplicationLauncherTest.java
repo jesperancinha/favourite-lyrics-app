@@ -1,13 +1,15 @@
 package org.jesperancinha.lyrics;
 
-import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -16,17 +18,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class LyricsDemoApplicationLauncherTest {
     private static final String TEST_ARTIST_NAME = "Florence and the Machine";
     private static final String TEST_LYRICS = "Sweet Nothings";
     private static final String TEST_LYRICS_2 = "You've got the love I need to see me through";
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private MockMvc mvc;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
     @Test
+    @Transactional
     void givenLyrics_whenAddAndUpdateAndThenRemoveLyrics_thenEntity() throws Exception {
         final LyricsDto testLyricsDto = LyricsDto.builder()
                 .participatingArtist(TEST_ARTIST_NAME)
