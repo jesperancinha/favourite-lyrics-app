@@ -11,12 +11,7 @@
         <module>favourite-lyrics-test</module>
         <module>favourite-lyrics-rest</module>
     </modules>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.2</version>
-        <relativePath/>
-    </parent>
+
     <groupId>org.jesperancinha.lyrics</groupId>
     <artifactId>favourite-lyrics</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -24,7 +19,7 @@
     <description>Favourite Lyrics App</description>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <h2.version>1.4.200</h2.version>
@@ -80,6 +75,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.6.1</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!-- Test dependencies -->
