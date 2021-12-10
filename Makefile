@@ -34,6 +34,8 @@ docker-clean:
 	docker-compose rm -svf
 docker-clean-build-start: docker-clean b docker
 docker-delete-apps: stop
+docker-local:
+	docker-compose up -d fla_postgres
 prune-all: stop
 	docker ps -a --format '{{.ID}}' -q | xargs docker stop
 	docker ps -a --format '{{.ID}}' -q | xargs docker rm
@@ -42,6 +44,9 @@ prune-all: stop
 	docker system prune --all --volumes
 stop:
 	docker-compose down --remove-orphans
+stop-all: stop
+	docker-compose down --remove-orphans
+	docker ps -a --format '{{.ID}}' -q | xargs docker stop
 install:
 	nvm install --lts
 	nvm use --lts

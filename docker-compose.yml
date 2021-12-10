@@ -1,0 +1,73 @@
+version: "3.7"
+services:
+  fla_postgres:
+    container_name: ${PROJECT_SLUG}_postgres
+    hostname: ${PROJECT_SLUG}_postgres
+    restart: on-failure
+    build:
+      context: ./docker-images/psql/.
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker-images/psql/init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    expose:
+      - ${PG_EXPOSED_PORT}
+    deploy:
+      resources:
+        limits:
+          memory: 150M
+        reservations:
+          memory: 150M
+    networks:
+      fla_net:
+        ipv4_address: ${POSTGRES_IP}
+
+  fla_backend:
+    hostname: ${PROJECT_SLUG}_backend
+    container_name: ${PROJECT_SLUG}_backend
+    build:
+      context: favourite-lyrics-starter/.
+    ports:
+      - "8081:8080"
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 300M
+    networks:
+      fla_net:
+        ipv4_address: ${FLA_BACKEND}
+
+  fla_nginx:
+    hostname: ${PROJECT_SLUG}-nginx
+    container_name: ${PROJECT_SLUG}-nginx
+    build:
+      context: ./favourite-lyrics-gui/.
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 300M
+    env_file:
+      - .env
+    networks:
+      fla_net:
+        ipv4_address: ${FLA_NGINX_IP}
+
+networks:
+  fla_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_SUBNET}

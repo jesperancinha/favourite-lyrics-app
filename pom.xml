@@ -34,6 +34,8 @@
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <spring-boot-starter-parent.version>2.6.1</spring-boot-starter-parent.version>
+        <flyway-core.version>8.1.0</flyway-core.version>
+        <postgresql.version>42.2.24</postgresql.version>
     </properties>
 
     <dependencyManagement>
@@ -69,11 +71,22 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- External dependencies -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
