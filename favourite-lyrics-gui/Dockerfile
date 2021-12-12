@@ -2,6 +2,8 @@ FROM nginx
 
 ENV runningFolder /usr/local/bin/
 
+ENV FLA_BACKEND ${FLA_BACKEND}
+
 WORKDIR ${runningFolder}
 
 RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled

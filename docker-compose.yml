@@ -52,6 +52,8 @@ services:
     ports:
       - "8080:8080"
     restart: on-failure
+    environment:
+      - FLA_BACKEND=${FLA_BACKEND}
     deploy:
       resources:
         limits:
