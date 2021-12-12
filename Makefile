@@ -16,7 +16,8 @@ no-test:
 docker:
 	docker-compose down
 	docker-compose up -d --build --remove-orphans
-docker-databases: stop local
+docker-databases: stop
+	docker-compose up -d fla_postgres
 build-images:
 build-docker: stop no-test build-npm
 	docker-compose up -d --build --remove-orphans

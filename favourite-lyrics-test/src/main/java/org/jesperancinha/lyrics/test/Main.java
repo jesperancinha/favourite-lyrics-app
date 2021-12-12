@@ -1,12 +1,14 @@
 package org.jesperancinha.lyrics.test;
 
-import org.jesperancinha.lyrics.core.service.LyricsServiceImpl;
+import lombok.val;
 import org.jesperancinha.lyrics.core.service.LyricsService;
+import org.jesperancinha.lyrics.core.service.LyricsServiceImpl;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * This is just a test application. The goal is not to use test frameworks. The goal is just to show how easy it is to implement an adapter that is specifically designed to test nothing else but the core of the application.
@@ -25,7 +27,8 @@ public class Main {
         lyricsService.updateLyrics(lyricsDto);
         lyricsService.removeLyrics(lyricsDto);
         final List<LyricsDto> allLyricsDtos = lyricsService.getAllLyrics();
-        final LyricsDto lyricsDtoById = lyricsService.getLyricsById(1L);
+        val id = UUID.randomUUID();
+        final LyricsDto lyricsDtoById = lyricsService.getLyricsById(id);
         assert allLyricsDtos.size() == 1;
         final LyricsDto lyricsDto1 = allLyricsDtos.get(0);
         assert lyricsDto1
@@ -67,7 +70,7 @@ public class Main {
             }
 
             @Override
-            public LyricsDto getLyricsById(Long lyricsId) {
+            public LyricsDto getLyricsById(UUID lyricsId) {
                 return LyricsDto.builder()
                         .participatingArtist("Alesha Dixon")
                         .lyrics("Does he wash up? Never wash up")

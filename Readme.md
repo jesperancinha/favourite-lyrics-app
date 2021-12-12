@@ -82,6 +82,24 @@ Alternatively just run this script from the command line:
 . ./sdk17.sh
 ```
 
+You also need to run an LTS version of node JS.
+
+I have made script for this which will automatically install [NVM](https://github.com/nvm-sh/nvm) (Node Version Manager) and [Node 16](https://nodejs.org/en/about/releases/):
+
+```shell
+. ./node16.sh
+```
+
+## How to run
+
+```shell
+make docker-clean-build-start
+```
+
+- Endpoints
+
+1. [http://localhost:8081/lyrics](http://localhost:8081/lyrics) - All Lyrics
+
 ## Run Codecov
 
 ```bash
