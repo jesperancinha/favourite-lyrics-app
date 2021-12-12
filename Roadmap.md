@@ -9,9 +9,3 @@
 - Cleanup dependencies
 - Upgrade versions
 - Remove obsolete versions
-
-
----
-
-1. Remove H2 and all its references. Use Test containers insted
-2. H2 console is not needed anymore since PostgreSQL will be used as a container
