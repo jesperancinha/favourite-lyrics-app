@@ -1,8 +1,9 @@
 package org.jesperancinha.lyrics.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.val;
 import org.jesperancinha.lyrics.core.service.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Collections;
+import java.util.UUID;
 
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
@@ -46,9 +48,9 @@ public class LyricsControllerImplTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/lyrics")
-                .content(objectMapper.writeValueAsString(testLyricsDto))
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(testLyricsDto))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
         verify(lyricsService, only()).addLyrics(testLyricsDto);
@@ -63,9 +65,9 @@ public class LyricsControllerImplTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.put("/lyrics")
-                .content(objectMapper.writeValueAsString(testLyricsDto))
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(testLyricsDto))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(lyricsService, only()).updateLyrics(testLyricsDto);
@@ -79,9 +81,9 @@ public class LyricsControllerImplTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.delete("/lyrics")
-                .content(objectMapper.writeValueAsString(testLyricsDto))
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(testLyricsDto))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(lyricsService, only()).removeLyrics(testLyricsDto);
@@ -96,7 +98,7 @@ public class LyricsControllerImplTest {
         when(lyricsService.getAllLyrics()).thenReturn(Collections.singletonList(testLyricsDto));
 
         mvc.perform(MockMvcRequestBuilders.get("/lyrics")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].participatingArtist")
                         .exists())
@@ -116,10 +118,11 @@ public class LyricsControllerImplTest {
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
-        when(lyricsService.getLyricsById(1L)).thenReturn(testLyricsDto);
+        val id = UUID.randomUUID();
+        when(lyricsService.getLyricsById(id)).thenReturn(testLyricsDto);
 
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
-                .accept(APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + id)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.participatingArtist")
                         .exists())
@@ -130,18 +133,19 @@ public class LyricsControllerImplTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lyrics")
                         .value(TEST_LYRICS));
 
-        verify(lyricsService, only()).getLyricsById(1L);
+        verify(lyricsService, only()).getLyricsById(id);
     }
 
     @Test
     void givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToServiceFails() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
-                .accept(APPLICATION_JSON))
+        val id = UUID.randomUUID();
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + id)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.participatingArtist")
                         .doesNotExist());
 
-        verify(lyricsService, only()).getLyricsById(1L);
+        verify(lyricsService, only()).getLyricsById(id);
     }
 
 }

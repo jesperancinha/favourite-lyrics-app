@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LyricsServiceImpl implements LyricsService {
@@ -38,7 +39,7 @@ public class LyricsServiceImpl implements LyricsService {
     }
 
     @Override
-    public LyricsDto getLyricsById(Long lyricsId) {
+    public LyricsDto getLyricsById(UUID lyricsId) {
         return lyricsPersistencePort.getLyricsById(lyricsId);
     }
 

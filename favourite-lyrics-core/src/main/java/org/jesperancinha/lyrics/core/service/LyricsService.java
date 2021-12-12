@@ -3,6 +3,7 @@ package org.jesperancinha.lyrics.core.service;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface LyricsService {
 
@@ -14,7 +15,7 @@ public interface LyricsService {
 
     List<LyricsDto> getAllLyrics();
 
-    LyricsDto getLyricsById(Long lyricsId);
+    LyricsDto getLyricsById(UUID lyricsId);
 
 }
 

@@ -3,6 +3,7 @@ package org.jesperancinha.lyrics.domain.port;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface LyricsPersistencePort {
 
@@ -14,5 +15,5 @@ public interface LyricsPersistencePort {
 
     List<LyricsDto> getAllLyrics();
 
-    LyricsDto getLyricsById(Long lyricsId);
+    LyricsDto getLyricsById(UUID lyricsId);
 }

@@ -1,5 +1,6 @@
 package org.jesperancinha.lyrics.jpa.adapter;
 
+import lombok.val;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -95,20 +97,22 @@ public class LyricsJpaAdapterTest {
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
-        when(mockLyricsRepository.findById(1L)).thenReturn(Optional.of(testLyrics));
+        val testId = UUID.randomUUID();
+        when(mockLyricsRepository.findById(testId)).thenReturn(Optional.of(testLyrics));
 
-        final LyricsDto lyricsDtoById = lyricsPersistencePort.getLyricsById(1L);
+        final LyricsDto lyricsDtoById = lyricsPersistencePort.getLyricsById(testId);
 
-        verify(mockLyricsRepository, only()).findById(1L);
+        verify(mockLyricsRepository, only()).findById(testId);
         assertThat(lyricsDtoById.getParticipatingArtist()).isEqualTo(TEST_AUTHOR);
         assertThat(lyricsDtoById.getLyrics()).isEqualTo(TEST_LYRICS);
     }
 
     @Test
     void givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToRepositoryFails() {
-        when(mockLyricsRepository.findById(1L)).thenReturn(Optional.empty());
+        val testId = UUID.randomUUID();
+        when(mockLyricsRepository.findById(testId)).thenReturn(Optional.empty());
 
-        assertThrows(LyricsNotFoundException.class, () -> lyricsPersistencePort.getLyricsById(1L));
+        assertThrows(LyricsNotFoundException.class, () -> lyricsPersistencePort.getLyricsById(testId));
     }
 
     @Test

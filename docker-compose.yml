@@ -4,16 +4,16 @@ services:
     container_name: ${PROJECT_SLUG}_postgres
     hostname: ${PROJECT_SLUG}_postgres
     restart: on-failure
-    build:
-      context: ./docker-images/psql/.
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./docker-images/psql/init-scripts:/docker-entrypoint-initdb.d
+    image: postgres:14.1
     environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
+    volumes:
+      - ./docker-images/docker-psql:/docker-entrypoint-initdb.d
+      - ./docker-images/docker-psql/multiple:/docker-entrypoint-initdb.d/multiple
+    ports:
+      - "${PG_EXPOSED_PORT}:${PG_EXPOSED_PORT}"
     expose:
       - ${PG_EXPOSED_PORT}
     deploy:

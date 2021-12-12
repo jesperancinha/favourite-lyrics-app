@@ -2,7 +2,7 @@
 
 ## References
 
-- [Flyway Documentation/Migrations](https://flywaydb.org/documentation/concepts/migrations.html#naming)
+-   [Flyway Documentation/Migrations](https://flywaydb.org/documentation/concepts/migrations.html#naming)
 
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -42,7 +43,7 @@ public class LyricsControllerImpl implements LyricsController {
     }
 
     @Override
-    public ResponseEntity<LyricsDto> getLyricsById(Long lyricsId) {
+    public ResponseEntity<LyricsDto> getLyricsById(UUID lyricsId) {
         try {
             return new ResponseEntity<>(lyricsService.getLyricsById(lyricsId), HttpStatus.OK);
         } catch (LyricsNotFoundException ex) {

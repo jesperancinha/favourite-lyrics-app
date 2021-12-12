@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
 public class LyricsJpaAdapter implements LyricsPersistencePort {
 
-    private LyricsRepository lyricsRepository;
+    private final LyricsRepository lyricsRepository;
 
     public LyricsJpaAdapter(LyricsRepository lyricsRepository) {
         this.lyricsRepository = lyricsRepository;
@@ -58,7 +59,7 @@ public class LyricsJpaAdapter implements LyricsPersistencePort {
 
     @SneakyThrows
     @Override
-    public LyricsDto getLyricsById(Long lyricsId) {
+    public LyricsDto getLyricsById(UUID lyricsId) {
         return getLyrics(lyricsRepository.findById(lyricsId)
                 .orElseThrow((Supplier<Throwable>) () -> new LyricsNotFoundException(lyricsId)));
     }

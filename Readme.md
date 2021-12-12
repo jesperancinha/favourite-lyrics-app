@@ -43,22 +43,44 @@ This project is also the official support project of my article on medium:
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/medium-20.png "Medium")](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
 [Hexagonal Architecture](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
 
+<div align="center">
+      <a title="Hexagonal Architecture" href="https://medium.com/swlh/hexagonal-architecture-a596390269fd">
+     <img 
+          src="./docs/images/articles.favourite.lyrics.intro.png" 
+          style="width:100%;">
+      </a>
+</div>
+
+
+---
+
+## Project Layout
+
+- [favourite-lyrics-domain](./favourite-lyrics-domain) - Domain libraries. This is where the domain model and the interfaces for it are located - (Inside)
+- [favourite-lyrics-jpa](./favourite-lyrics-jpa) - JPA libraries. This is the implementation of the domain libraries (Inside)
+- [favourite-lyrics-core](./favourite-lyrics-core) - Core libraries. This is where the services are located (Inside-Outside)
+- [favourite-lyrics-rest](./favourite-lyrics-rest) - REST Controller libraries. This is where the rest controller is located (Outside)
+- [favourite-lyrics-starter](./favourite-lyrics-starter) - Spring boot starter for this project
+- [favourite-lyrics-test](./favourite-lyrics-test) - Live running test project. (Not in included in docker-compose)
+- [favourite-lyrics-gui](./favourite-lyrics-gui) - Front end application to better visualize and understand the project (Not associated with Hexagonal architecture directly, but it is part of the Outside)
+
+---
+
 ## Settings
 
-This application has been tested to run with Java 13. The release being used is 13.0.1.hs-adpt, which is also known as:
+This application has been tested to run with Java 17. The release being used is 13.0.1.hs-adpt, which is also known as:
 ```bash
-sdk install java 16.0.1.hs-adpt
-sdk use java 16.0.1.hs-adpt
+sdk install java 17-open
+sdk use java java 17-open
 ```
-
-```bash
-openjdk version "16.0.1" 2021-04-20
-OpenJDK Runtime Environment AdoptOpenJDK-16.0.1+9 (build 16.0.1+9)
-OpenJDK 64-Bit Server VM AdoptOpenJDK-16.0.1+9 (build 16.0.1+9, mixed mode, sharing)
-``` 
 
 You need to have this version installed.
 I've achieved this by using [SDK-MAN](https://sdkman.io/)
+
+Alternatively just run this script from the command line:
+```shell
+. ./sdk17.sh
+```
 
 ## Run Codecov
 
@@ -71,7 +93,7 @@ NOTE: In GitLab pipelines, only protected branches and tags can access protected
 
 ## References
 
-- [Flyway Documentation/Migrations](https://flywaydb.org/documentation/concepts/migrations.html#naming)
+-   [Flyway Documentation/Migrations](https://flywaydb.org/documentation/concepts/migrations.html#naming)
 -   [PlantB Code Highlighter](http://www.planetb.ca/syntax-highlight-word)
 -   [Hexagonal Architecture by Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
 -   [Postman](https://www.getpostman.com/)

@@ -36,9 +36,12 @@ docker-clean-build-start: docker-clean b docker
 docker-delete-apps: stop
 docker-local:
 	docker-compose up -d fla_postgres
+prune-network: stop
+	docker network prune
 prune-all: stop
 	docker ps -a --format '{{.ID}}' -q | xargs docker stop
 	docker ps -a --format '{{.ID}}' -q | xargs docker rm
+	docker network prune
 	docker system prune --all
 	docker builder prune
 	docker system prune --all --volumes

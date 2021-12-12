@@ -10,20 +10,29 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface LyricsController {
 
     @PostMapping("/lyrics")
-    ResponseEntity<Void> addLyrics(@RequestBody LyricsDto lyricsDto);
+    ResponseEntity<Void> addLyrics(
+            @RequestBody
+                    LyricsDto lyricsDto);
 
     @DeleteMapping("/lyrics")
-    ResponseEntity<String> removeLyrics(@RequestBody LyricsDto lyricsDto);
+    ResponseEntity<String> removeLyrics(
+            @RequestBody
+                    LyricsDto lyricsDto);
 
     @PutMapping("/lyrics")
-    ResponseEntity<String> updateLyrics(@RequestBody LyricsDto lyricsDto);
+    ResponseEntity<String> updateLyrics(
+            @RequestBody
+                    LyricsDto lyricsDto);
 
     @GetMapping("/lyrics/{lyricsId}")
-    ResponseEntity<LyricsDto> getLyricsById(@PathVariable Long lyricsId);
+    ResponseEntity<LyricsDto> getLyricsById(
+            @PathVariable
+                    UUID lyricsId);
 
     @GetMapping("/lyrics")
     ResponseEntity<List<LyricsDto>> getLyrics();

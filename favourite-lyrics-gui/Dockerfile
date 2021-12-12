@@ -12,7 +12,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY nginx/entrypoint.sh /usr/local/bin/
 
-COPY nginx/build /usr/share/nginx/html
+COPY /build /usr/share/nginx/html
 
 ENTRYPOINT ["entrypoint.sh"]
 

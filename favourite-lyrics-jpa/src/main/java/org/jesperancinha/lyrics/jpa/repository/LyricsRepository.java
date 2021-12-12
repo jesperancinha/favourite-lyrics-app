@@ -3,7 +3,9 @@ package org.jesperancinha.lyrics.jpa.repository;
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LyricsRepository extends JpaRepository<LyricsEntity, Long> {
+import java.util.UUID;
+
+public interface LyricsRepository extends JpaRepository<LyricsEntity, UUID> {
 
     void deleteAllByParticipatingArtist(String name);
 
