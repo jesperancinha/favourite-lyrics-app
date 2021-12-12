@@ -1,6 +1,7 @@
 package org.jesperancinha.lyrics.rest;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.jesperancinha.lyrics.core.service.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException;
@@ -53,14 +54,14 @@ public class LyricsControllerImpl implements LyricsController {
     }
 
     @Override
-    public ResponseEntity<List<LyricsDto>> getLyrics() {
+    public ResponseEntity<List<LyricsDto>> lyrics() {
         return new ResponseEntity<>(lyricsService.getAllLyrics(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<LyricsDto> getRandomLyric() {
-        final List<LyricsDto> allLyrics = lyricsService.getAllLyrics();
-        final int size = allLyrics.size();
+        val allLyrics = lyricsService.getAllLyrics();
+        val size = allLyrics.size();
         return new ResponseEntity<>(allLyrics.get(random.nextInt(size)), HttpStatus.OK);
     }
 }

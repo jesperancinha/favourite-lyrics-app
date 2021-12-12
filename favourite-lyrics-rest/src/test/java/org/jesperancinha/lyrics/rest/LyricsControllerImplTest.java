@@ -56,10 +56,9 @@ public class LyricsControllerImplTest {
         verify(lyricsService, only()).addLyrics(testLyricsDto);
     }
 
-
     @Test
     void givenLyrics_whenUpdateLyrics_thenEntityUpdateIsPortedToService() throws Exception {
-        final LyricsDto testLyricsDto = LyricsDto.builder()
+        val testLyricsDto = LyricsDto.builder()
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();

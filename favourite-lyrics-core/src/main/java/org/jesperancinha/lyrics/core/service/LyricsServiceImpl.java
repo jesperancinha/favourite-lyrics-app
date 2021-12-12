@@ -42,12 +42,4 @@ public class LyricsServiceImpl implements LyricsService {
     public LyricsDto getLyricsById(UUID lyricsId) {
         return lyricsPersistencePort.getLyricsById(lyricsId);
     }
-
-
-
-
-
 }
-
-
-

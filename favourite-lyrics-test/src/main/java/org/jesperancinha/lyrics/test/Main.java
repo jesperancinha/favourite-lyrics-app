@@ -18,28 +18,28 @@ import java.util.UUID;
 public class Main {
 
     public static void main(String[] args) {
-        final LyricsService lyricsService = new LyricsServiceImpl(createMockLyricsPersistencePort());
-        final LyricsDto lyricsDto = LyricsDto.builder()
+        val lyricsService = new LyricsServiceImpl(createMockLyricsPersistencePort());
+        val lyricsDto = LyricsDto.builder()
                 .participatingArtist("Aretha Franklin")
                 .lyrics("find out what it means to me")
                 .build();
         lyricsService.addLyrics(lyricsDto);
         lyricsService.updateLyrics(lyricsDto);
         lyricsService.removeLyrics(lyricsDto);
-        final List<LyricsDto> allLyricsDtos = lyricsService.getAllLyrics();
+        val allLyricsDtos = lyricsService.getAllLyrics();
         val id = UUID.randomUUID();
         final LyricsDto lyricsDtoById = lyricsService.getLyricsById(id);
         assert allLyricsDtos.size() == 1;
         final LyricsDto lyricsDto1 = allLyricsDtos.get(0);
         assert lyricsDto1
-                .getParticipatingArtist()
+                .participatingArtist()
                 .equals("Gloria Gaynor");
         assert lyricsDto1
-                .getLyrics()
+                .lyrics()
                 .equals("First I was afraid, I was petrified");
-        assert lyricsDtoById.getParticipatingArtist()
+        assert lyricsDtoById.participatingArtist()
                 .equals("Alesha Dixon");
-        assert lyricsDtoById.getLyrics()
+        assert lyricsDtoById.lyrics()
                 .equals("Does he wash up? Never wash up");
     }
 

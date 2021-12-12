@@ -1,18 +1,13 @@
 package org.jesperancinha.lyrics.domain.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@Builder
-@Data
-@NoArgsConstructor
-public class LyricsDto {
+public record LyricsDto(
+        String lyrics,
+        String participatingArtist
+) {
 
-    private String lyrics;
-
-    private String participatingArtist;
-
+    @Builder
+    public LyricsDto {
+    }
 }

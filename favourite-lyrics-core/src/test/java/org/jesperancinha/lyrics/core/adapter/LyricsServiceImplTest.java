@@ -48,7 +48,6 @@ public class LyricsServiceImplTest {
         verify(lyricsPersistencePort, only()).removeLyrics(mockLyricsDto);
     }
 
-
     @Test
     public void givenLyrics_whenUpdate_thenUpdateLyricsPortCalled() {
         final LyricsDto mockLyricsDto = mock(LyricsDto.class);

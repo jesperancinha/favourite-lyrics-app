@@ -1,12 +1,12 @@
 package org.jesperancinha.lyrics;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.val;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,29 +37,32 @@ public class LyricsDemoApplicationLauncherTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/lyrics")
-                .content(objectMapper.writeValueAsString(testLyricsDto))
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(testLyricsDto))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
                 .andExpect(jsonPath("$.participatingArtist").value(TEST_ARTIST_NAME))
                 .andExpect(jsonPath("$.lyrics").exists())
                 .andExpect(jsonPath("$.lyrics").value(TEST_LYRICS));
 
-        testLyricsDto.setLyrics(TEST_LYRICS_2);
+        val testLyricsDto2 = LyricsDto.builder()
+                .participatingArtist(TEST_ARTIST_NAME)
+                .lyrics(TEST_LYRICS_2)
+                .build();
 
         mvc.perform(MockMvcRequestBuilders.put("/lyrics")
-                .content(objectMapper.writeValueAsString(testLyricsDto))
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(testLyricsDto2))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
                 .andExpect(jsonPath("$.participatingArtist").value(TEST_ARTIST_NAME))
@@ -67,13 +70,13 @@ public class LyricsDemoApplicationLauncherTest {
                 .andExpect(jsonPath("$.lyrics").value(TEST_LYRICS_2));
 
         mvc.perform(MockMvcRequestBuilders.delete("/lyrics")
-                .content(objectMapper.writeValueAsString(testLyricsDto))
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                        .content(objectMapper.writeValueAsString(testLyricsDto))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.participatingArtist").doesNotExist())
                 .andExpect(jsonPath("$.lyrics").doesNotExist());
@@ -82,7 +85,7 @@ public class LyricsDemoApplicationLauncherTest {
     @Test
     void givenCallToAllLyrics_whenNoParams_thenFindAll() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(5)))
                 .andExpect(jsonPath("$[0].participatingArtist").exists())
@@ -110,7 +113,7 @@ public class LyricsDemoApplicationLauncherTest {
     @Test
     void givenArtisId_whenCallingGetLyricsById_thenReturnsLyrics() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
                 .andExpect(jsonPath("$.participatingArtist").value("William Orbit"))
@@ -121,7 +124,7 @@ public class LyricsDemoApplicationLauncherTest {
     @Test
     void givenUnexistingArtisId_whenCallingGetLyricsById_thenIsNotFound() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/lyrics/7")
-                .accept(APPLICATION_JSON))
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.participatingArtist").doesNotExist())
                 .andExpect(jsonPath("$.lyrics").doesNotExist());

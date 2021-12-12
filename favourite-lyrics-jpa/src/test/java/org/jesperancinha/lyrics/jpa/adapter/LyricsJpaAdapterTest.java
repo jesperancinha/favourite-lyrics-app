@@ -70,7 +70,7 @@ public class LyricsJpaAdapterTest {
 
         lyricsPersistencePort.removeLyrics(testLyricsDto);
 
-        verify(mockLyricsRepository, only()).deleteAllByParticipatingArtist(testLyricsDto.getParticipatingArtist());
+        verify(mockLyricsRepository, only()).deleteAllByParticipatingArtist(testLyricsDto.participatingArtist());
     }
 
     @Test
@@ -87,8 +87,8 @@ public class LyricsJpaAdapterTest {
         verify(mockLyricsRepository, only()).findAll();
         assertThat(allLyricsDtos).hasSize(1);
         final LyricsDto lyricsDto = allLyricsDtos.get(0);
-        assertThat(lyricsDto.getParticipatingArtist()).isEqualTo(TEST_AUTHOR);
-        assertThat(lyricsDto.getLyrics()).isEqualTo(TEST_LYRICS);
+        assertThat(lyricsDto.participatingArtist()).isEqualTo(TEST_AUTHOR);
+        assertThat(lyricsDto.lyrics()).isEqualTo(TEST_LYRICS);
     }
 
     @Test
@@ -103,8 +103,8 @@ public class LyricsJpaAdapterTest {
         final LyricsDto lyricsDtoById = lyricsPersistencePort.getLyricsById(testId);
 
         verify(mockLyricsRepository, only()).findById(testId);
-        assertThat(lyricsDtoById.getParticipatingArtist()).isEqualTo(TEST_AUTHOR);
-        assertThat(lyricsDtoById.getLyrics()).isEqualTo(TEST_LYRICS);
+        assertThat(lyricsDtoById.participatingArtist()).isEqualTo(TEST_AUTHOR);
+        assertThat(lyricsDtoById.lyrics()).isEqualTo(TEST_LYRICS);
     }
 
     @Test

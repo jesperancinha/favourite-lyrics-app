@@ -13,8 +13,8 @@ public class LyricsTest {
                 .lyrics("You can read my Pokerface")
                 .build();
 
-        assertThat(lyricsDto.getParticipatingArtist()).isEqualTo("Lady Gaga");
-        assertThat(lyricsDto.getLyrics()).isEqualTo("You can read my Pokerface");
+        assertThat(lyricsDto.participatingArtist()).isEqualTo("Lady Gaga");
+        assertThat(lyricsDto.lyrics()).isEqualTo("You can read my Pokerface");
     }
 
     @Test

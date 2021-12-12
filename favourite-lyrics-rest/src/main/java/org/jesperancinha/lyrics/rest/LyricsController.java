@@ -35,7 +35,7 @@ public interface LyricsController {
                     UUID lyricsId);
 
     @GetMapping("/lyrics")
-    ResponseEntity<List<LyricsDto>> getLyrics();
+    ResponseEntity<List<LyricsDto>> lyrics();
 
     @GetMapping("/lyrics/random")
     ResponseEntity<LyricsDto> getRandomLyric();
