@@ -99,6 +99,7 @@ make docker-clean-build-start
 - Endpoints
 
 1. [http://localhost:8081/lyrics](http://localhost:8081/lyrics) - All Lyrics
+2. [http://localhost:8081/lyrics/random](http://localhost:8081/lyrics/random)
 
 ## Run Codecov
 
