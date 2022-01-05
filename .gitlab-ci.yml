@@ -25,7 +25,13 @@ variables:
   script:
     - bundle exec rake "dependabot:update[$PROJECT_PATH,$PACKAGE_MANAGER,$DIRECTORY]"
 
+stages:
+  - build
+  - test
+  - deploy
+
 maven:
+  stage: build
   extends: .dependabot-gitlab
   rules:
     - if: $DEPENDENCY_UPDATES_DISABLED
