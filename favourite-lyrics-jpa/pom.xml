@@ -41,6 +41,9 @@
                 <groupId>org.jesperancinha.plugins</groupId>
                 <artifactId>omni-coveragereporter-maven-plugin</artifactId>
                 <version>${omni-coveragereporter-maven-plugin.version}</version>
+                <configuration>
+                    <useCoverallsCount>true</useCoverallsCount>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
