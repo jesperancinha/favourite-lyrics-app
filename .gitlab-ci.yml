@@ -54,9 +54,9 @@ deploy:jdk17-pull-request:
     - branches
 
 update-dependencies:
-    stage: update
-    script:
-     - export RENOVATE_CONFIG=$(< renovate.json)
-     - renovate
-    only:
-        master
+  stage: update
+  script:
+    - export RENOVATE_CONFIG=$(< renovate.json)
+    - renovate
+  only:
+    - master
