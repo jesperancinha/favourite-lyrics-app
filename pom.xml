@@ -34,7 +34,7 @@
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <spring-boot-starter-parent.version>2.6.2</spring-boot-starter-parent.version>
-        <flyway-core.version>8.1.0</flyway-core.version>
+        <flyway-core.version>8.4.0</flyway-core.version>
         <postgresql.version>42.2.24</postgresql.version>
         <omni-coveragereporter-maven-plugin.version>0.0.5</omni-coveragereporter-maven-plugin.version>
     </properties>
