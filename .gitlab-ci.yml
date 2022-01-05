@@ -25,47 +25,38 @@ variables:
   script:
     - bundle exec rake "dependabot:update[$PROJECT_PATH,$PACKAGE_MANAGER,$DIRECTORY]"
 
+cache:
+  paths:
+    - .m2/repository
+
 stages:
   - build
   - test
-  - deploy
+
+build-image:
+  stage: build
+  script:
+    - docker build -t "dependabot/dependabot-script" -f Dockerfile .
+
+.dependabot:
+  image: dependabot/dependabot-script
+  variables:
+    PACKAGE_MANAGER: $CI_JOB_NAME
+  script:
+    - bundle exec ruby ./generic-update-script.rb
+  only:
+    - schedules
 
 maven:
-  stage: build
   extends: .dependabot-gitlab
   rules:
     - if: $DEPENDENCY_UPDATES_DISABLED
       when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule" && $PACKAGE_MANAGER_SET =~ /\bmaven\b/'
 
-# This template uses jdk17 for verifying and deploying images
-image: maven:3.8.1-openjdk-17
-
-# Cache downloaded dependencies and plugins between builds.
-# To keep cache across branches add 'key: "$CI_JOB_NAME"'
-cache:
-  paths:
-    - .m2/repository
-
-# For merge requests do not `deploy` but only run `verify`.
-# See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
-.verify: &verify
-  stage: test
-  script:
-    - 'mvn $MAVEN_CLI_OPTS verify'
-  except:
-    - master
-
-# Verify merge requests using JDK17
-verify:jdk17:
-  <<: *verify
-
-# To deploy packages from CI, create a ci_settings.xml file
-# For deploying packages to GitLab's Maven Repository: See https://docs.gitlab.com/ee/user/project/packages/maven_repository.html#creating-maven-packages-with-gitlab-cicd for more details.
-# Please note: The GitLab Maven Repository is currently only available in GitLab Premium / Ultimate.
-# For `master` branch run `mvn deploy` automatically.
-deploy:jdk17:
-  stage: deploy
+build:
+  image: maven:3.8.1-openjdk-17
+  stage: build
   script:
     - if [ ! -f ci_settings.xml ];
         then echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/project/packages/maven_repository.html#creating-maven-packages-with-gitlab-cicd for instructions.";
@@ -75,4 +66,12 @@ deploy:jdk17:
     - 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
     - 'bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java $(find **/jacoco*.xml -printf ''-r %p '')'
   only:
+    - master
+
+verify:
+  image: maven:3.8.1-openjdk-17
+  stage: test
+  script:
+    - 'mvn $MAVEN_CLI_OPTS verify'
+  except:
     - master
