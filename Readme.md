@@ -33,8 +33,7 @@
 
 ---
 
-This project is an implementation of a Favourite lyrics app.
-It contains an implementation to be used as an example of Hexagonal Architecture implemented in Java and Spring.
+This project is an implementation of a Favourite lyrics app.	It contains an implementation to be used as an example of Hexagonal Architecture implemented in Java and Spring.
 
 This is a part of a series of studies I am making about DDD(Domain driven architecture)
 
@@ -56,28 +55,29 @@ This project is also the official support project of my article on medium:
 
 ## Project Layout
 
-- [favourite-lyrics-domain](./favourite-lyrics-domain) - Domain libraries. This is where the domain model and the interfaces for it are located - (Inside)
-- [favourite-lyrics-jpa](./favourite-lyrics-jpa) - JPA libraries. This is the implementation of the domain libraries (Inside)
-- [favourite-lyrics-core](./favourite-lyrics-core) - Core libraries. This is where the services are located (Inside-Outside)
-- [favourite-lyrics-rest](./favourite-lyrics-rest) - REST Controller libraries. This is where the rest controller is located (Outside)
-- [favourite-lyrics-starter](./favourite-lyrics-starter) - Spring boot starter for this project
-- [favourite-lyrics-test](./favourite-lyrics-test) - Live running test project. (Not in included in docker-compose)
-- [favourite-lyrics-gui](./favourite-lyrics-gui) - Front end application to better visualize and understand the project (Not associated with Hexagonal architecture directly, but it is part of the Outside)
+-   [favourite-lyrics-domain](./favourite-lyrics-domain) - Domain libraries. This is where the domain model and the interfaces for it are located - (Inside)
+-   [favourite-lyrics-jpa](./favourite-lyrics-jpa) - JPA libraries. This is the implementation of the domain libraries (Inside)
+-   [favourite-lyrics-core](./favourite-lyrics-core) - Core libraries. This is where the services are located (Inside-Outside)
+-   [favourite-lyrics-rest](./favourite-lyrics-rest) - REST Controller libraries. This is where the rest controller is located (Outside)
+-   [favourite-lyrics-starter](./favourite-lyrics-starter) - Spring boot starter for this project
+-   [favourite-lyrics-test](./favourite-lyrics-test) - Live running test project. (Not in included in docker-compose)
+-   [favourite-lyrics-gui](./favourite-lyrics-gui) - Front end application to better visualize and understand the project (Not associated with Hexagonal architecture directly, but it is part of the Outside)
 
 ---
 
 ## Settings
 
 This application has been tested to run with Java 17. The release being used is 13.0.1.hs-adpt, which is also known as:
+
 ```bash
 sdk install java 17-open
 sdk use java java 17-open
 ```
 
-You need to have this version installed.
-I've achieved this by using [SDK-MAN](https://sdkman.io/)
+You need to have this version installed.	I've achieved this by using [SDK-MAN](https://sdkman.io/)
 
 Alternatively just run this script from the command line:
+
 ```shell
 . ./sdk17.sh
 ```
@@ -96,10 +96,10 @@ I have made script for this which will automatically install [NVM](https://githu
 make docker-clean-build-start
 ```
 
-- Endpoints
+-   Endpoints
 
-1. [http://localhost:8081/lyrics](http://localhost:8081/lyrics) - All Lyrics
-2. [http://localhost:8081/lyrics/random](http://localhost:8081/lyrics/random)
+1.  [http://localhost:8081/lyrics](http://localhost:8081/lyrics) - All Lyrics
+2.  [http://localhost:8081/lyrics/random](http://localhost:8081/lyrics/random)
 
 ## Run Codecov
 

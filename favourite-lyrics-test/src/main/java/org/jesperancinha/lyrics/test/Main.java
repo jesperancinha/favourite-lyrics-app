@@ -1,7 +1,6 @@
 package org.jesperancinha.lyrics.test;
 
 import lombok.val;
-import org.jesperancinha.lyrics.core.service.LyricsService;
 import org.jesperancinha.lyrics.core.service.LyricsServiceImpl;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
