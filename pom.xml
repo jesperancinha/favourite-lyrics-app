@@ -36,7 +36,7 @@
         <spring-boot-starter-parent.version>2.6.2</spring-boot-starter-parent.version>
         <flyway-core.version>8.4.0</flyway-core.version>
         <postgresql.version>42.3.1</postgresql.version>
-        <omni-coveragereporter-maven-plugin.version>0.0.5</omni-coveragereporter-maven-plugin.version>
+        <omni-coveragereporter-maven-plugin.version>0.0.6</omni-coveragereporter-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -118,9 +118,6 @@
                     <groupId>org.jesperancinha.plugins</groupId>
                     <artifactId>omni-coveragereporter-maven-plugin</artifactId>
                     <version>${omni-coveragereporter-maven-plugin.version}</version>
-                    <configuration>
-                        <useCoverallsCount>true</useCoverallsCount>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
