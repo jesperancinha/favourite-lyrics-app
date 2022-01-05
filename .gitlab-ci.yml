@@ -55,6 +55,7 @@ deploy:jdk17-pull-request:
     - master
 
 update-dependencies:
+  image: renovate/renovate
   stage: update
   script:
     - export RENOVATE_CONFIG=$(< renovate.json)
