@@ -2,8 +2,6 @@ stages:
   - build
   - test
 
-image: docker:latest
-
 build-image:
   stage: build
   script:
