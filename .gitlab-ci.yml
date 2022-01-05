@@ -1,6 +1,11 @@
-include:
-  - project: 'dependabot-gitlab/dependabot-standalone'
-    file: '.gitlab-ci.yml'
+stages:
+  - build
+  - test
+
+build-image:
+  stage: build
+  script:
+    - docker build -t "dependabot/dependabot-script" -f Dockerfile .
 
 variables:
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
@@ -28,15 +33,6 @@ variables:
 cache:
   paths:
     - .m2/repository
-
-stages:
-  - build
-  - test
-
-build-image:
-  stage: build
-  script:
-    - docker build -t "dependabot/dependabot-script" -f Dockerfile .
 
 .dependabot:
   image: dependabot/dependabot-script
