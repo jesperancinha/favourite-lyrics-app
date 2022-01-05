@@ -36,7 +36,7 @@
         <spring-boot-starter-parent.version>2.6.1</spring-boot-starter-parent.version>
         <flyway-core.version>8.1.0</flyway-core.version>
         <postgresql.version>42.2.24</postgresql.version>
-        <omni-coveragereporter-maven-plugin.version>0.0.4</omni-coveragereporter-maven-plugin.version>
+        <omni-coveragereporter-maven-plugin.version>0.0.5</omni-coveragereporter-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
