@@ -32,29 +32,29 @@ public class LyricsServiceImplTest {
 
     @Test
     public void givenLyrics_whenAdd_thenAddPortCalled() {
-        final LyricsDto mockLyricsDto = mock(LyricsDto.class);
+        final LyricsDto testLyricsDto = LyricsDto.builder().build();
 
-        lyricsServicePort.addLyrics(mockLyricsDto);
+        lyricsServicePort.addLyrics(testLyricsDto);
 
-        verify(lyricsPersistencePort, only()).addLyrics(mockLyricsDto);
+        verify(lyricsPersistencePort, only()).addLyrics(testLyricsDto);
     }
 
     @Test
     public void givenLyrics_whenRemove_thenRemovePortCalled() {
-        final LyricsDto mockLyricsDto = mock(LyricsDto.class);
+        final LyricsDto testLyricsDto = LyricsDto.builder().build();
 
-        lyricsServicePort.removeLyrics(mockLyricsDto);
+        lyricsServicePort.removeLyrics(testLyricsDto);
 
-        verify(lyricsPersistencePort, only()).removeLyrics(mockLyricsDto);
+        verify(lyricsPersistencePort, only()).removeLyrics(testLyricsDto);
     }
 
     @Test
     public void givenLyrics_whenUpdate_thenUpdateLyricsPortCalled() {
-        final LyricsDto mockLyricsDto = mock(LyricsDto.class);
+        final LyricsDto testLyricsDto = LyricsDto.builder().build();
 
-        lyricsServicePort.updateLyrics(mockLyricsDto);
+        lyricsServicePort.updateLyrics(testLyricsDto);
 
-        verify(lyricsPersistencePort, only()).updateLyrics(mockLyricsDto);
+        verify(lyricsPersistencePort, only()).updateLyrics(testLyricsDto);
     }
 
     @Test
@@ -70,12 +70,12 @@ public class LyricsServiceImplTest {
     @Test
     public void givenLyricsId_whenGetLyricssById_thenGetLyricsByIdPortCalled() {
         var testLyricsId = UUID.randomUUID();
-        final LyricsDto mockLyricsDto = mock(LyricsDto.class);
-        when(lyricsPersistencePort.getLyricsById(testLyricsId)).thenReturn(mockLyricsDto);
+        final LyricsDto testLyricsDto = LyricsDto.builder().build();
+        when(lyricsPersistencePort.getLyricsById(testLyricsId)).thenReturn(testLyricsDto);
 
         final LyricsDto lyricsDto = lyricsServicePort.getLyricsById(testLyricsId);
 
-        assertThat(lyricsDto).isSameAs(mockLyricsDto);
+        assertThat(lyricsDto).isSameAs(testLyricsDto);
         verify(lyricsPersistencePort, only()).getLyricsById(testLyricsId);
     }
 

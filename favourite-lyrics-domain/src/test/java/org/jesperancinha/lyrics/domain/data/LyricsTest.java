@@ -94,6 +94,6 @@ public class LyricsTest {
                 .lyrics("I'm in love with the shape of you")
                 .build();
 
-        assertThat(lyricsDto1.toString()).isEqualTo("LyricsDto(lyrics=I'm in love with the shape of you, participatingArtist=Ed Sheeran)");
+        assertThat(lyricsDto1.toString()).isEqualTo("LyricsDto[lyrics=I'm in love with the shape of you, participatingArtist=Ed Sheeran]");
     }
 }

@@ -2,16 +2,32 @@ package org.jesperancinha.lyrics;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;
+import org.hibernate.type.descriptor.java.UUIDTypeDescriptor;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
+import org.jesperancinha.lyrics.jpa.model.LyricsEntity;
+import org.jesperancinha.lyrics.jpa.repository.LyricsRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.testcontainers.containers.Network;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.UUID;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
+@Testcontainers
 public class LyricsDemoApplicationLauncherTest {
     private static final String TEST_ARTIST_NAME = "Florence and the Machine";
     private static final String TEST_LYRICS = "Sweet Nothings";
@@ -27,6 +44,12 @@ public class LyricsDemoApplicationLauncherTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @SpyBean
+    private LyricsRepository lyricsRepository;
+
+    @Captor
+    private ArgumentCaptor<LyricsEntity> lyricsEntityArgumentCaptor;
 
     @Test
     @Transactional
@@ -42,7 +65,10 @@ public class LyricsDemoApplicationLauncherTest {
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
+
+        verify(lyricsRepository, times(1)).save(lyricsEntityArgumentCaptor.capture());
+
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + lyricsEntityArgumentCaptor.getValue().getId())
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
@@ -61,7 +87,10 @@ public class LyricsDemoApplicationLauncherTest {
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
+        verify(lyricsRepository, times(2)).save(lyricsEntityArgumentCaptor.capture());
+
+        final UUID lastId = lyricsEntityArgumentCaptor.getValue().getId();
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + lastId)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
@@ -75,7 +104,7 @@ public class LyricsDemoApplicationLauncherTest {
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/6")
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + lastId)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.participatingArtist").doesNotExist())
@@ -112,7 +141,8 @@ public class LyricsDemoApplicationLauncherTest {
 
     @Test
     void givenArtisId_whenCallingGetLyricsById_thenReturnsLyrics() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/1")
+        final UUID id = lyricsRepository.findAll().get(0).getId();
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/"+id)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
@@ -123,10 +153,31 @@ public class LyricsDemoApplicationLauncherTest {
 
     @Test
     void givenUnexistingArtisId_whenCallingGetLyricsById_thenIsNotFound() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/7")
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + UUID.randomUUID())
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.participatingArtist").doesNotExist())
                 .andExpect(jsonPath("$.lyrics").doesNotExist());
     }
+
+    @Container
+    final static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres")
+            .withDatabaseName("fla")
+            .withUsername("postgres")
+            .withPassword("admin")
+            .withExposedPorts(5432)
+            .withNetwork(Network.newNetwork())
+            .withNetworkAliases("postgres");
+
+    static {
+        postgreSQLContainer.start();
+    }
+
+    @DynamicPropertySource
+    static void registerProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", () -> postgreSQLContainer.getJdbcUrl() + "&currentSchema=hexagonal");
+        registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
+        registry.add("spring.datasource.password", postgreSQLContainer::getPassword);
+    }
+
 }
