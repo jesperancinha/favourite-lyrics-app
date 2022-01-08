@@ -14,7 +14,7 @@ variables:
   CODACY_PROJECT_TOKEN: $CODACY_PROJECT_TOKEN
   RENOVATE_TOKEN: $RENOVATE_TOKEN
 
-image: maven:3.8.4-openjdk-17
+image: maven:3-openjdk-17
 cache:
   paths:
     - .m2/repository
