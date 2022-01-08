@@ -1,4 +1,3 @@
-image: docker:latest
 services:
     - docker:dind
 stages:
@@ -14,6 +13,9 @@ variables:
   COVERALLS_TOKEN: $COVERALLS_TOKEN
   CODACY_PROJECT_TOKEN: $CODACY_PROJECT_TOKEN
   RENOVATE_TOKEN: $RENOVATE_TOKEN
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
 
 image: maven:3-openjdk-17
 cache:
