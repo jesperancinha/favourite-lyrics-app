@@ -1,5 +1,5 @@
-image: maven:3.8.4-openjdk-17
-
+services:
+    - docker:dind
 stages:
     - build
     - test
@@ -14,9 +14,7 @@ variables:
   CODACY_PROJECT_TOKEN: $CODACY_PROJECT_TOKEN
   RENOVATE_TOKEN: $RENOVATE_TOKEN
 
-services:
-    - docker:dind
-
+image: maven:3.8.4-openjdk-17
 cache:
   paths:
     - .m2/repository
