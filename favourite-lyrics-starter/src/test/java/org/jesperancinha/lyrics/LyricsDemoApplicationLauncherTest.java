@@ -2,7 +2,6 @@ package org.jesperancinha.lyrics;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;
-import org.hibernate.type.descriptor.java.UUIDTypeDescriptor;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity;
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository;
@@ -142,7 +141,7 @@ public class LyricsDemoApplicationLauncherTest {
     @Test
     void givenArtisId_whenCallingGetLyricsById_thenReturnsLyrics() throws Exception {
         final UUID id = lyricsRepository.findAll().get(0).getId();
-        mvc.perform(MockMvcRequestBuilders.get("/lyrics/"+id)
+        mvc.perform(MockMvcRequestBuilders.get("/lyrics/" + id)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.participatingArtist").exists())
@@ -168,10 +167,6 @@ public class LyricsDemoApplicationLauncherTest {
             .withExposedPorts(5432)
             .withNetwork(Network.newNetwork())
             .withNetworkAliases("postgres");
-
-    static {
-        postgreSQLContainer.start();
-    }
 
     @DynamicPropertySource
     static void registerProperties(DynamicPropertyRegistry registry) {
