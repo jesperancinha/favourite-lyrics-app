@@ -1,3 +1,5 @@
+image: maven:3.8.4-openjdk-17
+
 stages:
     - build
     - test
@@ -11,10 +13,6 @@ variables:
   COVERALLS_TOKEN: $COVERALLS_TOKEN
   CODACY_PROJECT_TOKEN: $CODACY_PROJECT_TOKEN
   RENOVATE_TOKEN: $RENOVATE_TOKEN
-
-
-# This template uses jdk17 for verifying and deploying images
-image: maven:3.8.4-openjdk-17
 
 services:
     - docker:dind
