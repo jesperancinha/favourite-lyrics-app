@@ -7,10 +7,10 @@
 
 [![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)](https://gitlab.com/jesperancinha/favourite-lyrics-app/pipelines)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f58be73117224ce0848b951e3a446b45)](https://www.codacy.com/gl/jesperancinha/favourite-lyrics-app/dashboard?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/favourite-lyrics-app&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/03e7df2eb23c4545af7f32d2c1870074)](https://www.codacy.com/gl/jesperancinha/favourite-lyrics-app/dashboard?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/favourite-lyrics-app&amp;utm_campaign=Badge_Grade)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f58be73117224ce0848b951e3a446b45)](https://www.codacy.com/gl/jesperancinha/favourite-lyrics-app/dashboard?utm_source=gitlab.com&utm_medium=referral&utm_content=jesperancinha/favourite-lyrics-app&utm_campaign=Badge_Coverage)
-[![Coverage Status](https://coveralls.io/repos/gitlab/jesperancinha/favourite-lyrics-app/badge.svg?branch=bc49657a0a5b8635b777f72bb63866c319cf7d43)](https://coveralls.io/gitlab/jesperancinha/favourite-lyrics-app?branch=bc49657a0a5b8635b777f72bb63866c319cf7d43)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/03e7df2eb23c4545af7f32d2c1870074)](https://www.codacy.com/gl/jesperancinha/favourite-lyrics-app/dashboard?utm_source=gitlab.com&utm_medium=referral&utm_content=jesperancinha/favourite-lyrics-app&utm_campaign=Badge_Coverage)
+[![Coverage Status](https://coveralls.io/repos/gitlab/jesperancinha/favourite-lyrics-app/badge.svg?branch=master)](https://coveralls.io/gitlab/jesperancinha/favourite-lyrics-app?branch=master)
 [![codecov](https://codecov.io/gl/jesperancinha/favourite-lyrics-app/branch/master/graph/badge.svg?token=7IA2J24R6H)](https://codecov.io/gl/jesperancinha/favourite-lyrics-app)
 
 ---
