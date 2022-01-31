@@ -35,26 +35,58 @@ cache:
 verify:jdk17:
   <<: *verify
 
-build:jdk17:
+build:
+  image: maven:3.8-openjdk-17-slim
   stage: build
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
   script:
-    - if [ ! -f ci_settings.xml ];
-        then echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/project/packages/maven_repository.html#creating-maven-packages-with-gitlab-cicd for instructions.";
-      fi
-    - 'mvn clean install jacoco:prepare-agent package jacoco:report'
-    - 'mvn omni-coveragereporter:report'
+    - mvn clean install
+
+coverage:
+  image: maven:3.8-openjdk-17-slim
+  stage: coverage
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
+  script:
+    - mvn jacoco:prepare-agent package jacoco:report
   only:
     - master
+  needs:
+    - build
 
-build:jdk17-pull-request:
-  stage: build
+reporting:
+  image: maven:3.8-openjdk-17-slim
+  stage: reporting
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
   script:
-    - if [ ! -f ci_settings.xml ];
-        then echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/project/packages/maven_repository.html#creating-maven-packages-with-gitlab-cicd for instructions.";
-      fi
-    - 'mvn clean install jacoco:prepare-agent package jacoco:report'
-  except:
+    - mvn omni-coveragereporter:report
+  only:
     - master
+  needs:
+    - coverage
 
 update-dependencies:
   image: renovate/renovate
@@ -64,3 +96,6 @@ update-dependencies:
     - renovate
   only:
     - master
+  needs:
+    - reporting
+
