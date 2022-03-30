@@ -12,7 +12,7 @@
     "@types/react-cache": "^2.0.1",
     "@types/react-dom": "^17.0.0",
     "axios": "^0.26.0",
-    "react": "^17.0.2",
+    "react": "^18.0.0",
     "react-async": "^10.0.1",
     "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^17.0.2",
