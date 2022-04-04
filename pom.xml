@@ -36,7 +36,7 @@
         <flyway-core.version>8.5.5</flyway-core.version>
         <postgresql.version>42.3.3</postgresql.version>
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
         <testcontainers.version>1.16.3</testcontainers.version>
     </properties>
 
