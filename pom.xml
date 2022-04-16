@@ -33,7 +33,7 @@
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <spring-boot-starter-parent.version>2.6.6</spring-boot-starter-parent.version>
-        <flyway-core.version>8.5.7</flyway-core.version>
+        <flyway-core.version>8.5.8</flyway-core.version>
         <postgresql.version>42.3.4</postgresql.version>
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
