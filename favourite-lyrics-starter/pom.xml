@@ -115,7 +115,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>8.5.8</version>
+                <version>8.5.9</version>
             </plugin>
         </plugins>
     </build>
