@@ -32,7 +32,7 @@
         <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
-        <spring-boot-starter-parent.version>2.6.7</spring-boot-starter-parent.version>
+        <spring-boot-starter-parent.version>2.7.0</spring-boot-starter-parent.version>
         <flyway-core.version>8.5.11</flyway-core.version>
         <postgresql.version>42.3.5</postgresql.version>
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
