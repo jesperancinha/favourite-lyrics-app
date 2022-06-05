@@ -2,5 +2,23 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "repositories": ["jesperancinha/favourite-lyrics-app"],
   "platform": "gitlab",
-  "extends": ["docker:disable"]
+  "extends": ["docker:disable"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "Angular Group",
+      "matchPackagePrefixes": [
+        "@angular/"
+      ],
+      "automerge": true
+    }
+  ]
 }
