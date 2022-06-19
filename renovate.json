@@ -19,6 +19,12 @@
         "@angular/"
       ],
       "automerge": true
-    }
-  ]
+    },
+    {
+      "groupName": "Node Types Group",
+      "matchPackagePrefixes": [
+        "@types"
+      ],
+      "automerge": true
+    }  ]
 }
