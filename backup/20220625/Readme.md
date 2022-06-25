@@ -101,9 +101,14 @@ make docker-clean-build-start
 1.  [http://localhost:8081/lyrics](http://localhost:8081/lyrics) - All Lyrics
 2.  [http://localhost:8081/lyrics/random](http://localhost:8081/lyrics/random)
 
-#### Swagger UI
+## Run Codecov
 
-- [Homepage Swagger UI](http://localhost:8080/swagger-ui/index.html)
+```bash
+mvn clean test -Dconsolerizer.show=false
+bash <(curl -s https://codecov.io/bash)
+```
+
+> NOTE: In GitLab pipelines, only protected branches and tags can access protected environment variables.
 
 ## References
 

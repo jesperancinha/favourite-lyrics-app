@@ -17,6 +17,11 @@
             <artifactId>favourite-lyrics-domain</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.jesperancinha.lyrics</groupId>
             <artifactId>favourite-lyrics-rest</artifactId>
         </dependency>
