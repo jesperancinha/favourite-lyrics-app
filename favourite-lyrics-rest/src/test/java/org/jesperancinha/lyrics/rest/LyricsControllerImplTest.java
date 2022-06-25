@@ -42,7 +42,7 @@ public class LyricsControllerImplTest {
 
     @Test
     void givenLyrics_whenAddLyrics_thenEntityIsPortedToService() throws Exception {
-        final LyricsDto testLyricsDto = LyricsDto.builder()
+        val testLyricsDto = LyricsDto.builder()
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
@@ -74,7 +74,7 @@ public class LyricsControllerImplTest {
 
     @Test
     void givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToService() throws Exception {
-        final LyricsDto testLyricsDto = LyricsDto.builder()
+        val testLyricsDto = LyricsDto.builder()
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
@@ -90,7 +90,7 @@ public class LyricsControllerImplTest {
 
     @Test
     void givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToService() throws Exception {
-        final LyricsDto testLyricsDto = LyricsDto.builder()
+        val testLyricsDto = LyricsDto.builder()
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();
@@ -113,7 +113,7 @@ public class LyricsControllerImplTest {
 
     @Test
     void givenArtisId_whenCallingGetLyricsById_thenFindByIdToService() throws Exception {
-        final LyricsDto testLyricsDto = LyricsDto.builder()
+        val testLyricsDto = LyricsDto.builder()
                 .participatingArtist(TEST_AUTHOR)
                 .lyrics(TEST_LYRICS)
                 .build();

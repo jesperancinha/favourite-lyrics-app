@@ -32,7 +32,7 @@ public class LyricsServiceImplTest {
 
     @Test
     public void givenLyrics_whenAdd_thenAddPortCalled() {
-        final LyricsDto testLyricsDto = LyricsDto.builder().build();
+        final var testLyricsDto = LyricsDto.builder().build();
 
         lyricsServicePort.addLyrics(testLyricsDto);
 
@@ -41,7 +41,7 @@ public class LyricsServiceImplTest {
 
     @Test
     public void givenLyrics_whenRemove_thenRemovePortCalled() {
-        final LyricsDto testLyricsDto = LyricsDto.builder().build();
+        final var testLyricsDto = LyricsDto.builder().build();
 
         lyricsServicePort.removeLyrics(testLyricsDto);
 
@@ -50,7 +50,7 @@ public class LyricsServiceImplTest {
 
     @Test
     public void givenLyrics_whenUpdate_thenUpdateLyricsPortCalled() {
-        final LyricsDto testLyricsDto = LyricsDto.builder().build();
+        final var testLyricsDto = LyricsDto.builder().build();
 
         lyricsServicePort.updateLyrics(testLyricsDto);
 
@@ -70,10 +70,10 @@ public class LyricsServiceImplTest {
     @Test
     public void givenLyricsId_whenGetLyricssById_thenGetLyricsByIdPortCalled() {
         var testLyricsId = UUID.randomUUID();
-        final LyricsDto testLyricsDto = LyricsDto.builder().build();
+        final var testLyricsDto = LyricsDto.builder().build();
         when(lyricsPersistencePort.getLyricsById(testLyricsId)).thenReturn(testLyricsDto);
 
-        final LyricsDto lyricsDto = lyricsServicePort.getLyricsById(testLyricsId);
+        final var lyricsDto = lyricsServicePort.getLyricsById(testLyricsId);
 
         assertThat(lyricsDto).isSameAs(testLyricsDto);
         verify(lyricsPersistencePort, only()).getLyricsById(testLyricsId);
