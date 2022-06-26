@@ -3,6 +3,7 @@ package org.jesperancinha.lyrics.test;
 import lombok.val;
 import org.jesperancinha.lyrics.core.service.LyricsServiceImpl;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
+import org.jesperancinha.lyrics.domain.data.LyricsFullDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 
 import java.util.Collections;
@@ -61,11 +62,18 @@ public class Main {
 
             @Override
             public List<LyricsDto> getAllLyrics() {
-                final LyricsDto lyricsDto = LyricsDto.builder()
+                return Collections.singletonList(LyricsDto.builder()
                         .participatingArtist("Gloria Gaynor")
                         .lyrics("First I was afraid, I was petrified")
-                        .build();
-                return Collections.singletonList(lyricsDto);
+                        .build());
+            }
+
+            @Override
+            public List<LyricsFullDto> getAllLFullLyrics() {
+                return Collections.singletonList(LyricsFullDto.builder()
+                      .participatingArtist("Metallica")
+                      .lyrics("Sad but true")
+                      .build());
             }
 
             @Override

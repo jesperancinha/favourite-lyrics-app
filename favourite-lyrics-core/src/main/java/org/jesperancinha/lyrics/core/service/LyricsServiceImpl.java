@@ -1,6 +1,7 @@
 package org.jesperancinha.lyrics.core.service;
 
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
+import org.jesperancinha.lyrics.domain.data.LyricsFullDto;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,11 @@ public class LyricsServiceImpl implements LyricsService {
     @Override
     public List<LyricsDto> getAllLyrics() {
         return lyricsPersistencePort.getAllLyrics();
+    }
+
+    @Override
+    public List<LyricsFullDto> getAllFullLyrics() {
+        return lyricsPersistencePort.getAllLFullLyrics();
     }
 
     @Override

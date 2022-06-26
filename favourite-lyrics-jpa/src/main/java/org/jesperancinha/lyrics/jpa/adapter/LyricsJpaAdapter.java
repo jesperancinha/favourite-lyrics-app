@@ -2,6 +2,7 @@ package org.jesperancinha.lyrics.jpa.adapter;
 
 import lombok.SneakyThrows;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
+import org.jesperancinha.lyrics.domain.data.LyricsFullDto;
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException;
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort;
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity;
@@ -57,6 +58,14 @@ public class LyricsJpaAdapter implements LyricsPersistencePort {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<LyricsFullDto> getAllLFullLyrics() {
+        return lyricsRepository.findAll()
+                .stream()
+                .map(this::fullLyrics)
+                .collect(Collectors.toList());
+    }
+
     @SneakyThrows
     @Override
     public LyricsDto getLyricsById(UUID lyricsId) {
@@ -75,6 +84,14 @@ public class LyricsJpaAdapter implements LyricsPersistencePort {
         return LyricsDto.builder()
                 .participatingArtist(lyricsEntity.getParticipatingArtist())
                 .lyrics(lyricsEntity.getLyrics())
+                .build();
+    }
+
+    private LyricsFullDto fullLyrics(LyricsEntity lyricsEntity) {
+        return LyricsFullDto.builder()
+                .participatingArtist(lyricsEntity.getParticipatingArtist())
+                .lyrics(lyricsEntity.getLyrics())
+                .uuid(lyricsEntity.getId())
                 .build();
     }
 

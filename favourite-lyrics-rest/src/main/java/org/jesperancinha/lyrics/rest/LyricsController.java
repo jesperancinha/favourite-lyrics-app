@@ -1,6 +1,7 @@
 package org.jesperancinha.lyrics.rest;
 
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
+import org.jesperancinha.lyrics.domain.data.LyricsFullDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,9 @@ public interface LyricsController {
 
     @GetMapping("/lyrics")
     ResponseEntity<List<LyricsDto>> lyrics();
+
+    @GetMapping("/complete/lyrics")
+    ResponseEntity<List<LyricsFullDto>> complete();
 
     @GetMapping("/lyrics/random")
     ResponseEntity<LyricsDto> getRandomLyric();

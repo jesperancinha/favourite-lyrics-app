@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.jesperancinha.lyrics.core.service.LyricsService;
 import org.jesperancinha.lyrics.domain.data.LyricsDto;
+import org.jesperancinha.lyrics.domain.data.LyricsFullDto;
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,11 @@ public class LyricsControllerImpl implements LyricsController {
     @Override
     public ResponseEntity<List<LyricsDto>> lyrics() {
         return new ResponseEntity<>(lyricsService.getAllLyrics(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<LyricsFullDto>> complete() {
+        return new ResponseEntity<>(lyricsService.getAllFullLyrics(), HttpStatus.OK);
     }
 
     @Override
