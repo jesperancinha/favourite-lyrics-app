@@ -103,7 +103,7 @@ make docker-clean-build-start
 
 #### Swagger UI
 
-- [Homepage Swagger UI](http://localhost:8080/swagger-ui/index.html)
+-   [Homepage Swagger UI](http://localhost:8080/swagger-ui/index.html)
 
 ## References
 

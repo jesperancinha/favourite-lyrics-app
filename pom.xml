@@ -39,6 +39,7 @@
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
         <testcontainers.version>1.17.2</testcontainers.version>
         <springdoc-openapi-ui.version>1.6.9</springdoc-openapi-ui.version>
+        <kotlinx-coroutines-debug.version>1.6.3</kotlinx-coroutines-debug.version>
     </properties>
 
     <dependencyManagement>
@@ -113,6 +114,20 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${testcontainers.version}</version>
+            </dependency>
+            <!-- This Dependency is added as a workaround for the following issue -->
+            <!--- https://github.com/Kotlin/kotlinx.coroutines/issues/3334 -->
+            <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-coroutines-debug</artifactId>
+                <version>${kotlinx-coroutines-debug.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jetbrains.kotlinx</groupId>
+                        <artifactId>kotlinx-coroutines-bom</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

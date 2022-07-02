@@ -53,4 +53,10 @@ stop-all: stop
 	docker ps -a --format '{{.ID}}' -q | xargs docker stop
 install:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+dcup-light:
+	docker-compose up -d fla_postgres
+dcup: dcd
+	docker-compose up -d --build --remove-orphans
+dcd:
+	docker-compose down
 
