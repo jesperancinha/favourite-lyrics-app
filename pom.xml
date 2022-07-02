@@ -37,7 +37,7 @@
         <postgresql.version>42.4.0</postgresql.version>
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-        <testcontainers.version>1.17.2</testcontainers.version>
+        <testcontainers.version>1.17.3</testcontainers.version>
         <springdoc-openapi-ui.version>1.6.9</springdoc-openapi-ui.version>
         <kotlinx-coroutines-debug.version>1.6.3-native-mt</kotlinx-coroutines-debug.version>
     </properties>
