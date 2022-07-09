@@ -132,9 +132,6 @@ coverage:
     - master
   needs:
     - build
-    - favorite-lyrics-electron-e2e
-    - favorite-lyrics-firefox-e2e
-    - favorite-lyrics-chrome-e2e
 
 reporting:
   image: maven:3.8-openjdk-17-slim
@@ -154,6 +151,9 @@ reporting:
     - master
   needs:
     - coverage
+    - favorite-lyrics-electron-e2e
+    - favorite-lyrics-firefox-e2e
+    - favorite-lyrics-chrome-e2e
 
 update-dependencies:
   image: renovate/renovate
