@@ -40,7 +40,7 @@ verify:jdk17:
   <<: *verify
 
 before_script:
-  - apt-get update && apt-get install build-essential
+  - apt-get update -y && apt-get install build-essential -y
 
 build:
   image: maven:3.8-openjdk-17-slim
