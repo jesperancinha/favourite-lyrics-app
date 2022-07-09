@@ -42,3 +42,9 @@ javacore.**.txt
 
 # Codecov
 codecov.yml
+
+# Logs
+logs
+
+# Node
+node_modules

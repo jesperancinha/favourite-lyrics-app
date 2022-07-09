@@ -2,7 +2,7 @@ b: build-npm build-maven
 build: build-npm
 	mvn clean install
 build-npm:
-	cd favourite-lyrics-gui && yarn install && yarn build
+	cd favourite-lyrics-gui && yarn && yarn build
 build-maven:
 	mvn clean install -DskipTests
 test:
@@ -11,7 +11,7 @@ test-maven:
 	mvn test
 local: no-test
 	mkdir -p bin
-no-test:
+no-test: build-npm
 	mvn clean install -DskipTests
 docker:
 	docker-compose down
@@ -37,6 +37,8 @@ docker-clean-build-start: docker-clean b docker
 docker-delete-apps: stop
 docker-local:
 	docker-compose up -d fla_postgres
+docker-action:
+	docker-compose -f docker-compose.yml up -d --build --remove-orphans
 prune-network: stop
 	docker network prune
 prune-all: stop
@@ -53,10 +55,30 @@ stop-all: stop
 	docker ps -a --format '{{.ID}}' -q | xargs docker stop
 install:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-dcup-light:
+fla-wait:
+	bash fla_wait.sh
+dcup-light: dcd
 	docker-compose up -d fla_postgres
 dcup: dcd
 	docker-compose up -d --build --remove-orphans
+dcup-full: docker-clean-build-start fla-wait
+dcup-full-action: docker-clean no-test docker-action fla-wait
 dcd:
 	docker-compose down
-
+cypress-open:
+	cd e2e && yarn && npm run cypress
+cypress-electron:
+	cd e2e && yarn && npm run cypress:run:electron
+cypress-chrome:
+	cd e2e && yarn && npm run cypress:run:chrome
+cypress-firefox:
+	cd e2e && yarn && npm run cypress:run:firefox
+update:
+	git pull
+	npm install -g npm-check-updates
+	cd favourite-lyrics-gui && npx browserslist --update-db && ncu -u && yarn
+refresh-nginx:
+	docker-compose stop fla_nginx
+	docker-compose build fla_nginx
+	docker-compose up -d fla_nginx
+	bash fla_nginx_wait.sh

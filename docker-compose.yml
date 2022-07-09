@@ -12,8 +12,6 @@ services:
     volumes:
       - ./docker-images/docker-psql:/docker-entrypoint-initdb.d
       - ./docker-images/docker-psql/multiple:/docker-entrypoint-initdb.d/multiple
-    ports:
-      - "${PG_EXPOSED_PORT}:${PG_EXPOSED_PORT}"
     expose:
       - ${PG_EXPOSED_PORT}
     deploy:
@@ -31,9 +29,6 @@ services:
     container_name: ${PROJECT_SLUG}_backend
     build:
       context: favourite-lyrics-starter/.
-    ports:
-      - "8081:8080"
-    restart: on-failure
     deploy:
       resources:
         limits:
@@ -43,6 +38,8 @@ services:
     networks:
       fla_net:
         ipv4_address: ${FLA_BACKEND}
+        aliases:
+          - localhost
 
   fla_nginx:
     hostname: ${PROJECT_SLUG}-nginx

@@ -38,7 +38,7 @@ public interface LyricsController {
     @GetMapping("/lyrics")
     ResponseEntity<List<LyricsDto>> lyrics();
 
-    @GetMapping("/complete/lyrics")
+    @GetMapping("/lyrics/complete")
     ResponseEntity<List<LyricsFullDto>> complete();
 
     @GetMapping("/lyrics/random")

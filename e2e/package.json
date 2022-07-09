@@ -1,0 +1,21 @@
+{
+  "name": "favourite-lyrics-app-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "cypress": "npx cypress open --browser electron",
+    "cypress:run:electron": "npx cypress run --browser electron",
+    "cypress:run:chrome": "npx cypress run --browser chrome",
+    "cypress:run:firefox": "npx cypress run --browser firefox",
+    "cypress:run:edge": "npx cypress run --browser edge"
+  },
+  "author": "João Esperancinha",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^10.3.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}

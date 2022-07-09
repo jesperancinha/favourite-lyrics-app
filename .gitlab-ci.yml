@@ -3,6 +3,7 @@ services:
 stages:
   - build
   - coverage
+  - e2e
   - reporting
   - verify
   - test
@@ -52,6 +53,66 @@ build:
         - favourite-lyrics-test/target/
   script:
     - mvn clean install
+
+favorite-lyrics-electron-e2e:
+  image: maven:3.8-openjdk-17-slim
+  stage: e2e
+  script:
+    - make dcup-full-action
+    - make cypress-electron
+  only:
+    - master
+  needs:
+    - build
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
+
+favorite-lyrics-chrome-e2e:
+  image: maven:3.8-openjdk-17-slim
+  stage: e2e
+  script:
+    - make dcup-full-action
+    - make cypress-chrome
+  only:
+    - master
+  needs:
+    - build
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
+
+favorite-lyrics-firefox-e2e:
+  image: maven:3.8-openjdk-17-slim
+  stage: e2e
+  script:
+    - make dcup-full-action
+    - make cypress-firefox
+  only:
+    - master
+  needs:
+    - build
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
 
 coverage:
   image: maven:3.8-openjdk-17-slim
