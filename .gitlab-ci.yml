@@ -2,8 +2,8 @@ services:
     - docker:dind
 stages:
   - build
-  - coverage
   - e2e
+  - coverage
   - reporting
   - verify
   - test
