@@ -21,7 +21,8 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   DOCKER_DRIVER: overlay2
 
-image: maven:3-openjdk-17
+image: docker:latest
+
 cache:
   paths:
     - .m2/repository
