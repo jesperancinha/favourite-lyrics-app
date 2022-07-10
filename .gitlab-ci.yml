@@ -135,6 +135,8 @@ favorite-lyrics-electron-e2e:
         - favourite-lyrics-gui/build/
         - favourite-lyrics-gui/dist/
         - favourite-lyrics-gui/node_modules/
+  allow_failure: true
+  timeout: 10m
 
 favorite-lyrics-chrome-e2e:
   image: node:16
