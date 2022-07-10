@@ -44,8 +44,7 @@ before_script:
   - apt-get install -y npm
   - npm install --global yarn
   - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-  - export NVM_DIR="$HOME/.nvm"
-  - export PATH="PATH:$NVM_DIR"
+  - export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
   - nvm install --lts
   - apt-get install build-essential -y
   - apt-get install -y docker-compose
