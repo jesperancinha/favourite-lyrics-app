@@ -62,7 +62,7 @@ dcup-light: dcd
 dcup: dcd
 	docker-compose up -d --build --remove-orphans
 dcup-full: docker-clean-build-start fla-wait
-dcup-full-action: docker-clean no-test docker-action fla-wait
+dcup-full-action: docker-clean docker-action fla-wait
 dcd:
 	docker-compose down
 cypress-open:
