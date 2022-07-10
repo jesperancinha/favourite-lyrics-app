@@ -43,6 +43,7 @@ before_script:
   - apt-get update -y
   - apt-get install -y npm
   - npm install --global yarn
+  - nvm install --lts
   - apt-get install build-essential -y
   - apt-get install -y docker-compose
 
