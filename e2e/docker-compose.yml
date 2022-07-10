@@ -35,11 +35,3 @@ services:
       - .:/e2e
     networks:
       - fla_net
-
-networks:
-  fla_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.0.0/24
