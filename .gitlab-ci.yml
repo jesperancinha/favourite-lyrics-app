@@ -272,6 +272,8 @@ reporting:
 update-dependencies:
   image: renovate/renovate
   stage: update
+  before_script:
+    - ''
   script:
     - export RENOVATE_CONFIG=$(< renovate.json)
     - renovate
