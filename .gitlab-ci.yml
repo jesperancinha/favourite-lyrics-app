@@ -143,7 +143,8 @@ favorite-lyrics-chrome-e2e:
   only:
     - master
   needs:
-    - build
+    - qa-maven
+    - qa-front-end
   cache:
     - key: MAVEN
       paths:
@@ -168,7 +169,8 @@ favorite-lyrics-firefox-e2e:
   only:
     - master
   needs:
-    - build
+    - qa-maven
+    - qa-front-end
   cache:
     - key: MAVEN
       paths:
@@ -193,7 +195,8 @@ favorite-lyrics-edge-e2e:
   only:
     - master
   needs:
-    - build
+    - qa-maven
+    - qa-front-end
   cache:
     - key: MAVEN
       paths:
