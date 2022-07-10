@@ -44,7 +44,8 @@ before_script:
   - apt-get update -y
   - apt-get upgrade -y
   - apt-get install build-essential -y
-  - apt-get install -y docker-compose
+  - bash latest-compose.sh
+#  - apt-get install -y docker-compose
 #  - apt-get install -y npm
 #  - npm install --global yarn
 #  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
