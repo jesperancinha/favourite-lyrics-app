@@ -3,8 +3,8 @@ services:
 stages:
   - build
   - qa
-  - e2e
   - coverage
+  - e2e
   - reporting
   - verify
   - test
@@ -109,7 +109,7 @@ qa-front-end:
     - build-front-end
 
 favorite-lyrics-electron-e2e:
-  image: maven:3.8-openjdk-17-slim
+  image: node:16
   stage: e2e
   script:
     - make dcup-full-action
@@ -135,7 +135,7 @@ favorite-lyrics-electron-e2e:
         - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-chrome-e2e:
-  image: maven:3.8-openjdk-17-slim
+  image: node:16
   stage: e2e
   script:
     - make dcup-full-action
@@ -161,7 +161,7 @@ favorite-lyrics-chrome-e2e:
         - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-firefox-e2e:
-  image: maven:3.8-openjdk-17-slim
+  image: node:16
   stage: e2e
   script:
     - make dcup-full-action
@@ -187,7 +187,7 @@ favorite-lyrics-firefox-e2e:
         - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-edge-e2e:
-  image: maven:3.8-openjdk-17-slim
+  image: node:16
   stage: e2e
   script:
     - make dcup-full-action
