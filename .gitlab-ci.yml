@@ -55,7 +55,8 @@ before_script:
   - dpkg -i google-chrome-stable_current_amd64.deb
   - wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64"
   - tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/
-  - ln -s /opt/firefox/firefox /usr/lib/firefox
+  - mkdir /usr/lib/firefox
+  - ln -s /opt/firefox/firefox /usr/lib/firefox/firefox
 
 build:
   image: maven:3.8-openjdk-17-slim
