@@ -6,6 +6,8 @@ services:
     command: "--browser electron --env host=host.docker.internal"
     volumes:
       - .:/e2e
+    networks:
+      - fla_net
 
   e2e-chrome:
     image: "cypress/included:10.3.0"
@@ -13,6 +15,8 @@ services:
     command: "--browser chrome --env host=host.docker.internal"
     volumes:
       - .:/e2e
+    networks:
+      - fla_net
 
   e2e-firefox:
     image: "cypress/included:10.3.0"
@@ -20,6 +24,8 @@ services:
     command: "--browser firefox --env host=host.docker.internal"
     volumes:
       - .:/e2e
+    networks:
+      - fla_net
 
   e2e-edge:
     image: "cypress/included:10.3.0"
@@ -27,6 +33,8 @@ services:
     command: "--browser edge --env host=host.docker.internal"
     volumes:
       - .:/e2e
+    networks:
+      - fla_net
 
 networks:
   fla_net:
