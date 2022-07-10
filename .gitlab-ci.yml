@@ -41,6 +41,7 @@ verify:jdk17:
 
 before_script:
   - apt-get update -y
+  - npm install --global yarn
   - apt-get install build-essential -y
   - apt-get install -y docker-compose
 
