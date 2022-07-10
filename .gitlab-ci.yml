@@ -21,8 +21,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   DOCKER_DRIVER: overlay2
 
-image: docker:latest
-
+image: maven:3-openjdk-17
 cache:
   paths:
     - .m2/repository
@@ -41,8 +40,9 @@ verify:jdk17:
   <<: *verify
 
 before_script:
-  - apt-get update -y && apt-get install build-essential -y
-  - apk add --no-cache docker-compose
+  - apt-get update -y
+  - apt-get install build-essential -y
+  - apt-get install -y docker-compose
 
 build:
   image: maven:3.8-openjdk-17-slim
