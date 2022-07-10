@@ -50,6 +50,7 @@ before_script:
   - apt-get install -y docker-compose
   - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
   - apt-get install wget
+  - apt-get install -y fonts-liberation
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - dpkg -i google-chrome-stable_current_amd64.deb
   - apt-get install firefox
