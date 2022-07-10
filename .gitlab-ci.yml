@@ -2,6 +2,7 @@ services:
     - docker:dind
 stages:
   - build
+  - qa
   - e2e
   - coverage
   - reporting
@@ -49,7 +50,7 @@ before_script:
   - source ~/.bashrc
   - nvm install --lts
 
-build:
+build-maven:
   image: maven:3.8-openjdk-17-slim
   stage: build
   cache:
@@ -62,7 +63,50 @@ build:
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
   script:
-    - mvn clean install
+    - make build-maven
+
+build-front-end:
+  image: node:16
+  stage: build
+  cache:
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
+  script:
+    - make build-npm
+
+qa-maven:
+  image: maven:3.8-openjdk-17-slim
+  stage: qa
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
+  script:
+    - mvn test
+  needs:
+    - build-maven
+
+qa-front-end:
+  image: node:16
+  stage: qa
+  cache:
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
+  script:
+    - echo "TODO"
+  needs:
+    - build-front-end
 
 favorite-lyrics-electron-e2e:
   image: maven:3.8-openjdk-17-slim
@@ -73,7 +117,8 @@ favorite-lyrics-electron-e2e:
   only:
     - master
   needs:
-    - build
+    - qa-maven
+    - qa-front-end
   cache:
     - key: MAVEN
       paths:
@@ -83,6 +128,11 @@ favorite-lyrics-electron-e2e:
         - favourite-lyrics-rest/target/
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-chrome-e2e:
   image: maven:3.8-openjdk-17-slim
@@ -103,6 +153,11 @@ favorite-lyrics-chrome-e2e:
         - favourite-lyrics-rest/target/
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-firefox-e2e:
   image: maven:3.8-openjdk-17-slim
@@ -123,6 +178,11 @@ favorite-lyrics-firefox-e2e:
         - favourite-lyrics-rest/target/
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-edge-e2e:
   image: maven:3.8-openjdk-17-slim
@@ -143,6 +203,11 @@ favorite-lyrics-edge-e2e:
         - favourite-lyrics-rest/target/
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
 
 coverage:
   image: maven:3.8-openjdk-17-slim
@@ -156,6 +221,11 @@ coverage:
         - favourite-lyrics-rest/target/
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
   script:
     - mvn jacoco:prepare-agent package jacoco:report
   only:
@@ -175,6 +245,11 @@ reporting:
         - favourite-lyrics-rest/target/
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
+    - key: NODE
+      paths:
+        - favourite-lyrics-gui/build/
+        - favourite-lyrics-gui/dist/
+        - favourite-lyrics-gui/node_modules/
   script:
     - mvn omni-coveragereporter:report
   only:
