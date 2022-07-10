@@ -1,0 +1,37 @@
+version: '3'
+services:
+  e2e-electron:
+    image: "cypress/included:10.3.0"
+    working_dir: /e2e
+    command: "--browser electron --env host=host.docker.internal"
+    volumes:
+      - .:/e2e
+
+  e2e-chrome:
+    image: "cypress/included:10.3.0"
+    working_dir: /e2e
+    command: "--browser chrome --env host=host.docker.internal"
+    volumes:
+      - .:/e2e
+
+  e2e-firefox:
+    image: "cypress/included:10.3.0"
+    working_dir: /e2e
+    command: "--browser firefox --env host=host.docker.internal"
+    volumes:
+      - .:/e2e
+
+  e2e-edge:
+    image: "cypress/included:10.3.0"
+    working_dir: /e2e
+    command: "--browser edge --env host=host.docker.internal"
+    volumes:
+      - .:/e2e
+
+networks:
+  fla_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24

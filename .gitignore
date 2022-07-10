@@ -48,3 +48,7 @@ logs
 
 # Node
 node_modules
+
+## Cypress
+videos
+screenshots

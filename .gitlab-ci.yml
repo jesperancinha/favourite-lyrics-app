@@ -39,25 +39,6 @@ cache:
 verify:jdk17:
   <<: *verify
 
-before_script:
-  - apt-get update -y
-  - apt-get install -y npm
-  - npm install --global yarn
-  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-  - source ~/.bashrc
-  - nvm install --lts
-  - apt-get install build-essential -y
-  - apt-get install -y docker-compose
-  - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
-  - apt-get install wget
-  - apt-get install -y fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - dpkg -i google-chrome-stable_current_amd64.deb
-  - wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64"
-  - tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/
-  - mkdir /usr/lib/firefox
-  - ln -s /opt/firefox/firefox /usr/lib/firefox/firefox
-
 build:
   image: maven:3.8-openjdk-17-slim
   stage: build
@@ -119,6 +100,26 @@ favorite-lyrics-firefox-e2e:
   script:
     - make dcup-full-action
     - make cypress-firefox
+  only:
+    - master
+  needs:
+    - build
+  cache:
+    - key: MAVEN
+      paths:
+        - favourite-lyrics-core/target/
+        - favourite-lyrics-domain/target/
+        - favourite-lyrics-jpa/target/
+        - favourite-lyrics-rest/target/
+        - favourite-lyrics-starter/target/
+        - favourite-lyrics-test/target/
+
+favorite-lyrics-edge-e2e:
+  image: maven:3.8-openjdk-17-slim
+  stage: e2e
+  script:
+    - make dcup-full-action
+    - make cypress-edge
   only:
     - master
   needs:
