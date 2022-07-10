@@ -42,6 +42,7 @@ verify:jdk17:
 
 before_script:
   - apt-get update -y
+  - apt-get upgrade -y
   - apt-get install build-essential -y
   - apt-get install -y docker-compose
 #  - apt-get install -y npm
