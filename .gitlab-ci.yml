@@ -48,7 +48,7 @@ before_script:
   - nvm install --lts
   - apt-get install build-essential -y
   - apt-get install -y docker-compose
-  - apt install xvfb -y
+  - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
 
 build:
   image: maven:3.8-openjdk-17-slim
