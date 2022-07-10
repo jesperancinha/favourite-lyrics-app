@@ -5,7 +5,7 @@ services:
     working_dir: /e2e
     command: "--browser electron --env host=host.docker.internal"
     volumes:
-      - .:/e2e
+      - ./e2e:/e2e
     networks:
       - fla_net
 
@@ -14,7 +14,7 @@ services:
     working_dir: /e2e
     command: "--browser chrome --env host=host.docker.internal"
     volumes:
-      - .:/e2e
+      - ./e2e:/e2e
     networks:
       - fla_net
 
@@ -23,7 +23,7 @@ services:
     working_dir: /e2e
     command: "--browser firefox --env host=host.docker.internal"
     volumes:
-      - .:/e2e
+      - ./e2e:/e2e
     networks:
       - fla_net
 
@@ -32,6 +32,6 @@ services:
     working_dir: /e2e
     command: "--browser edge --env host=host.docker.internal"
     volumes:
-      - .:/e2e
+      - ./e2e:/e2e
     networks:
       - fla_net
