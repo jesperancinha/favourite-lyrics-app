@@ -70,7 +70,7 @@ build-maven:
     - make build-maven
 
 build-front-end:
-  image: node:16
+  image: node:18
   stage: build
   cache:
     - key: NODE
@@ -99,7 +99,7 @@ qa-maven:
     - build-maven
 
 qa-front-end:
-  image: node:16
+  image: node:18
   stage: qa
   cache:
     - key: NODE
@@ -113,7 +113,7 @@ qa-front-end:
     - build-front-end
 
 favorite-lyrics-electron-e2e:
-  image: node:16
+  image: node:18
   stage: e2e
   script:
     - make dcup-full-action
@@ -139,7 +139,7 @@ favorite-lyrics-electron-e2e:
   timeout: 10m
 
 favorite-lyrics-chrome-e2e:
-  image: node:16
+  image: node:18
   stage: e2e
   script:
     - make dcup-full-action
@@ -163,7 +163,7 @@ favorite-lyrics-chrome-e2e:
         - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-firefox-e2e:
-  image: node:16
+  image: node:18
   stage: e2e
   script:
     - make dcup-full-action
@@ -187,7 +187,7 @@ favorite-lyrics-firefox-e2e:
         - favourite-lyrics-gui/node_modules/
 
 favorite-lyrics-edge-e2e:
-  image: node:16
+  image: node:18
   stage: e2e
   script:
     - make dcup-full-action
