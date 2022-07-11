@@ -108,7 +108,7 @@ qa-front-end:
         - favourite-lyrics-gui/dist/
         - favourite-lyrics-gui/node_modules/
   script:
-    - echo "TODO"
+    - npm test
   needs:
     - build-front-end
 
