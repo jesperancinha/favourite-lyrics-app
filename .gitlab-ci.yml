@@ -94,7 +94,7 @@ qa-maven:
         - favourite-lyrics-starter/target/
         - favourite-lyrics-test/target/
   script:
-    - mvn test
+    - cd favourite-lyrics-gui && mvn test
   needs:
     - build-maven
 
