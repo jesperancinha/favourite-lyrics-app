@@ -1,7 +1,7 @@
-import ReactDOM from "react-dom";
-import React from "react";
 import LyricsService from "../services/lyrics.service";
 import {Lyric} from "../domain/lyric";
+import * as ReactDOMClient from 'react-dom/client';
+import React from "react";
 
 
 class LyricsComponent extends React.Component<any, any> {
@@ -52,9 +52,12 @@ class LyricsComponent extends React.Component<any, any> {
     }
 }
 
-ReactDOM.render(
-    <LyricsComponent/>,
-    document.getElementById('root')
-);
+let rootElement = document.getElementById('root')
+if (rootElement) {
+    const root = ReactDOMClient.createRoot(rootElement);
+    root.render(
+        <LyricsComponent/>,
+    )
+}
 
 export default LyricsComponent
