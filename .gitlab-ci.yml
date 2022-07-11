@@ -39,6 +39,8 @@ cache:
 # Verify merge requests using JDK17
 verify:jdk17:
   <<: *verify
+  before_script:
+    - ''
 
 before_script:
   - apt-get update -y
@@ -116,8 +118,6 @@ favorite-lyrics-electron-e2e:
   script:
     - make dcup-full-action
     - make cypress-electron
-  only:
-    - master
   needs:
     - qa-maven
     - qa-front-end
@@ -144,8 +144,6 @@ favorite-lyrics-chrome-e2e:
   script:
     - make dcup-full-action
     - make cypress-chrome
-  only:
-    - master
   needs:
     - qa-maven
     - qa-front-end
@@ -170,8 +168,6 @@ favorite-lyrics-firefox-e2e:
   script:
     - make dcup-full-action
     - make cypress-firefox
-  only:
-    - master
   needs:
     - qa-maven
     - qa-front-end
@@ -196,8 +192,6 @@ favorite-lyrics-edge-e2e:
   script:
     - make dcup-full-action
     - make cypress-edge
-  only:
-    - master
   needs:
     - qa-maven
     - qa-front-end
