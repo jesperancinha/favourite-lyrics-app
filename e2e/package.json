@@ -9,7 +9,11 @@
     "cypress:run:electron": "npx cypress run --browser electron",
     "cypress:run:chrome": "npx cypress run --browser chrome",
     "cypress:run:firefox": "npx cypress run --browser firefox",
-    "cypress:run:edge": "npx cypress run --browser edge"
+    "cypress:run:edge": "npx cypress run --browser edge",
+    "cypress:run:electron:full": "npx cypress run --config-file full.cypress.config.ts --browser electron",
+    "cypress:run:chrome:full": "npx cypress run --config-file full.cypress.config.ts --browser chrome",
+    "cypress:run:firefox:full": "npx cypress run --config-file full.cypress.config.ts --browser firefox",
+    "cypress:run:edge:full": "npx cypress run --config-file full.cypress.config.ts --browser edge"
   },
   "author": "João Esperancinha",
   "license": "ISC",
