@@ -165,6 +165,8 @@ favorite-lyrics-chrome-e2e:
 favorite-lyrics-firefox-e2e:
   image: node:18
   stage: e2e
+  retry: 2
+  allow_failure: true
   script:
     - make dcup-full-action
     - make cypress-firefox
