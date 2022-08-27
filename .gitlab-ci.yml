@@ -68,6 +68,8 @@ build-maven:
         - favourite-lyrics-test/target/
   script:
     - make build-maven
+  except:
+    - schedules
 
 build-front-end:
   image: node:18
@@ -80,6 +82,8 @@ build-front-end:
         - favourite-lyrics-gui/node_modules/
   script:
     - make build-npm
+  except:
+    - schedules
 
 qa-maven:
   image: maven:3.8-openjdk-17-slim
@@ -97,6 +101,8 @@ qa-maven:
     - mvn test
   needs:
     - build-maven
+  except:
+    - schedules
 
 qa-front-end:
   image: node:18
@@ -111,6 +117,8 @@ qa-front-end:
     - cd favourite-lyrics-gui && npm test
   needs:
     - build-front-end
+  except:
+    - schedules
 
 favorite-lyrics-electron-e2e:
   image: node:18
@@ -137,6 +145,8 @@ favorite-lyrics-electron-e2e:
         - favourite-lyrics-gui/node_modules/
   allow_failure: true
   timeout: 10m
+  except:
+    - schedules
 
 favorite-lyrics-chrome-e2e:
   image: node:18
@@ -161,6 +171,8 @@ favorite-lyrics-chrome-e2e:
         - favourite-lyrics-gui/build/
         - favourite-lyrics-gui/dist/
         - favourite-lyrics-gui/node_modules/
+  except:
+    - schedules
 
 favorite-lyrics-firefox-e2e:
   image: node:18
@@ -187,6 +199,8 @@ favorite-lyrics-firefox-e2e:
         - favourite-lyrics-gui/build/
         - favourite-lyrics-gui/dist/
         - favourite-lyrics-gui/node_modules/
+  except:
+    - schedules
 
 favorite-lyrics-edge-e2e:
   image: node:18
@@ -211,6 +225,8 @@ favorite-lyrics-edge-e2e:
         - favourite-lyrics-gui/build/
         - favourite-lyrics-gui/dist/
         - favourite-lyrics-gui/node_modules/
+  except:
+    - schedules
 
 coverage:
   image: maven:3.8-openjdk-17-slim
@@ -236,6 +252,8 @@ coverage:
   needs:
     - build-maven
     - build-front-end
+  except:
+    - schedules
 
 reporting:
   image: maven:3.8-openjdk-17-slim
@@ -264,6 +282,8 @@ reporting:
     - favorite-lyrics-firefox-e2e
     - favorite-lyrics-chrome-e2e
     - favorite-lyrics-edge-e2e
+  except:
+    - schedules
 
 update-dependencies:
   image: renovate/renovate
@@ -274,7 +294,6 @@ update-dependencies:
     - export RENOVATE_CONFIG=$(< renovate.json)
     - renovate
   only:
-    - master
-  needs:
-    - reporting
+    - schedules
+  needs: []
 
