@@ -5,5 +5,5 @@ module.exports = {
             title: "Favorite Lyrics App",
             template: './public/index.html'
         })
-    ]
+    ],
 }
