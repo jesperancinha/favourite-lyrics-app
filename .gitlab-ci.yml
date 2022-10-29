@@ -56,7 +56,7 @@ build-maven:
     - schedules
 
 build-front-end:
-  image: node:18
+  image: node:19
   stage: build
   cache:
     - key: NODE
@@ -89,7 +89,7 @@ qa-maven:
     - schedules
 
 qa-front-end:
-  image: node:18
+  image: node:19
   stage: qa
   cache:
     - key: NODE
@@ -105,7 +105,7 @@ qa-front-end:
     - schedules
 
 favorite-lyrics-electron-e2e:
-  image: node:18
+  image: node:19
   stage: e2e
   script:
     - make dcup-full-action
@@ -133,7 +133,7 @@ favorite-lyrics-electron-e2e:
     - schedules
 
 favorite-lyrics-chrome-e2e:
-  image: node:18
+  image: node:19
   stage: e2e
   script:
     - make dcup-full-action
@@ -159,7 +159,7 @@ favorite-lyrics-chrome-e2e:
     - schedules
 
 favorite-lyrics-firefox-e2e:
-  image: node:18
+  image: node:19
   stage: e2e
   retry: 2
   allow_failure: true
@@ -187,7 +187,7 @@ favorite-lyrics-firefox-e2e:
     - schedules
 
 favorite-lyrics-edge-e2e:
-  image: node:18
+  image: node:19
   stage: e2e
   script:
     - make dcup-full-action
