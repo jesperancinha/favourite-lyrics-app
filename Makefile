@@ -84,3 +84,7 @@ refresh-nginx:
 	docker-compose build fla_nginx
 	docker-compose up -d fla_nginx
 	bash fla_nginx_wait.sh
+version-status:
+	mvn versions:display-dependency-updates
+version-update-maven:
+	mvn versions:use-next-releases

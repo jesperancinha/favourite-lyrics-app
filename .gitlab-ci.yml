@@ -258,6 +258,7 @@ reporting:
         - favourite-lyrics-gui/node_modules/
   script:
     - mvn omni-coveragereporter:report
+    - make version-status
   only:
     - master
   needs:
