@@ -52,6 +52,10 @@ This project is also the official support project of my article on medium:
       </a>
 </div>
 
+#### Stable releases
+
+- [1.0.0](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/1.0.0) - [cfe174af1a698da2c685d63ee50db317f2da53d2](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/1.0.0)
+- [2.0.0](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/2.0.0) - [e2c3dfef5d84da62e4561a78f7c9bc3d3647e180](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/2.0.0)
 
 ---
 

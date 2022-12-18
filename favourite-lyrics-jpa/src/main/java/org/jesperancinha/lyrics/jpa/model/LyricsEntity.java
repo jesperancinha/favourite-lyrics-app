@@ -1,23 +1,11 @@
 package org.jesperancinha.lyrics.jpa.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 import java.util.UUID;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,9 +30,14 @@ public class LyricsEntity {
 
     @Override
     public boolean equals(Object o) {
+        if(o==null){
+            return false;
+        }
+        if(!(o instanceof LyricsEntity that)){
+            return false;
+        }
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        LyricsEntity that = (LyricsEntity) o;
+        if (Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         return id != null && Objects.equals(id, that.id);
     }
 

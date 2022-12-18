@@ -17,7 +17,7 @@ docker:
 	docker-compose down
 	docker-compose up -d --build --remove-orphans
 docker-databases: stop
-	docker-compose up -d fla_postgres
+	docker-compose up -d fla-postgres
 build-images:
 build-docker: stop no-test build-npm
 	docker-compose up -d --build --remove-orphans
@@ -36,7 +36,7 @@ docker-clean:
 docker-clean-build-start: docker-clean b docker
 docker-delete-apps: stop
 docker-local:
-	docker-compose up -d fla_postgres
+	docker-compose up -d fla-postgres
 docker-action:
 	docker-compose -f docker-compose.yml up -d --build --remove-orphans
 prune-network: stop
@@ -58,7 +58,7 @@ install:
 fla-wait:
 	bash fla_wait.sh
 dcup-light: dcd
-	docker-compose up -d fla_postgres
+	docker-compose up -d fla-postgres
 dcup: dcd
 	docker-compose up -d --build --remove-orphans
 dcup-full: docker-clean-build-start fla-wait
@@ -80,9 +80,9 @@ update:
 	npm install -g npm-check-updates
 	cd favourite-lyrics-gui && npx browserslist --update-db && ncu -u && yarn
 refresh-nginx:
-	docker-compose stop fla_nginx
-	docker-compose build fla_nginx
-	docker-compose up -d fla_nginx
+	docker-compose stop fla-nginx
+	docker-compose build fla-nginx
+	docker-compose up -d fla-nginx
 	bash fla_nginx_wait.sh
 version-status:
 	mvn versions:display-dependency-updates
@@ -90,3 +90,4 @@ version-update-maven:
 	mvn versions:use-next-releases
 	mvn versions:use-latest-releases
 	mvn versions:use-releases
+local-pipeline: dcd docker-clean b docker-action fla-wait cypress-electron

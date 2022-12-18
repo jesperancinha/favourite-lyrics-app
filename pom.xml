@@ -23,23 +23,26 @@
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <h2.version>1.4.200</h2.version>
+        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+        <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
+
+        <kotlinx-coroutines-debug.version>1.6.4</kotlinx-coroutines-debug.version>
         <lombok.version>1.18.24</lombok.version>
-        <spring-tx.version>5.2.2.RELEASE</spring-tx.version>
+
+        <postgresql.version>42.5.1</postgresql.version>
+        <h2.version>1.4.200</h2.version>
+
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
         <assertj-core.version>3.13.2</assertj-core.version>
         <mockito-all.version>1.10.19</mockito-all.version>
-        <junit-jupiter.version>5.5.2</junit-jupiter.version>
-        <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
-        <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-        <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
-        <spring-boot-starter-parent.version>2.7.6</spring-boot-starter-parent.version>
-        <postgresql.version>42.5.1</postgresql.version>
-        <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
         <testcontainers.version>1.17.5</testcontainers.version>
-        <springdoc-openapi-ui.version>1.6.13</springdoc-openapi-ui.version>
-        <kotlinx-coroutines-debug.version>1.6.4</kotlinx-coroutines-debug.version>
-        <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
+        <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
+
+        <spring-boot-starter-parent.version>3.0.0</spring-boot-starter-parent.version>
+        <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.0.0</springdoc-openapi-starter-webmvc-ui.version>
+        <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
     </properties>
 
     <dependencyManagement>
@@ -78,8 +81,8 @@
             <!-- External dependencies -->
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>${springdoc-openapi-ui.version}</version>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -91,6 +94,11 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
             </dependency>
 
             <dependency>

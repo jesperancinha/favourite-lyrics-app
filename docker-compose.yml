@@ -1,8 +1,8 @@
 version: "3.7"
 services:
-  fla_postgres:
-    container_name: ${PROJECT_SLUG}_postgres
-    hostname: ${PROJECT_SLUG}_postgres
+  fla-postgres:
+    container_name: ${PROJECT_SLUG}-postgres
+    hostname: ${PROJECT_SLUG}-postgres
     restart: on-failure
     image: postgres:15.1
     command: -c 'max_connections=400' -c 'shared_buffers=100MB'
@@ -22,11 +22,10 @@ services:
         reservations:
           memory: 150M
     networks:
-      fla_net:
-        ipv4_address: ${POSTGRES_IP}
+      - fla_net
 
-  fla_backend:
-    hostname: ${PROJECT_SLUG}_backend
+  fla-backend:
+    hostname: ${PROJECT_SLUG}-backend
     container_name: ${PROJECT_SLUG}_backend
     build:
       context: favourite-lyrics-starter/.
@@ -37,10 +36,9 @@ services:
         reservations:
           memory: 300M
     networks:
-      fla_net:
-        ipv4_address: ${FLA_BACKEND}
+      - fla_net
 
-  fla_nginx:
+  fla-nginx:
     hostname: ${PROJECT_SLUG}-nginx
     container_name: ${PROJECT_SLUG}-nginx
     build:
@@ -59,13 +57,7 @@ services:
     env_file:
       - .env
     networks:
-      fla_net:
-        ipv4_address: ${FLA_NGINX_IP}
+      - fla_net
 
 networks:
   fla_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: ${NETWORK_SUBNET}
