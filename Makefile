@@ -90,4 +90,4 @@ version-update-maven:
 	mvn versions:use-next-releases
 	mvn versions:use-latest-releases
 	mvn versions:use-releases
-local-pipeline: docker-clean docker-action fla-wait cypress-electron
+local-pipeline: dcd docker-clean b docker-action fla-wait cypress-electron
