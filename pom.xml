@@ -39,11 +39,9 @@
         <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
 
         <spring-boot-starter-parent.version>3.0.0</spring-boot-starter-parent.version>
-
-        <springdoc-openapi-ui.version>1.6.13</springdoc-openapi-ui.version>
-
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.0.0</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
 
     <dependencyManagement>
@@ -82,8 +80,8 @@
             <!-- External dependencies -->
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>${springdoc-openapi-ui.version}</version>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>

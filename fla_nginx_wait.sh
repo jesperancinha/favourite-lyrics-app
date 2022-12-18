@@ -23,4 +23,4 @@ function checkServiceByNameAndMessage() {
     echo "Succeeded $name Service after $counter tries!"
 }
 
-checkServiceByNameAndMessage fla_nginx 'test is successful'
+checkServiceByNameAndMessage fla-nginx 'test is successful'
