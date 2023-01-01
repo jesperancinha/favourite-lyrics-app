@@ -1,4 +1,4 @@
-FROM openjdk:20-slim-buster
+FROM openjdk:21-slim-buster
 
 WORKDIR /root
 
