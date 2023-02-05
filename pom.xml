@@ -39,7 +39,7 @@
         <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
 
         <spring-boot-starter-parent.version>3.0.1</spring-boot-starter-parent.version>
-        <omni-coveragereporter-maven-plugin.version>0.3.2</omni-coveragereporter-maven-plugin.version>
+        <omni-coveragereporter-maven-plugin.version>0.4.2</omni-coveragereporter-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.0.2</springdoc-openapi-starter-webmvc-ui.version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
