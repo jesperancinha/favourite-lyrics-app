@@ -13,7 +13,7 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/03e7df2eb23c4545af7f32d2c1870074)](https://www.codacy.com/gl/jesperancinha/favourite-lyrics-app/dashboard?utm_source=gitlab.com&utm_medium=referral&utm_content=jesperancinha/favourite-lyrics-app&utm_campaign=Badge_Coverage)
 [![Coverage Status](https://coveralls.io/repos/github/jesperancinha/favourite-lyrics-app/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/favourite-lyrics-app?branch=master)
-[![codecov](https://codecov.io/gh/jesperancinha/favourite-lyrics-app/branch/main/graph/badge.svg?token=kQluBZ2gJK)](https://codecov.io/gh/jesperancinha/favourite-lyrics-app)
+[![codecov](https://codecov.io/gh/jesperancinha/favourite-lyrics-app/branch/master/graph/badge.svg?token=kQluBZ2gJK)](https://codecov.io/gh/jesperancinha/favourite-lyrics-app)
 
 [![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/favourite-lyrics-app.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/favourite-lyrics-app.svg)](#)
