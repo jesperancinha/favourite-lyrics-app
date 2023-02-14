@@ -10,5 +10,5 @@ interface LyricsPersistencePort {
     fun updateLyrics(lyricsDto: LyricsDto)
     fun getAllLyrics(): List<LyricsDto>
     fun getAllLFullLyrics(): List<LyricsFullDto>
-    fun getLyricsById(lyricsId: UUID?): LyricsDto
+    fun getLyricsById(lyricsId: UUID): LyricsDto
 }

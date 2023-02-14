@@ -13,51 +13,44 @@ import java.util.stream.Collectors
 
 @Service
 class LyricsJpaAdapter(private val lyricsRepository: LyricsRepository) : LyricsPersistencePort {
-    override fun addLyrics(lyricsDto: LyricsDto?) {
+    override fun addLyrics(lyricsDto: LyricsDto) {
         val lyricsEntity = getLyricsEntity(lyricsDto)
         lyricsRepository.save(lyricsEntity)
     }
 
-    override fun removeLyrics(lyricsDto: LyricsDto?) {
-        lyricsRepository.deleteAllByParticipatingArtist(lyricsDto!!.participatingArtist)
+    override fun removeLyrics(lyricsDto: LyricsDto) {
+        lyricsRepository.deleteAllByParticipatingArtist(requireNotNull(lyricsDto.participatingArtist))
     }
 
-    override fun updateLyrics(lyricsDto: LyricsDto?) {
-        val byParticipatingArtist = lyricsRepository.findByParticipatingArtist(lyricsDto!!.participatingArtist)
+    override fun updateLyrics(lyricsDto: LyricsDto) {
+        val byParticipatingArtist =
+            lyricsRepository.findByParticipatingArtist(requireNotNull(lyricsDto.participatingArtist))
         if (Objects.nonNull(byParticipatingArtist)) {
-            byParticipatingArtist.lyrics = lyricsDto.lyrics
-            lyricsRepository.save(byParticipatingArtist)
+            lyricsRepository.save(byParticipatingArtist.copy(lyrics = lyricsDto.lyrics))
         } else {
-            val byLyrics = lyricsRepository.findByLyrics(lyricsDto.lyrics)
+            val byLyrics = lyricsRepository.findByLyrics(requireNotNull(lyricsDto.lyrics))
             if (Objects.nonNull(byLyrics)) {
-                byLyrics.participatingArtist = lyricsDto.participatingArtist
-                lyricsRepository.save(byLyrics)
+                lyricsRepository.save(byLyrics.copy(participatingArtist = lyricsDto.participatingArtist))
             }
         }
     }
 
-    override val allLyrics: List<LyricsDto>
-        get() = lyricsRepository.findAll()
-            .stream()
-            .map { lyricsEntity: LyricsEntity -> getLyrics(lyricsEntity) }
-            .collect(Collectors.toList())
-    override val allLFullLyrics: List<LyricsFullDto>
-        get() = lyricsRepository.findAll()
-            .stream()
-            .map { lyricsEntity: LyricsEntity -> fullLyrics(lyricsEntity) }
-            .collect(Collectors.toList())
+    override fun getAllLyrics(): List<LyricsDto> = lyricsRepository.findAll()
+        .filterNotNull()
+        .map { lyricsEntity -> getLyrics(lyricsEntity) }
 
-    @SneakyThrows
-    override fun getLyricsById(lyricsId: UUID?): LyricsDto? {
-        return getLyrics(
-            lyricsRepository.findById(lyricsId)
-                .orElseThrow(Supplier<Throwable> { LyricsNotFoundException(lyricsId) })!!
-        )
-    }
+    override fun getAllLFullLyrics(): List<LyricsFullDto> = lyricsRepository.findAll()
+        .filterNotNull()
+        .map { lyricsEntity -> fullLyrics(lyricsEntity) }
 
-    private fun getLyricsEntity(lyricsDto: LyricsDto?): LyricsEntity {
+    override fun getLyricsById(lyricsId: UUID): LyricsDto = getLyrics(
+        requireNotNull(lyricsRepository.findById(lyricsId)
+            .orElseThrow { LyricsNotFoundException(lyricsId) })
+    )
+
+    private fun getLyricsEntity(lyricsDto: LyricsDto): LyricsEntity {
         return LyricsEntity.builder()
-            .participatingArtist(lyricsDto!!.participatingArtist)
+            .participatingArtist(lyricsDto.participatingArtist)
             .lyrics(lyricsDto.lyrics)
             .build()
     }

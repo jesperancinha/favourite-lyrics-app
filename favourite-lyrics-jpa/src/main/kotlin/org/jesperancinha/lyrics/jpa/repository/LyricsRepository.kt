@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface LyricsRepository : JpaRepository<LyricsEntity?, UUID?> {
-    fun deleteAllByParticipatingArtist(name: String?)
-    fun findByParticipatingArtist(Name: String?): LyricsEntity?
-    fun findByLyrics(Lyrics: String?): LyricsEntity?
+    fun deleteAllByParticipatingArtist(name: String)
+    fun findByParticipatingArtist(name: String): LyricsEntity
+    fun findByLyrics(lyrics: String): LyricsEntity
 }
