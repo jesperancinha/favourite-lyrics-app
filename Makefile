@@ -61,8 +61,8 @@ dcup-light: dcd
 	docker-compose up -d fla-postgres
 dcup: dcd
 	docker-compose up -d --build --remove-orphans
-dcup-full: docker-clean-build-start fla-wait
-dcup-full-action: docker-clean docker-action fla-wait
+dcup-full-action: docker-clean-build-start fla-wait
+dcup-full: docker-clean docker-action fla-wait
 dcd:
 	docker-compose down
 cypress-open:
