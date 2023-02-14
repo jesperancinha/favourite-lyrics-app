@@ -4,7 +4,7 @@ services:
     container_name: ${PROJECT_SLUG}-postgres
     hostname: ${PROJECT_SLUG}-postgres
     restart: on-failure
-    image: postgres:15.1
+    image: postgres:15.2
     command: -c 'max_connections=400' -c 'shared_buffers=100MB'
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
