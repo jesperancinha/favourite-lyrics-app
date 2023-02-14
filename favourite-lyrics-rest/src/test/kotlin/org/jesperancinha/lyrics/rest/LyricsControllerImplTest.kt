@@ -22,19 +22,21 @@ import java.util.*
 @ContextConfiguration(classes = [LyricsController::class, LyricsControllerImpl::class])
 class LyricsControllerImplTest {
     @Autowired
-    private val mvc: MockMvc? = null
+    lateinit var mvc: MockMvc
 
     @MockBean
-    private val lyricsService: LyricsService? = null
+    lateinit var lyricsService: LyricsService
     private val objectMapper = ObjectMapper()
+
     @Test
     @Throws(Exception::class)
     fun givenLyrics_whenAddLyrics_thenEntityIsPortedToService() {
-        val testLyricsDto: Any = LyricsDto.builder()
-            .participatingArtist(TEST_AUTHOR)
-            .lyrics(TEST_LYRICS)
-            .build()
-        mvc!!.perform(
+        val testLyricsDto = LyricsDto(
+            participatingArtist = TEST_AUTHOR,
+            lyrics = TEST_LYRICS
+        )
+
+        mvc.perform(
             MockMvcRequestBuilders.post("/lyrics")
                 .content(objectMapper.writeValueAsString(testLyricsDto))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -47,11 +49,12 @@ class LyricsControllerImplTest {
     @Test
     @Throws(Exception::class)
     fun givenLyrics_whenUpdateLyrics_thenEntityUpdateIsPortedToService() {
-        val testLyricsDto: Any = LyricsDto.builder()
-            .participatingArtist(TEST_AUTHOR)
-            .lyrics(TEST_LYRICS)
-            .build()
-        mvc!!.perform(
+        val testLyricsDto = LyricsDto(
+            participatingArtist = TEST_AUTHOR,
+            lyrics = TEST_LYRICS
+        )
+
+        mvc.perform(
             MockMvcRequestBuilders.put("/lyrics")
                 .content(objectMapper.writeValueAsString(testLyricsDto))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -64,11 +67,12 @@ class LyricsControllerImplTest {
     @Test
     @Throws(Exception::class)
     fun givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToService() {
-        val testLyricsDto: Any = LyricsDto.builder()
-            .participatingArtist(TEST_AUTHOR)
-            .lyrics(TEST_LYRICS)
-            .build()
-        mvc!!.perform(
+        val testLyricsDto = LyricsDto(
+            participatingArtist = TEST_AUTHOR,
+            lyrics = TEST_LYRICS
+        )
+
+        mvc.perform(
             MockMvcRequestBuilders.delete("/lyrics")
                 .content(objectMapper.writeValueAsString(testLyricsDto))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -81,12 +85,13 @@ class LyricsControllerImplTest {
     @Test
     @Throws(Exception::class)
     fun givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToService() {
-        val testLyricsDto: Any = LyricsDto.builder()
-            .participatingArtist(TEST_AUTHOR)
-            .lyrics(TEST_LYRICS)
-            .build()
-        Mockito.`when`<Any?>(lyricsService!!.allLyrics).thenReturn(listOf(testLyricsDto))
-        mvc!!.perform(
+        val testLyricsDto = LyricsDto(
+            participatingArtist = TEST_AUTHOR,
+            lyrics = TEST_LYRICS
+        )
+
+        Mockito.`when`<Any?>(lyricsService.getAllLyrics()).thenReturn(listOf(testLyricsDto))
+        mvc.perform(
             MockMvcRequestBuilders.get("/lyrics")
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -107,19 +112,20 @@ class LyricsControllerImplTest {
                 MockMvcResultMatchers.jsonPath("$[0].lyrics")
                     .value(TEST_LYRICS)
             )
-        Mockito.verify(lyricsService, Mockito.only()).allLyrics
+        Mockito.verify(lyricsService, Mockito.only()).getAllLyrics()
     }
 
     @Test
     @Throws(Exception::class)
     fun givenArtisId_whenCallingGetLyricsById_thenFindByIdToService() {
-        val testLyricsDto: Any = LyricsDto.builder()
-            .participatingArtist(TEST_AUTHOR)
-            .lyrics(TEST_LYRICS)
-            .build()
+        val testLyricsDto = LyricsDto(
+            participatingArtist = TEST_AUTHOR,
+            lyrics = TEST_LYRICS
+        )
+
         val id = UUID.randomUUID()
-        Mockito.`when`(lyricsService!!.getLyricsById(id)).thenReturn(testLyricsDto)
-        mvc!!.perform(
+        Mockito.`when`(lyricsService.getLyricsById(id)).thenReturn(testLyricsDto)
+        mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$id")
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -147,7 +153,7 @@ class LyricsControllerImplTest {
     @Throws(Exception::class)
     fun givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToServiceFails() {
         val id = UUID.randomUUID()
-        mvc!!.perform(
+        mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$id")
                 .accept(MediaType.APPLICATION_JSON)
         )

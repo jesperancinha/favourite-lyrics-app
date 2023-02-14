@@ -18,7 +18,8 @@ object Main {
         val lyricsService = LyricsServiceImpl(createMockLyricsPersistencePort())
         val lyricsDto = LyricsDto(
             participatingArtist = "Aretha Franklin",
-            lyrics = "find out what it means to me")
+            lyrics = "find out what it means to me"
+        )
         lyricsService.addLyrics(lyricsDto)
         lyricsService.updateLyrics(lyricsDto)
         lyricsService.removeLyrics(lyricsDto)
@@ -51,22 +52,24 @@ object Main {
             override fun removeLyrics(lyricsDto: LyricsDto) {}
             override fun updateLyrics(lyricsDto: LyricsDto) {}
             override fun getAllLyrics(): List<LyricsDto> = listOf(
-                    LyricsDto(
-                        participatingArtist = "Gloria Gaynor",
-                        lyrics = "First I was afraid, I was petrified"))
+                LyricsDto(
+                    participatingArtist = "Gloria Gaynor",
+                    lyrics = "First I was afraid, I was petrified"
+                )
+            )
 
             override fun getAllLFullLyrics(): List<LyricsFullDto> = listOf(
-                    LyricsFullDto.builder()
-                        participatingArtist = "Metallica")
-                        lyrics = "Sad but true")
-                        .build()
+                LyricsFullDto(
+                    participatingArtist = "Metallica",
+                    lyrics = "Sad but true"
                 )
+            )
 
             override fun getLyricsById(lyricsId: UUID): LyricsDto {
                 return LyricsDto(
-                    participatingArtist = "Alesha Dixon")
-                    lyrics = "Does he wash up? Never wash up")
-                    .build()
+                    participatingArtist = "Alesha Dixon",
+                    lyrics = "Does he wash up? Never wash up"
+                )
             }
         }
     }

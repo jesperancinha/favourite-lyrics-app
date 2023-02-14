@@ -1,3 +1,4 @@
+
 package org.jesperancinha.lyrics
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
@@ -13,9 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
     info = Info(title = "OpenAPI definition"),
     servers = [Server(url = "\${fla.server.url}", description = "Server URL")]
 )
-object LyricsDemoApplicationLauncher {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        SpringApplication.run(LyricsDemoApplicationLauncher::class.java)
-    }
+class LyricsDemoApplicationLauncher
+
+fun main(args: Array<String>) {
+    SpringApplication.run(LyricsDemoApplicationLauncher::class.java, *args)
 }

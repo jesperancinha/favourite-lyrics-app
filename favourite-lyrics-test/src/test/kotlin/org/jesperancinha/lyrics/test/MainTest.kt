@@ -15,7 +15,7 @@ class MainTest {
     companion object {
         @JvmStatic
         @BeforeAll
-        fun beforeAll(): Unit {
+        fun beforeAll() {
             ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true)
         }
     }

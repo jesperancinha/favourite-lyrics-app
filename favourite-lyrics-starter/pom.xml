@@ -166,7 +166,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>org.jesperancinha.lyrics.LyricsDemoApplicationLauncher</mainClass>
+                    <mainClass>org.jesperancinha.lyrics.LyricsDemoApplicationLauncherKt</mainClass>
                 </configuration>
             </plugin>
             <plugin>
