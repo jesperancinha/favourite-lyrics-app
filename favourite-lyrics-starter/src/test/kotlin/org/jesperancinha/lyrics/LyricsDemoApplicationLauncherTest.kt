@@ -44,7 +44,7 @@ class LyricsDemoApplicationLauncherTest {
     @Transactional
     @Throws(Exception::class)
     fun givenLyrics_whenAddAndUpdateAndThenRemoveLyrics_thenEntity() {
-        val testLyricsDto= LyricsDto(
+        val testLyricsDto = LyricsDto(
             participatingArtist = TEST_ARTIST_NAME,
             lyrics = TEST_LYRICS
         )
@@ -174,15 +174,17 @@ class LyricsDemoApplicationLauncherTest {
         private val objectMapper = ObjectMapper()
 
         @Container
-        val postgreSQLContainer: PostgreSQLContainer<*> = PostgreSQLContainer("postgres")
+        @JvmStatic
+        val postgreSQLContainer: PostgreSQLContainer<*> = PostgreSQLContainer("postgres:15")
             .withDatabaseName("fla")
             .withUsername("postgres")
             .withPassword("admin")
-            .withExposedPorts(5432)
+            .withEnv("POSTGRES_MULTIPLE_DATABASES", "fla")
             .withNetwork(Network.newNetwork())
             .withNetworkAliases("postgres")
 
         @DynamicPropertySource
+        @JvmStatic
         fun registerProperties(registry: DynamicPropertyRegistry) {
             registry.add("spring.datasource.url") { postgreSQLContainer.jdbcUrl + "&currentSchema=hexagonal" }
             registry.add("spring.datasource.username") { postgreSQLContainer.username }
