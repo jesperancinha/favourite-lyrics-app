@@ -5,7 +5,6 @@
 [![Generic badge](https://img.shields.io/static/v1.svg?label=GitLab&message=Favourite%20Lyrics%20App🎶&color=informational)](https://gitlab.com/jesperancinha/favourite-lyrics-app)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
-[![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/jesperancinha/favourite-lyrics-app/master)](https://gitlab.com/jesperancinha/favourite-lyrics-app/pipelines)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/03e7df2eb23c4545af7f32d2c1870074)](https://www.codacy.com/gl/jesperancinha/favourite-lyrics-app/dashboard?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/favourite-lyrics-app&amp;utm_campaign=Badge_Grade)
 
@@ -54,8 +53,8 @@ This project is also the official support project of my article on medium:
 
 #### Stable releases
 
--   [1.0.0](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/1.0.0) - [cfe174af1a698da2c685d63ee50db317f2da53d2](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/1.0.0)
--   [2.0.0](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/2.0.0) - [e2c3dfef5d84da62e4561a78f7c9bc3d3647e180](https://gitlab.com/jesperancinha/favourite-lyrics-app/-/tree/2.0.0)
+-   [1.0.0](https://github.com/jesperancinha/favourite-lyrics-app/tree/1.0.0) - [cfe174af1a698da2c685d63ee50db317f2da53d2](https://github.com/jesperancinha/favourite-lyrics-app/tree/1.0.0)
+-   [2.0.0](https://github.com/jesperancinha/favourite-lyrics-app/tree/2.0.0) - [e2c3dfef5d84da62e4561a78f7c9bc3d3647e180](https://github.com/jesperancinha/favourite-lyrics-app/tree/2.0.0)
 
 ---
 
