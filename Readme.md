@@ -6,6 +6,8 @@
 [![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Favourite%20Lyrics%20App🎶&color=informational)](https://github.com/jesperancinha/favourite-lyrics-app)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
+[![FLA Build and reporting](https://github.com/jesperancinha/favourite-lyrics-app/actions/workflows/favorit-lyrics-app.yml/badge.svg)](https://github.com/jesperancinha/favourite-lyrics-app/actions/workflows/favorit-lyrics-app.yml)
+[![FLA e2e-video-series-app](https://github.com/jesperancinha/favourite-lyrics-app/actions/workflows/favorit-lyrics-app-e2e.yml/badge.svg)](https://github.com/jesperancinha/favourite-lyrics-app/actions/workflows/favorit-lyrics-app-e2e.yml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/765b3ff66aab454b9e04c9465a688e5f)](https://www.codacy.com/gh/jesperancinha/favourite-lyrics-app/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/favourite-lyrics-app&amp;utm_campaign=Badge_Grade)
 
