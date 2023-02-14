@@ -14,23 +14,21 @@ import java.util.*
  */
 object Main {
     @JvmStatic
-    @JvmStatic
-    fun main(args: Array<String>) {
+    fun main(args: Array<String> = emptyArray()) {
         val lyricsService = LyricsServiceImpl(createMockLyricsPersistencePort())
-        val lyricsDto: Any = LyricsDto.builder()
-            .participatingArtist("Aretha Franklin")
-            .lyrics("find out what it means to me")
-            .build()
+        val lyricsDto = LyricsDto(
+            participatingArtist = "Aretha Franklin",
+            lyrics = "find out what it means to me")
         lyricsService.addLyrics(lyricsDto)
         lyricsService.updateLyrics(lyricsDto)
         lyricsService.removeLyrics(lyricsDto)
-        val allLyricsDtos = lyricsService.allLyrics
+        val allLyricsDtos = lyricsService.getAllLyrics()
         val id = UUID.randomUUID()
         val lyricsDtoById = lyricsService.getLyricsById(id)
-        assert(allLyricsDtos!!.size == 1)
+        assert(allLyricsDtos.size == 1)
         val lyricsDto1 = allLyricsDtos[0]
         assert(
-            lyricsDto1!!.participatingArtist
+            lyricsDto1.participatingArtist
                     == "Gloria Gaynor"
         )
         assert(
@@ -38,7 +36,7 @@ object Main {
                     == "First I was afraid, I was petrified"
         )
         assert(
-            lyricsDtoById!!.participatingArtist
+            lyricsDtoById.participatingArtist
                     == "Alesha Dixon"
         )
         assert(
@@ -49,28 +47,25 @@ object Main {
 
     private fun createMockLyricsPersistencePort(): LyricsPersistencePort {
         return object : LyricsPersistencePort {
-            override fun addLyrics(lyricsDto: LyricsDto?) {}
-            override fun removeLyrics(lyricsDto: LyricsDto?) {}
-            override fun updateLyrics(lyricsDto: LyricsDto?) {}
-            override val allLyrics: List<LyricsDto>
-                get() = listOf(
-                    LyricsDto.builder()
-                        .participatingArtist("Gloria Gaynor")
-                        .lyrics("First I was afraid, I was petrified")
-                        .build()
-                )
-            override val allLFullLyrics: List<LyricsFullDto>
-                get() = listOf(
+            override fun addLyrics(lyricsDto: LyricsDto) {}
+            override fun removeLyrics(lyricsDto: LyricsDto) {}
+            override fun updateLyrics(lyricsDto: LyricsDto) {}
+            override fun getAllLyrics(): List<LyricsDto> = listOf(
+                    LyricsDto(
+                        participatingArtist = "Gloria Gaynor",
+                        lyrics = "First I was afraid, I was petrified"))
+
+            override fun getAllLFullLyrics(): List<LyricsFullDto> = listOf(
                     LyricsFullDto.builder()
-                        .participatingArtist("Metallica")
-                        .lyrics("Sad but true")
+                        participatingArtist = "Metallica")
+                        lyrics = "Sad but true")
                         .build()
                 )
 
-            override fun getLyricsById(lyricsId: UUID?): LyricsDto? {
-                return LyricsDto.builder()
-                    .participatingArtist("Alesha Dixon")
-                    .lyrics("Does he wash up? Never wash up")
+            override fun getLyricsById(lyricsId: UUID): LyricsDto {
+                return LyricsDto(
+                    participatingArtist = "Alesha Dixon")
+                    lyrics = "Does he wash up? Never wash up")
                     .build()
             }
         }

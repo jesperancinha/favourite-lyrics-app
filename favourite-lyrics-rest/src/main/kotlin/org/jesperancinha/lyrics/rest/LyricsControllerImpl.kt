@@ -9,26 +9,25 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
-@Slf4j
 @RestController
 class LyricsControllerImpl(private val lyricsService: LyricsService) : LyricsController {
     private val random = Random()
-    override fun addLyrics(lyricsDto: LyricsDto?): ResponseEntity<Void> {
+    override fun addLyrics(lyricsDto: LyricsDto): ResponseEntity<Void> {
         lyricsService.addLyrics(lyricsDto)
         return ResponseEntity(HttpStatus.CREATED)
     }
 
-    override fun removeLyrics(lyricsDto: LyricsDto?): ResponseEntity<String> {
+    override fun removeLyrics(lyricsDto: LyricsDto): ResponseEntity<String> {
         lyricsService.removeLyrics(lyricsDto)
         return ResponseEntity(HttpStatus.OK)
     }
 
-    override fun updateLyrics(lyricsDto: LyricsDto?): ResponseEntity<String> {
+    override fun updateLyrics(lyricsDto: LyricsDto): ResponseEntity<String> {
         lyricsService.updateLyrics(lyricsDto)
         return ResponseEntity(HttpStatus.OK)
     }
 
-    override fun getLyricsById(lyricsId: UUID?): ResponseEntity<LyricsDto?> {
+    override fun getLyricsById(lyricsId: UUID?): ResponseEntity<LyricsDto> {
         return try {
             ResponseEntity(lyricsService.getLyricsById(lyricsId), HttpStatus.OK)
         } catch (ex: LyricsNotFoundException) {
@@ -45,7 +44,7 @@ class LyricsControllerImpl(private val lyricsService: LyricsService) : LyricsCon
         return ResponseEntity(lyricsService.allFullLyrics, HttpStatus.OK)
     }
 
-    override val randomLyric: ResponseEntity<LyricsDto?>
+    override val randomLyric: ResponseEntity<LyricsDto>
         get() {
             val allLyrics: Any? = lyricsService.allLyrics
             val size: Any = allLyrics.size()

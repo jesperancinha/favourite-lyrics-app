@@ -9,23 +9,23 @@ import java.util.*
 interface LyricsController {
     @PostMapping("/lyrics")
     fun addLyrics(
-        @RequestBody lyricsDto: LyricsDto?
+        @RequestBody lyricsDto: LyricsDto
     ): ResponseEntity<Void>
 
     @DeleteMapping("/lyrics")
     fun removeLyrics(
-        @RequestBody lyricsDto: LyricsDto?
+        @RequestBody lyricsDto: LyricsDto
     ): ResponseEntity<String>
 
     @PutMapping("/lyrics")
     fun updateLyrics(
-        @RequestBody lyricsDto: LyricsDto?
+        @RequestBody lyricsDto: LyricsDto
     ): ResponseEntity<String>
 
     @GetMapping("/lyrics/{lyricsId}")
     fun getLyricsById(
         @PathVariable lyricsId: UUID?
-    ): ResponseEntity<LyricsDto?>
+    ): ResponseEntity<LyricsDto>
 
     @GetMapping("/lyrics")
     fun lyrics(): ResponseEntity<List<LyricsDto>>
@@ -34,5 +34,5 @@ interface LyricsController {
     fun complete(): ResponseEntity<List<LyricsFullDto>>
 
     @get:GetMapping("/lyrics/random")
-    val randomLyric: ResponseEntity<LyricsDto?>
+    val randomLyric: ResponseEntity<LyricsDto>
 }

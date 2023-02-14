@@ -9,12 +9,13 @@ import org.junit.jupiter.api.function.Executable
 class MainTest {
     @Test
     fun testMain() {
-        Assertions.assertAll(Executable { main(null) })
+        Assertions.assertAll(Executable { main() })
     }
 
     companion object {
+        @JvmStatic
         @BeforeAll
-        fun beforeAll() {
+        fun beforeAll(): Unit {
             ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true)
         }
     }
