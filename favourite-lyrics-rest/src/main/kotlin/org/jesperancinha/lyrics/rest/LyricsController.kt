@@ -24,7 +24,7 @@ interface LyricsController {
 
     @GetMapping("/lyrics/{lyricsId}")
     fun getLyricsById(
-        @PathVariable lyricsId: UUID?
+        @PathVariable lyricsId: UUID
     ): ResponseEntity<LyricsDto>
 
     @GetMapping("/lyrics")
@@ -33,6 +33,6 @@ interface LyricsController {
     @GetMapping("/lyrics/complete")
     fun complete(): ResponseEntity<List<LyricsFullDto>>
 
-    @get:GetMapping("/lyrics/random")
-    val randomLyric: ResponseEntity<LyricsDto>
+    @GetMapping("/lyrics/random")
+    fun getRandomLyric(): ResponseEntity<LyricsDto>
 }

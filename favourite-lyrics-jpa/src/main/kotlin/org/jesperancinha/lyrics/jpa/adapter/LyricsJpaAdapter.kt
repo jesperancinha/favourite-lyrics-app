@@ -50,23 +50,24 @@ class LyricsJpaAdapter(private val lyricsRepository: LyricsRepository) : LyricsP
 
     private fun getLyricsEntity(lyricsDto: LyricsDto): LyricsEntity {
         return LyricsEntity(
-            .participatingArtist(lyricsDto.participatingArtist)
-            .lyrics(lyricsDto.lyrics)
-            .build()
+            participatingArtist = lyricsDto.participatingArtist,
+            lyrics = lyricsDto.lyrics
+        )
     }
 
     private fun getLyrics(lyricsEntity: LyricsEntity): LyricsDto {
         return LyricsDto(
-            .participatingArtist(lyricsEntity.participatingArtist)
-            .lyrics(lyricsEntity.lyrics)
-            .build()
+            participatingArtist = lyricsEntity.participatingArtist,
+            lyrics = lyricsEntity.lyrics
+        )
+
     }
 
     private fun fullLyrics(lyricsEntity: LyricsEntity): LyricsFullDto {
         return LyricsFullDto(
-            .participatingArtist(lyricsEntity.participatingArtist)
-            .lyrics(lyricsEntity.lyrics)
-            .uuid(lyricsEntity.id)
-            .build()
+            participatingArtist = requireNotNull(lyricsEntity.participatingArtist),
+            lyrics = requireNotNull(lyricsEntity.lyrics),
+            uuid = requireNotNull(lyricsEntity.id)
+        )
     }
 }

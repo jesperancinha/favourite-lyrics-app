@@ -10,13 +10,13 @@ data class LyricsEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private val id: UUID? = null,
+    val id: UUID? = null,
 
     @Column
-    private val lyrics: String? = null,
+    val lyrics: String? = null,
 
     @Column
-    private val participatingArtist: String? = null,
+    val participatingArtist: String? = null,
 ) {
 
     override fun equals(o: Any?): Boolean {

@@ -1,7 +1,6 @@
-package org.jesperancinhalyrics.domain.data
+package org.jesperancinha.lyrics.domain.data
 
 import org.assertj.core.api.Assertions
-import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.junit.jupiter.api.Test
 
 class LyricsTest {
@@ -97,6 +96,6 @@ class LyricsTest {
         )
 
         Assertions.assertThat(lyricsDto1.toString())
-            .isEqualTo("LyricsDto[lyrics=I'm in love with the shape of you, participatingArtist=Ed Sheeran]")
+            .isEqualTo("LyricsDto(lyrics=I'm in love with the shape of you, participatingArtist=Ed Sheeran)")
     }
 }
