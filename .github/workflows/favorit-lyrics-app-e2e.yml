@@ -1,0 +1,72 @@
+name: FLA e2e-video-series-app
+
+on: push
+
+jobs:
+  e2e-electron:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Start Docker
+        run: make dcup-full-action
+
+      - name: Run Cypress
+        run: make cypress-electron
+
+  e2e-chrome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Start Docker
+        run: make dcup-full-action
+
+      - name: Run Cypress
+        run: make cypress-chrome
+
+  e2e-firefox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Start Docker
+        run: make dcup-full-action
+
+      - name: Run Cypress
+        run: make cypress-firefox
+
+  e2e-edge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Start Docker
+        run: make dcup-full-action
+
+      - name: Run Cypress
+        run: make cypress-edge
