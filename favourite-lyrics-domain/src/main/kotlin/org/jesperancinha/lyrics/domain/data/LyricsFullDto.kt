@@ -1,6 +1,5 @@
 package org.jesperancinha.lyrics.domain.data
 
-import lombok.Builder
 import java.util.*
 
 @JvmRecord

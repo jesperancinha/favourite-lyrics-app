@@ -1,29 +1,24 @@
 package org.jesperancinha.lyrics.jpa.model
 
 import jakarta.persistence.*
-import lombok.*
 import org.hibernate.Hibernate
 import java.util.*
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "lyrics")
-@Getter
-@Setter
-@ToString
-class LyricsEntity {
+data class LyricsEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private val id: UUID? = null
+    private val id: UUID? = null,
 
     @Column
-    private val lyrics: String? = null
+    private val lyrics: String? = null,
 
     @Column
-    private val participatingArtist: String? = null
+    private val participatingArtist: String? = null,
+) {
+
     override fun equals(o: Any?): Boolean {
         if (o == null) {
             return false

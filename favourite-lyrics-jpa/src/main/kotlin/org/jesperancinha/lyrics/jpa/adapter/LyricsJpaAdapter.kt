@@ -1,6 +1,5 @@
 package org.jesperancinha.lyrics.jpa.adapter
 
-import lombok.SneakyThrows
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.jesperancinha.lyrics.domain.data.LyricsFullDto
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException

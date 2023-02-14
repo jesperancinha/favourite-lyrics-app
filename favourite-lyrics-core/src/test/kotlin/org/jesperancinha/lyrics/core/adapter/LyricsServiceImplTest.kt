@@ -24,21 +24,21 @@ class LyricsServiceImplTest {
     private val mockLyricsDtoList: List<LyricsDto>? = null
     @Test
     fun givenLyrics_whenAdd_thenAddPortCalled() {
-        val testLyricsDto = LyricsDto.builder().build()
+        val testLyricsDto = LyricsDto()
         lyricsServicePort!!.addLyrics(testLyricsDto)
         Mockito.verify(lyricsPersistencePort, Mockito.only()).addLyrics(testLyricsDto)
     }
 
     @Test
     fun givenLyrics_whenRemove_thenRemovePortCalled() {
-        val testLyricsDto = LyricsDto.builder().build()
+        val testLyricsDto = LyricsDto()
         lyricsServicePort!!.removeLyrics(testLyricsDto)
         Mockito.verify(lyricsPersistencePort, Mockito.only()).removeLyrics(testLyricsDto)
     }
 
     @Test
     fun givenLyrics_whenUpdate_thenUpdateLyricsPortCalled() {
-        val testLyricsDto = LyricsDto.builder().build()
+        val testLyricsDto = LyricsDto()
         lyricsServicePort!!.updateLyrics(testLyricsDto)
         Mockito.verify(lyricsPersistencePort, Mockito.only()).updateLyrics(testLyricsDto)
     }
@@ -54,7 +54,7 @@ class LyricsServiceImplTest {
     @Test
     fun givenLyricsId_whenGetLyricssById_thenGetLyricsByIdPortCalled() {
         val testLyricsId = UUID.randomUUID()
-        val testLyricsDto = LyricsDto.builder().build()
+        val testLyricsDto = LyricsDto()
         Mockito.`when`(lyricsPersistencePort!!.getLyricsById(testLyricsId)).thenReturn(testLyricsDto)
         val lyricsDto = lyricsServicePort!!.getLyricsById(testLyricsId)
         Assertions.assertThat(lyricsDto).isSameAs(testLyricsDto)

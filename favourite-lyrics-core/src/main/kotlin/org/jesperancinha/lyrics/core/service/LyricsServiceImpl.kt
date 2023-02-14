@@ -9,25 +9,23 @@ import java.util.*
 
 @Service
 class LyricsServiceImpl(private val lyricsPersistencePort: LyricsPersistencePort) : LyricsService {
-    override fun addLyrics(lyricsDto: LyricsDto?) {
+    override fun addLyrics(lyricsDto: LyricsDto) {
         lyricsPersistencePort.addLyrics(lyricsDto)
     }
 
     @Transactional
-    override fun removeLyrics(lyricsDto: LyricsDto?) {
+    override fun removeLyrics(lyricsDto: LyricsDto) {
         lyricsPersistencePort.removeLyrics(lyricsDto)
     }
 
-    override fun updateLyrics(lyricsDto: LyricsDto?) {
+    override fun updateLyrics(lyricsDto: LyricsDto) {
         lyricsPersistencePort.updateLyrics(lyricsDto)
     }
 
-    override val allLyrics: List<LyricsDto?>?
-        get() = lyricsPersistencePort.allLyrics
-    override val allFullLyrics: List<LyricsFullDto?>?
-        get() = lyricsPersistencePort.allLFullLyrics
+    override fun getAllLyrics(): List<LyricsDto> = lyricsPersistencePort.getAllLyrics()
+    override fun getAllFullLyrics(): List<LyricsFullDto> = lyricsPersistencePort.getAllLFullLyrics()
 
-    override fun getLyricsById(lyricsId: UUID?): LyricsDto? {
+    override fun getLyricsById(lyricsId: UUID?): LyricsDto {
         return lyricsPersistencePort.getLyricsById(lyricsId)
     }
 }
