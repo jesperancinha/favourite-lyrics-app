@@ -44,6 +44,7 @@
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.0.3</springdoc-openapi-starter-webmvc-ui.version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
+        <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
     </properties>
 
     <dependencyManagement>
@@ -80,6 +81,11 @@
             </dependency>
 
             <!-- External dependencies -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-kotlin</artifactId>
+                <version>${jackson-module-kotlin.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib</artifactId>
