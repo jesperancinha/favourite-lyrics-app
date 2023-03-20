@@ -30,7 +30,7 @@
 
         <kotlinx-coroutines-debug.version>1.6.4</kotlinx-coroutines-debug.version>
 
-        <postgresql.version>42.5.4</postgresql.version>
+        <postgresql.version>42.6.0</postgresql.version>
         <h2.version>1.4.200</h2.version>
 
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
