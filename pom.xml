@@ -41,7 +41,7 @@
 
         <spring-boot-starter-parent.version>3.0.6</spring-boot-starter-parent.version>
         <omni-coveragereporter-maven-plugin.version>0.4.2</omni-coveragereporter-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.9</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <jackson-module-kotlin.version>2.15.0</jackson-module-kotlin.version>
