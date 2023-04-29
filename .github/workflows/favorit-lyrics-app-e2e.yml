@@ -15,7 +15,13 @@ jobs:
           cache: maven
 
       - name: Start Docker
-        run: make dcup-full-action
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_seconds: 2400
+          command: |
+            make make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-electron
@@ -32,7 +38,13 @@ jobs:
           cache: maven
 
       - name: Start Docker
-        run: make dcup-full-action
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_seconds: 2400
+          command: |
+            make make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-chrome
@@ -49,7 +61,13 @@ jobs:
           cache: maven
 
       - name: Start Docker
-        run: make dcup-full-action
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_seconds: 2400
+          command: |
+            make make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-firefox
@@ -66,7 +84,13 @@ jobs:
           cache: maven
 
       - name: Start Docker
-        run: make dcup-full-action
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_seconds: 2400
+          command: |
+            make make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-edge
