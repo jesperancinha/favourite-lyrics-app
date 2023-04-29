@@ -21,7 +21,7 @@ jobs:
           retry_on: error
           timeout_seconds: 2400
           command: |
-            make make dcup-full-action
+            make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-electron
@@ -44,7 +44,7 @@ jobs:
           retry_on: error
           timeout_seconds: 2400
           command: |
-            make make dcup-full-action
+            make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-chrome
@@ -67,7 +67,7 @@ jobs:
           retry_on: error
           timeout_seconds: 2400
           command: |
-            make make dcup-full-action
+            make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-firefox
@@ -90,7 +90,7 @@ jobs:
           retry_on: error
           timeout_seconds: 2400
           command: |
-            make make dcup-full-action
+            make dcup-full-action
 
       - name: Run Cypress
         run: make cypress-edge
