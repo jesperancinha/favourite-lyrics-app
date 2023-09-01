@@ -66,7 +66,7 @@ dcup-full: docker-clean docker-action fla-wait
 dcd:
 	docker-compose down
 cypress-open:
-	cd e2e && yarn && npm run cypress
+	cd e2e && yarn && npm run cypress:open:electron
 cypress-electron:
 	cd e2e && make cypress-electron
 cypress-chrome:
