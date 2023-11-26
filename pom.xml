@@ -21,7 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>19</java.version>
-        <kotlin.version>1.9.20</kotlin.version>
+        <kotlin.version>1.9.21</kotlin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
@@ -30,7 +30,7 @@
 
         <kotlinx-coroutines-debug.version>1.7.3</kotlinx-coroutines-debug.version>
 
-        <postgresql.version>42.6.0</postgresql.version>
+        <postgresql.version>42.7.0</postgresql.version>
         <h2.version>1.4.200</h2.version>
 
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
@@ -39,7 +39,7 @@
         <testcontainers.version>1.19.3</testcontainers.version>
         <mockito-junit-jupiter.version>3.1.0</mockito-junit-jupiter.version>
 
-        <spring-boot-starter-parent.version>3.1.5</spring-boot-starter-parent.version>
+        <spring-boot-starter-parent.version>3.2.0</spring-boot-starter-parent.version>
         <omni-coveragereporter-maven-plugin.version>0.4.3</omni-coveragereporter-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
