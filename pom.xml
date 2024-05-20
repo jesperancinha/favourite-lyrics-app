@@ -26,7 +26,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-        <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
+        <build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
 
         <kotlinx-coroutines-debug.version>1.8.1</kotlinx-coroutines-debug.version>
 
