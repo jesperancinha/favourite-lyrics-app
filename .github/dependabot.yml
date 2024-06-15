@@ -18,6 +18,9 @@ updates:
       maven:
         patterns:
           - "*maven*"
+      kotlin:
+        patterns:
+          - "*kotlin*"
 
   - package-ecosystem: "npm"
     directory: "/e2e"
