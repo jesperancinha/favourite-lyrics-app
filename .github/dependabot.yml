@@ -15,6 +15,9 @@ updates:
       postgresql:
         patterns:
           - "*postgresql*"
+      maven:
+        patterns:
+          - "*maven*"
 
   - package-ecosystem: "npm"
     directory: "/e2e"
