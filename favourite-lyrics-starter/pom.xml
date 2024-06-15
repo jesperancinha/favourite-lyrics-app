@@ -7,6 +7,9 @@
         <groupId>org.jesperancinha.lyrics</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <properties>
+        <flyway-maven-plugin.version>10.15.0</flyway-maven-plugin.version>
+    </properties>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>favourite-lyrics-starter</artifactId>
@@ -64,6 +67,10 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -207,7 +214,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>10.15.0</version>
+                <version>${flyway-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
