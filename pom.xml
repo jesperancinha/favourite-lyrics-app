@@ -31,6 +31,7 @@
         <kotlinx-coroutines-debug.version>1.8.1</kotlinx-coroutines-debug.version>
 
         <postgresql.version>42.7.3</postgresql.version>
+        <flyway-database-postgresql.version>10.13.0</flyway-database-postgresql.version>
         <h2.version>1.4.200</h2.version>
 
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
@@ -105,6 +106,15 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
+            </dependency>
+            <!-- Because of
+            https://github.com/flyway/flyway/issues/3780
+            https://github.com/jesperancinha/favourite-lyrics-app/pull/188
+            -->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-database-postgresql</artifactId>
+                <version>${flyway-database-postgresql.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
