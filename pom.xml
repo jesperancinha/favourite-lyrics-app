@@ -24,14 +24,14 @@
         <kotlin.version>2.0.0</kotlin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.3.0</maven-surefire-plugin.version>
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
         <build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
 
         <kotlinx-coroutines-debug.version>1.8.1</kotlinx-coroutines-debug.version>
 
         <postgresql.version>42.7.3</postgresql.version>
-        <flyway-database-postgresql.version>10.13.0</flyway-database-postgresql.version>
+        <flyway-database-postgresql.version>10.15.0</flyway-database-postgresql.version>
         <h2.version>1.4.200</h2.version>
 
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
