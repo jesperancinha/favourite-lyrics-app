@@ -1,9 +1,11 @@
 name: FLA Pull Request
 
 on:
+  pull_request:
+    branches: [ main ]
   push:
     branches:
-  pull_request:
+      - '!master'
 
 jobs:
   build:
@@ -11,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up JDK 19
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '19'
         distribution: 'adopt'
