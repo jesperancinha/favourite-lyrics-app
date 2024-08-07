@@ -61,9 +61,9 @@ dcup-light: dcd
 	docker-compose up -d fla-postgres
 dcup: dcd
 	docker-compose up -d --build --remove-orphans
-dcup-full-action: docker-clean-build-start fla-wait
-dcup-full: docker-clean docker-action fla-wait
-dcd:
+dcup-full-action: dcd docker-clean-build-start fla-wait
+dcup-full: dcd docker-clean docker-action fla-wait
+dcd: dc-migration
 	docker-compose down
 cypress-open:
 	cd e2e && yarn && npm run cypress:open:electron
@@ -101,3 +101,5 @@ deps-cypress-update:
 deps-plugins-update:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/pluginUpdatesOne.sh | bash
 deps-update: update
+dc-migration:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/setupDockerCompose.sh | bash
