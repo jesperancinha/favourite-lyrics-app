@@ -21,6 +21,10 @@ updates:
       kotlin:
         patterns:
           - "*kotlin*"
+      flyway:
+        patterns:
+          - "*flyway*"
+          - "flyway*"
 
   - package-ecosystem: "npm"
     directory: "/e2e"
