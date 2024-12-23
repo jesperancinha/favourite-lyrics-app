@@ -28,7 +28,7 @@
         <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
         <build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
 
-        <kotlinx-coroutines-debug.version>1.10.0</kotlinx-coroutines-debug.version>
+        <kotlinx-coroutines-debug.version>1.10.1</kotlinx-coroutines-debug.version>
 
         <postgresql.version>42.7.4</postgresql.version>
         <flyway-database-postgresql.version>11.1.0</flyway-database-postgresql.version>
