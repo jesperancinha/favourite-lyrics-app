@@ -33,19 +33,6 @@ This project is an implementation of a Favourite lyrics app.	It contains an impl
 
 This is a part of a series of studies I am making about DDD(Domain driven architecture)
 
-This project is also the official support project of my article on medium:
-
-[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/medium-20.png "Medium")](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
-[Hexagonal Architecture](https://medium.com/swlh/hexagonal-architecture-a596390269fd)
-
-<div align="center">
-      <a title="Hexagonal Architecture" href="https://medium.com/swlh/hexagonal-architecture-a596390269fd">
-     <img 
-          src="./docs/images/articles.favourite.lyrics.intro.png" 
-          style="width:100%;">
-      </a>
-</div>
-
 #### Stable releases
 
 -   [1.0.0](https://github.com/jesperancinha/favourite-lyrics-app/tree/1.0.0) - [cfe174af1a698da2c685d63ee50db317f2da53d2](https://github.com/jesperancinha/favourite-lyrics-app/tree/1.0.0)
