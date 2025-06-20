@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <properties>
-        <flyway-maven-plugin.version>11.9.1</flyway-maven-plugin.version>
+        <flyway-maven-plugin.version>11.9.2</flyway-maven-plugin.version>
     </properties>
     <modelVersion>4.0.0</modelVersion>
 
