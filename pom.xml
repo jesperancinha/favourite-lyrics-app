@@ -103,15 +103,6 @@
                 <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
-            </dependency>
-            <!-- Because of
-            https://github.com/flyway/flyway/issues/3780
-            https://github.com/jesperancinha/favourite-lyrics-app/pull/188
-            -->
-            <dependency>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-database-postgresql</artifactId>
                 <version>${flyway-database-postgresql.version}</version>
