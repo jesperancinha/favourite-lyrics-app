@@ -30,8 +30,6 @@
 
         <kotlinx-coroutines-debug.version>1.10.2</kotlinx-coroutines-debug.version>
 
-        <flyway-database-postgresql.version>11.13.0</flyway-database-postgresql.version>
-
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
         <assertj-core.version>3.13.2</assertj-core.version>
         <mockito-all.version>1.10.19</mockito-all.version>
@@ -99,11 +97,6 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-database-postgresql</artifactId>
-                <version>${flyway-database-postgresql.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
