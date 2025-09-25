@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   fla-postgres:
     container_name: ${PROJECT_SLUG}-postgres
