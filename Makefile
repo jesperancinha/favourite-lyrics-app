@@ -1,3 +1,5 @@
+include Makefile.mk
+
 b: build-npm build-maven
 build: build-npm
 	mvn clean install
