@@ -1,5 +1,10 @@
 package org.jesperancinha.lyrics.jpa.adapter
 
+import com.ninjasquad.springmockk.MockkBean
+import io.mockk.confirmVerified
+import io.mockk.every
+import io.mockk.slot
+import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException
@@ -7,64 +12,61 @@ import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
-import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import java.util.*
 
 @SpringBootTest(classes = [LyricsJpaAdapter::class, LyricsPersistencePort::class])
-class LyricsJpaAdapterTest {
-    @Autowired
-    lateinit var lyricsPersistencePort: LyricsPersistencePort
-
-    @MockBean
-    lateinit var mockLyricsRepository: LyricsRepository
-
-    @Captor
-    lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
+class LyricsJpaAdapterTest @Autowired constructor(
+    val lyricsPersistencePort: LyricsPersistencePort
+) {
+    @MockkBean(relaxed = true)
+    lateinit var lyricsRepository: LyricsRepository
 
     @Test
-    fun givenLyrics_whenAddLyrics_thenEntityIsPortedToRepository() {
+    fun `given lyrics when add lyrics then entity is ported to repository`() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
+        every { lyricsRepository.save(any()) } answers { firstArg() }
+
         lyricsPersistencePort.addLyrics(testLyricsDto)
-        Mockito.verify(mockLyricsRepository, Mockito.only()).save(
-            lyricsEntityArgumentCaptor.capture()
-        )
-        val lyricsEntity = lyricsEntityArgumentCaptor.value
+        val savedEntitySlot = slot<LyricsEntity>()
+        verify(exactly = 1) { lyricsRepository.save(capture(savedEntitySlot)) }
+        confirmVerified(lyricsRepository)
+        val lyricsEntity = savedEntitySlot.captured
         assertThat(lyricsEntity.participatingArtist).isEqualTo(TEST_AUTHOR)
         assertThat(lyricsEntity.lyrics).isEqualTo(TEST_LYRICS)
     }
 
     @Test
-    fun givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToRepository() {
+    fun `given lyrics when remove lyrics then entity removal is ported to repository`() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
         lyricsPersistencePort.removeLyrics(testLyricsDto)
-        Mockito.verify(mockLyricsRepository, Mockito.only())
-            .deleteAllByParticipatingArtist(requireNotNull(testLyricsDto.participatingArtist))
+        verify(exactly = 1) {
+            lyricsRepository.deleteAllByParticipatingArtist(requireNotNull(testLyricsDto.participatingArtist))
+        }
+        confirmVerified(lyricsRepository)
     }
 
     @Test
-    fun givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToRepository() {
+    fun `given call to all lyrics when no params then findAll is ported to repository`() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
         val testListLyricss: List<LyricsEntity?> = listOf(testLyrics)
-        Mockito.`when`(mockLyricsRepository.findAll()).thenReturn(testListLyricss)
+        every { lyricsRepository.findAll() } returns testListLyricss
         val allLyricsDtos = lyricsPersistencePort.getAllLyrics()
-        Mockito.verify(mockLyricsRepository, Mockito.only()).findAll()
+        verify(exactly = 1) { lyricsRepository.findAll() }
+        confirmVerified(lyricsRepository)
         assertThat(allLyricsDtos).hasSize(1)
         val lyricsDto = allLyricsDtos[0]
         assertThat(lyricsDto.participatingArtist).isEqualTo(TEST_AUTHOR)
@@ -72,24 +74,25 @@ class LyricsJpaAdapterTest {
     }
 
     @Test
-    fun givenArtisId_whenCallingGetLyricsById_thenFindByIdToRepository() {
+    fun `given artist id when calling get lyrics by id then find by id in repository`() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
         val testId = UUID.randomUUID()
-        Mockito.`when`(mockLyricsRepository.findById(testId)).thenReturn(Optional.of(testLyrics))
+        every { lyricsRepository.findById(testId) } returns Optional.of(testLyrics)
         val lyricsDtoById = lyricsPersistencePort.getLyricsById(testId)
-        Mockito.verify(mockLyricsRepository, Mockito.only()).findById(testId)
+        verify(exactly = 1) { lyricsRepository.findById(testId) }
+        confirmVerified(lyricsRepository)
         assertThat(lyricsDtoById.participatingArtist).isEqualTo(TEST_AUTHOR)
         assertThat(lyricsDtoById.lyrics).isEqualTo(TEST_LYRICS)
     }
 
     @Test
-    fun givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToRepositoryFails() {
+    fun `given unexisting artist id when calling get lyrics by id then find by id in repository fails`() {
         val testId = UUID.randomUUID()
-        Mockito.`when`(mockLyricsRepository.findById(testId)).thenReturn(Optional.empty())
+        every { lyricsRepository.findById(testId) } returns Optional.empty()
         org.junit.jupiter.api.Assertions.assertThrows(LyricsNotFoundException::class.java) {
             lyricsPersistencePort.getLyricsById(
                 testId
@@ -98,51 +101,54 @@ class LyricsJpaAdapterTest {
     }
 
     @Test
-    fun givenAnExistingParticipatingArtist_whenUpdateLyrics_thenUpdateLyrics() {
+    fun `given an existing participating artist when update lyrics then update lyrics`() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
-        val testLyricsDto: LyricsDto = LyricsDto(
+        val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS_2
         )
 
-        Mockito.`when`(mockLyricsRepository.findByParticipatingArtist(TEST_AUTHOR)).thenReturn(testLyrics)
+        every { lyricsRepository.save(any()) } answers { firstArg() }
+        every { lyricsRepository.findByParticipatingArtist(TEST_AUTHOR) } returns testLyrics
         lyricsPersistencePort.updateLyrics(testLyricsDto)
-        Mockito.verify(mockLyricsRepository, Mockito.times(1)).findByParticipatingArtist(TEST_AUTHOR)
-        Mockito.verify(mockLyricsRepository, Mockito.times(1)).save(
-            lyricsEntityArgumentCaptor.capture()
-        )
-        Mockito.verifyNoMoreInteractions(mockLyricsRepository)
-        val lyricsEntity = lyricsEntityArgumentCaptor.value
+        verify(exactly = 1) { lyricsRepository.findByParticipatingArtist(TEST_AUTHOR) }
+        val savedEntitySlot = slot<LyricsEntity>()
+        verify(exactly = 1) { lyricsRepository.save(capture(savedEntitySlot)) }
+        val lyricsEntity = savedEntitySlot.captured
         assertThat(lyricsEntity).isNotNull
         assertThat(lyricsEntity.participatingArtist).isEqualTo(TEST_AUTHOR)
         assertThat(lyricsEntity.lyrics).isEqualTo(TEST_LYRICS_2)
     }
 
     @Test
-    fun givenAnExistingLyrics_whenUpdateLyrics_thenUpdateParticipatingArtist() {
+    fun `given an existing lyrics when update lyrics then update participating artist`() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS_3
         )
 
-        val testLyricsDto: LyricsDto = LyricsDto(
+        val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR_2,
             lyrics = TEST_LYRICS_3
         )
 
-        Mockito.`when`(mockLyricsRepository.findByLyrics(TEST_LYRICS_3)).thenReturn(testLyrics)
-        lyricsPersistencePort.updateLyrics(testLyricsDto)
-        Mockito.verify(mockLyricsRepository, Mockito.times(1)).findByParticipatingArtist(TEST_AUTHOR_2)
-        Mockito.verify(mockLyricsRepository, Mockito.times(1)).findByLyrics(TEST_LYRICS_3)
-        Mockito.verify(mockLyricsRepository, Mockito.times(1)).save(
-            lyricsEntityArgumentCaptor.capture()
+        every { lyricsRepository.save(any()) } answers { firstArg() }
+        every { lyricsRepository.findByParticipatingArtist(TEST_AUTHOR_2) } returns LyricsEntity(
+            participatingArtist = TEST_AUTHOR_2,
+            lyrics = "dummy"
         )
-        Mockito.verifyNoMoreInteractions(mockLyricsRepository)
-        val lyricsEntity = lyricsEntityArgumentCaptor.value
+        every { lyricsRepository.findByLyrics(TEST_LYRICS_3) } returns testLyrics
+        lyricsPersistencePort.updateLyrics(testLyricsDto)
+        verify(exactly = 1) { lyricsRepository.findByParticipatingArtist(TEST_AUTHOR_2) }
+        verify(exactly = 1) { lyricsRepository.findByLyrics(TEST_LYRICS_3) }
+        val savedEntitySlot = slot<LyricsEntity>()
+        verify(exactly = 1) { lyricsRepository.save(capture(savedEntitySlot)) }
+        confirmVerified(lyricsRepository)
+        val lyricsEntity = savedEntitySlot.captured
         assertThat(lyricsEntity).isNotNull
         assertThat(lyricsEntity.participatingArtist).isEqualTo(TEST_AUTHOR_2)
         assertThat(lyricsEntity.lyrics).isEqualTo(TEST_LYRICS_3)

@@ -8,8 +8,6 @@ import org.jesperancinha.lyrics.jpa.model.LyricsEntity
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository
 import org.springframework.stereotype.Service
 import java.util.*
-import java.util.function.Supplier
-import java.util.stream.Collectors
 
 @Service
 class LyricsJpaAdapter(private val lyricsRepository: LyricsRepository) : LyricsPersistencePort {
@@ -25,12 +23,12 @@ class LyricsJpaAdapter(private val lyricsRepository: LyricsRepository) : LyricsP
     override fun updateLyrics(lyricsDto: LyricsDto) {
         val byParticipatingArtist =
             lyricsRepository.findByParticipatingArtist(requireNotNull(lyricsDto.participatingArtist))
-        if (Objects.nonNull(byParticipatingArtist)) {
+        if (isOnlyNullValues(byParticipatingArtist)) {
             lyricsRepository.save(byParticipatingArtist.copy(lyrics = lyricsDto.lyrics))
         } else {
-            val byLyrics = lyricsRepository.findByLyrics(requireNotNull(lyricsDto.lyrics))
-            if (Objects.nonNull(byLyrics)) {
-                lyricsRepository.save(byLyrics.copy(participatingArtist = lyricsDto.participatingArtist))
+            val findByLyrics: LyricsEntity = lyricsRepository.findByLyrics(requireNotNull(lyricsDto.lyrics))
+            if (!isOnlyNullValues(findByLyrics)) {
+                lyricsRepository.save(findByLyrics.copy(participatingArtist = lyricsDto.participatingArtist))
             }
         }
     }
@@ -71,3 +69,5 @@ class LyricsJpaAdapter(private val lyricsRepository: LyricsRepository) : LyricsP
         )
     }
 }
+fun isOnlyNullValues(lyricsEntity: LyricsEntity)
+        = lyricsEntity.participatingArtist == null && lyricsEntity.lyrics == null && lyricsEntity.id == null

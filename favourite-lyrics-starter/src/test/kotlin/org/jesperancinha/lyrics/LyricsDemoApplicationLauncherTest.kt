@@ -1,24 +1,24 @@
 package org.jesperancinha.lyrics
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.ninjasquad.springmockk.SpykBean
 import org.hamcrest.collection.IsCollectionWithSize
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.Mockito
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.http.MediaType
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.transaction.annotation.Transactional
 import org.testcontainers.containers.Network
 import org.testcontainers.containers.PostgreSQLContainer
@@ -27,18 +27,22 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import java.util.*
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @Transactional
 @Testcontainers
 class LyricsDemoApplicationLauncherTest {
-    @Autowired
+
     lateinit var mvc: MockMvc
 
-    @SpyBean
+    @SpykBean
     lateinit var lyricsRepository: LyricsRepository
 
     @Captor
     lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
+
+    @BeforeEach
+    fun setup() {
+        mvc = MockMvcBuilders.standaloneSetup(org.jesperancinha.lyrics.rest.LyricsControllerImpl(lyricsRepository)).build()
+    }
 
     @Test
     @Transactional
