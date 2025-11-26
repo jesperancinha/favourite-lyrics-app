@@ -2,22 +2,26 @@ package org.jesperancinha.lyrics
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.SpykBean
+import io.mockk.CapturingSlot
+import io.mockk.confirmVerified
+import io.mockk.slot
+import io.mockk.verify
 import org.hamcrest.collection.IsCollectionWithSize
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository
+import org.jesperancinha.lyrics.rest.LyricsControllerImpl
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
-import org.mockito.Mockito
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.transaction.annotation.Transactional
 import org.testcontainers.containers.Network
@@ -29,19 +33,22 @@ import java.util.*
 @SpringBootTest
 @Transactional
 @Testcontainers
-class LyricsDemoApplicationLauncherTest {
+class LyricsDemoApplicationLauncherTest @Autowired constructor(
+    val lyricsControllerImpl: LyricsControllerImpl
+) {
 
     lateinit var mvc: MockMvc
 
     @SpykBean
     lateinit var lyricsRepository: LyricsRepository
 
-    @Captor
-    lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
+    private lateinit var lyricsEntitySlot: CapturingSlot<LyricsEntity>
 
     @BeforeEach
-    fun setup() {
-        mvc = MockMvcBuilders.standaloneSetup(org.jesperancinha.lyrics.rest.LyricsControllerImpl(lyricsRepository)).build()
+    fun setup(){
+        mvc = MockMvcBuilders
+            .standaloneSetup(lyricsControllerImpl)
+            .build()
     }
 
     @Test
@@ -53,6 +60,8 @@ class LyricsDemoApplicationLauncherTest {
             lyrics = TEST_LYRICS
         )
 
+        lyricsEntitySlot = slot()
+
         mvc.perform(
             MockMvcRequestBuilders.post("/lyrics")
                 .content(objectMapper.writeValueAsString(testLyricsDto))
@@ -60,11 +69,9 @@ class LyricsDemoApplicationLauncherTest {
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isCreated)
-        Mockito.verify(lyricsRepository, Mockito.times(1)).save(
-            lyricsEntityArgumentCaptor.capture()
-        )
+        verify(exactly = 1) { lyricsRepository.save(capture(lyricsEntitySlot)) }
         mvc.perform(
-            MockMvcRequestBuilders.get("/lyrics/" + lyricsEntityArgumentCaptor.value.id)
+            MockMvcRequestBuilders.get("/lyrics/" + lyricsEntitySlot.captured.id)
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isOk)
@@ -84,10 +91,9 @@ class LyricsDemoApplicationLauncherTest {
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isOk)
-        Mockito.verify(lyricsRepository, Mockito.times(2)).save(
-            lyricsEntityArgumentCaptor.capture()
-        )
-        val lastId = lyricsEntityArgumentCaptor.value.id
+        // capture the second save as well
+        verify(exactly = 2) { lyricsRepository.save(capture(lyricsEntitySlot)) }
+        val lastId = lyricsEntitySlot.captured.id
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$lastId")
                 .accept(MediaType.APPLICATION_JSON)
@@ -104,6 +110,7 @@ class LyricsDemoApplicationLauncherTest {
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isOk)
+        confirmVerified(lyricsRepository)
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$lastId")
                 .accept(MediaType.APPLICATION_JSON)

@@ -29,6 +29,10 @@
         <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
         <kotlinx-coroutines-debug.version>1.10.2</kotlinx-coroutines-debug.version>
 
+        <!-- Testing BOMs/versions -->
+        <mockk.version>1.14.6</mockk.version>
+        <springmockk.version>4.0.2</springmockk.version>
+
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
         <assertj-core.version>3.13.2</assertj-core.version>
         <mockito-all.version>1.10.19</mockito-all.version>
@@ -45,6 +49,7 @@
     <dependencyManagement>
         <dependencies>
             <!-- Imports -->
+            <!-- Spring Boot platform -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
@@ -52,7 +57,24 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!-- MockK -->
+            <dependency>
+                <groupId>io.mockk</groupId>
+                <artifactId>mockk</artifactId>
+                <version>${mockk.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.mockk</groupId>
+                <artifactId>mockk-jvm</artifactId>
+                <version>${mockk.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.ninja-squad</groupId>
+                <artifactId>springmockk</artifactId>
+                <version>${springmockk.version}</version>
+            </dependency>
             <!-- Inner dependencies -->
             <dependency>
                 <groupId>org.jesperancinha.lyrics</groupId>

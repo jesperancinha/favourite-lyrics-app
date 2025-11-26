@@ -29,7 +29,7 @@ class LyricsControllerImplTest @Autowired constructor(
 
     lateinit var mvc: MockMvc
 
-    @MockkBean
+    @MockkBean(relaxed = true)
     lateinit var lyricsService: LyricsService
     private val objectMapper = ObjectMapper()
 
