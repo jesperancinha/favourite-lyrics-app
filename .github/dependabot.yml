@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "yearly"
     ignore:
       - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
         versions: ["1.6.0-RC2", "1.6.0-RC3", "1.6.0"]
@@ -29,4 +29,4 @@ updates:
   - package-ecosystem: "npm"
     directory: "/e2e"
     schedule:
-      interval: "daily"
+      interval: "yearly"
