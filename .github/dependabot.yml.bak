@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "yearly"
+    ignore:
+      - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+        versions: ["1.6.0-RC2", "1.6.0-RC3", "1.6.0"]
+      - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+        versions: ["1.6.0-RC2", "1.6.0-RC3", "1.6.0"]
+      - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm"
+        versions: ["1.6.0-RC2", "1.6.0-RC3", "1.6.0"]
+    groups:
+      postgresql:
+        patterns:
+          - "*postgresql*"
+      maven:
+        patterns:
+          - "*maven*"
+      kotlin:
+        patterns:
+          - "*kotlin*"
+      flyway:
+        patterns:
+          - "*flyway*"
+          - "flyway*"
+
+  - package-ecosystem: "npm"
+    directory: "/e2e"
+    schedule:
+      interval: "yearly"
