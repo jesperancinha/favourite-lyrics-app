@@ -93,6 +93,19 @@ make docker-clean-build-start
 
 -   [Homepage Swagger UI](http://localhost:8080/swagger-ui/index.html)
 
+---
+
+## Claude
+
+Prompt claude with the following:
+
+### Run all skills
+```text
+please run skills annotations, kotlin, angular, parallel, docker, and spring-integration-test-wiring on this project
+```
+
+---
+
 ## References
 
 -   [Flyway Documentation/Migrations](https://flywaydb.org/documentation/concepts/migrations.html#naming)
