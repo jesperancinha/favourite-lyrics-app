@@ -12,17 +12,14 @@ import org.mockito.Captor
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.util.*
 
 @SpringBootTest(classes = [LyricsJpaAdapter::class, LyricsPersistencePort::class])
-class LyricsJpaAdapterTest {
-    @Autowired
-    lateinit var lyricsPersistencePort: LyricsPersistencePort
-
-    @MockBean
-    lateinit var mockLyricsRepository: LyricsRepository
-
+class LyricsJpaAdapterTest @Autowired constructor(
+    private val lyricsPersistencePort: LyricsPersistencePort,
+    @MockitoBean private val mockLyricsRepository: LyricsRepository,
+) {
     @Captor
     lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
 

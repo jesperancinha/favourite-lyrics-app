@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.http.MediaType
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
@@ -30,13 +31,10 @@ import java.util.*
 @AutoConfigureMockMvc
 @Transactional
 @Testcontainers
-class LyricsDemoApplicationLauncherTest {
-    @Autowired
-    lateinit var mvc: MockMvc
-
-    @SpyBean
-    lateinit var lyricsRepository: LyricsRepository
-
+class LyricsDemoApplicationLauncherTest @Autowired constructor(
+    private val mvc: MockMvc,
+    @MockitoSpyBean private val lyricsRepository: LyricsRepository,
+) {
     @Captor
     lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
 

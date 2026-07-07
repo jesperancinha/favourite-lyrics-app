@@ -8,9 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -20,12 +20,10 @@ import java.util.*
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(LyricsControllerImpl::class)
 @ContextConfiguration(classes = [LyricsController::class, LyricsControllerImpl::class])
-class LyricsControllerImplTest {
-    @Autowired
-    lateinit var mvc: MockMvc
-
-    @MockBean
-    lateinit var lyricsService: LyricsService
+class LyricsControllerImplTest @Autowired constructor(
+    private val mvc: MockMvc,
+    @MockitoBean private val lyricsService: LyricsService,
+) {
     private val objectMapper = ObjectMapper()
 
     @Test
