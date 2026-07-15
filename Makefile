@@ -65,7 +65,7 @@ dcup: dcd
 	docker compose up -d --build --remove-orphans
 dcup-full-action: dcd docker-clean-build-start fla-wait
 dcup-full: dcd docker-clean docker-action fla-wait
-dcd: dc-migration
+dcd:
 	docker compose down
 cypress-open:
 	cd e2e && yarn && npm run cypress:open:electron
@@ -110,5 +110,3 @@ accept-prs:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/acceptPR.sh | bash
 update-repo-prs:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/update-all-repo-prs.sh | bash
-dc-migration:
-	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/setupDockerCompose.sh | bash
