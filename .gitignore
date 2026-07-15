@@ -55,3 +55,6 @@ screenshots
 
 # OS
 .DS_Store
+
+# Automation
+dependabot.yml.bak
