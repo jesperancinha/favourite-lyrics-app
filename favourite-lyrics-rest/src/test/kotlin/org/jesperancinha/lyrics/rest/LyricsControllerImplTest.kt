@@ -1,48 +1,42 @@
 package org.jesperancinha.lyrics.rest
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.ninjasquad.springmockk.MockkBean
-import io.mockk.confirmVerified
-import io.mockk.every
-import io.mockk.verify
 import org.jesperancinha.lyrics.core.service.LyricsService
 import org.jesperancinha.lyrics.domain.data.LyricsDto
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
+import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.util.*
 
-@SpringBootTest
+@ExtendWith(SpringExtension::class)
+@WebMvcTest(LyricsControllerImpl::class)
 @ContextConfiguration(classes = [LyricsController::class, LyricsControllerImpl::class])
+@TestMethodOrder(OrderAnnotation::class)
 class LyricsControllerImplTest @Autowired constructor(
-    val lyricsControllerImpl: LyricsControllerImpl
+    private val mvc: MockMvc,
+    @MockitoBean private val lyricsService: LyricsService,
 ) {
-
-    lateinit var mvc: MockMvc
-
-    @MockkBean(relaxed = true)
-    lateinit var lyricsService: LyricsService
     private val objectMapper = ObjectMapper()
 
-    @BeforeEach
-    fun setup(){
-        mvc = MockMvcBuilders
-            .standaloneSetup(lyricsControllerImpl)
-            .build()
-    }
-
     @Test
+    @Execution(SAME_THREAD)
+    @Order(1)
     @Throws(Exception::class)
-    fun `given lyrics when add lyrics then entity is ported to service`() {
+    fun givenLyrics_whenAddLyrics_thenEntityIsPortedToService() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
@@ -55,13 +49,14 @@ class LyricsControllerImplTest @Autowired constructor(
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isCreated)
-        verify(exactly = 1) { lyricsService.addLyrics(testLyricsDto) }
-        confirmVerified(lyricsService)
+        Mockito.verify(lyricsService, Mockito.only()).addLyrics(testLyricsDto)
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(2)
     @Throws(Exception::class)
-    fun `given lyrics when update lyrics then entity update is ported to service`() {
+    fun givenLyrics_whenUpdateLyrics_thenEntityUpdateIsPortedToService() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
@@ -74,13 +69,14 @@ class LyricsControllerImplTest @Autowired constructor(
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
-        verify(exactly = 1) { lyricsService.updateLyrics(testLyricsDto) }
-        confirmVerified(lyricsService)
+        Mockito.verify(lyricsService, Mockito.only()).updateLyrics(testLyricsDto)
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(3)
     @Throws(Exception::class)
-    fun `given lyrics when remove lyrics then entity removal is ported to service`() {
+    fun givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToService() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
@@ -93,19 +89,20 @@ class LyricsControllerImplTest @Autowired constructor(
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
-        verify(exactly = 1) { lyricsService.removeLyrics(testLyricsDto) }
-        confirmVerified(lyricsService)
+        Mockito.verify(lyricsService, Mockito.only()).removeLyrics(testLyricsDto)
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(4)
     @Throws(Exception::class)
-    fun `given call to all lyrics when no params then findAll is ported to service`() {
+    fun givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToService() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
-        every { lyricsService.getAllLyrics() } returns listOf(testLyricsDto)
+        Mockito.`when`<Any?>(lyricsService.getAllLyrics()).thenReturn(listOf(testLyricsDto))
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics")
                 .accept(MediaType.APPLICATION_JSON)
@@ -127,20 +124,21 @@ class LyricsControllerImplTest @Autowired constructor(
                 MockMvcResultMatchers.jsonPath("$[0].lyrics")
                     .value(TEST_LYRICS)
             )
-        verify(exactly = 1) { lyricsService.getAllLyrics() }
-        confirmVerified(lyricsService)
+        Mockito.verify(lyricsService, Mockito.only()).getAllLyrics()
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(5)
     @Throws(Exception::class)
-    fun `given artist id when calling get lyrics by id then find by id in service`() {
+    fun givenArtisId_whenCallingGetLyricsById_thenFindByIdToService() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
             lyrics = TEST_LYRICS
         )
 
         val id = UUID.randomUUID()
-        every { lyricsService.getLyricsById(id) } returns testLyricsDto
+        Mockito.`when`(lyricsService.getLyricsById(id)).thenReturn(testLyricsDto)
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$id")
                 .accept(MediaType.APPLICATION_JSON)
@@ -162,13 +160,14 @@ class LyricsControllerImplTest @Autowired constructor(
                 MockMvcResultMatchers.jsonPath("$.lyrics")
                     .value(TEST_LYRICS)
             )
-        verify(exactly = 1) { lyricsService.getLyricsById(id) }
-        confirmVerified(lyricsService)
+        Mockito.verify(lyricsService, Mockito.only()).getLyricsById(id)
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(6)
     @Throws(Exception::class)
-    fun `given unexisting artist id when calling get lyrics by id then find by id in service fails`() {
+    fun givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToServiceFails() {
         val id = UUID.randomUUID()
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$id")
@@ -179,8 +178,7 @@ class LyricsControllerImplTest @Autowired constructor(
                 MockMvcResultMatchers.jsonPath("$.participatingArtist")
                     .doesNotExist()
             )
-        verify(exactly = 1) { lyricsService.getLyricsById(id) }
-        confirmVerified(lyricsService)
+        Mockito.verify(lyricsService, Mockito.only()).getLyricsById(id)
     }
 
     companion object {

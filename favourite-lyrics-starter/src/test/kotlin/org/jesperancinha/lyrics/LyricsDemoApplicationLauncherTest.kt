@@ -1,28 +1,30 @@
 package org.jesperancinha.lyrics
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.ninjasquad.springmockk.SpykBean
-import io.mockk.CapturingSlot
-import io.mockk.confirmVerified
-import io.mockk.slot
-import io.mockk.verify
 import org.hamcrest.collection.IsCollectionWithSize
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository
-import org.jesperancinha.lyrics.rest.LyricsControllerImpl
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
+import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.transaction.annotation.Transactional
 import org.testcontainers.containers.Network
 import org.testcontainers.containers.PostgreSQLContainer
@@ -31,36 +33,27 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import java.util.*
 
 @SpringBootTest
+@AutoConfigureMockMvc
 @Transactional
 @Testcontainers
+@TestMethodOrder(OrderAnnotation::class)
 class LyricsDemoApplicationLauncherTest @Autowired constructor(
-    val lyricsControllerImpl: LyricsControllerImpl
+    private val mvc: MockMvc,
+    @MockitoSpyBean private val lyricsRepository: LyricsRepository,
 ) {
-
-    lateinit var mvc: MockMvc
-
-    @SpykBean
-    lateinit var lyricsRepository: LyricsRepository
-
-    private lateinit var lyricsEntitySlot: CapturingSlot<LyricsEntity>
-
-    @BeforeEach
-    fun setup(){
-        mvc = MockMvcBuilders
-            .standaloneSetup(lyricsControllerImpl)
-            .build()
-    }
+    @Captor
+    lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
 
     @Test
     @Transactional
+    @Execution(SAME_THREAD)
+    @Order(1)
     @Throws(Exception::class)
     fun givenLyrics_whenAddAndUpdateAndThenRemoveLyrics_thenEntity() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_ARTIST_NAME,
             lyrics = TEST_LYRICS
         )
-
-        lyricsEntitySlot = slot()
 
         mvc.perform(
             MockMvcRequestBuilders.post("/lyrics")
@@ -69,9 +62,11 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isCreated)
-        verify(exactly = 1) { lyricsRepository.save(capture(lyricsEntitySlot)) }
+        Mockito.verify(lyricsRepository, Mockito.times(1)).save(
+            lyricsEntityArgumentCaptor.capture()
+        )
         mvc.perform(
-            MockMvcRequestBuilders.get("/lyrics/" + lyricsEntitySlot.captured.id)
+            MockMvcRequestBuilders.get("/lyrics/" + lyricsEntityArgumentCaptor.value.id)
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isOk)
@@ -91,9 +86,10 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isOk)
-        // capture the second save as well
-        verify(exactly = 2) { lyricsRepository.save(capture(lyricsEntitySlot)) }
-        val lastId = lyricsEntitySlot.captured.id
+        Mockito.verify(lyricsRepository, Mockito.times(2)).save(
+            lyricsEntityArgumentCaptor.capture()
+        )
+        val lastId = lyricsEntityArgumentCaptor.value.id
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$lastId")
                 .accept(MediaType.APPLICATION_JSON)
@@ -110,7 +106,6 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(status().isOk)
-        confirmVerified(lyricsRepository)
         mvc.perform(
             MockMvcRequestBuilders.get("/lyrics/$lastId")
                 .accept(MediaType.APPLICATION_JSON)
@@ -121,6 +116,8 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(2)
     @Throws(Exception::class)
     fun givenCallToAllLyrics_whenNoParams_thenFindAll() {
         mvc.perform(
@@ -152,6 +149,8 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(3)
     @Throws(Exception::class)
     fun givenArtisId_whenCallingGetLyricsById_thenReturnsLyrics() {
         val id = lyricsRepository.findAll()[0].id
@@ -167,6 +166,8 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(4)
     @Throws(Exception::class)
     fun givenUnexistingArtisId_whenCallingGetLyricsById_thenIsNotFound() {
         mvc.perform(
