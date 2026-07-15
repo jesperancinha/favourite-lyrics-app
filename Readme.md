@@ -15,9 +15,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/jesperancinha/favourite-lyrics-app/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/favourite-lyrics-app?branch=master)
 [![codecov](https://codecov.io/gh/jesperancinha/favourite-lyrics-app/branch/master/graph/badge.svg?token=kQluBZ2gJK)](https://codecov.io/gh/jesperancinha/favourite-lyrics-app)
 
-[![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/favourite-lyrics-app.svg)](#)
-[![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/favourite-lyrics-app.svg)](#)
-[![GitHub top language](https://img.shields.io/github/languages/code-size/jesperancinha/favourite-lyrics-app.svg)](#)
+![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/favourite-lyrics-app.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/favourite-lyrics-app.svg)
+![GitHub top language](https://img.shields.io/github/languages/code-size/jesperancinha/favourite-lyrics-app.svg)
 
 ---
 
@@ -48,7 +48,7 @@ This is a part of a series of studies I am making about DDD(Domain driven archit
 -   [favourite-lyrics-core](./favourite-lyrics-core) - Core libraries. This is where the services are located (Inside-Outside)
 -   [favourite-lyrics-rest](./favourite-lyrics-rest) - REST Controller libraries. This is where the rest controller is located (Outside)
 -   [favourite-lyrics-starter](./favourite-lyrics-starter) - Spring boot starter for this project
--   [favourite-lyrics-test](./favourite-lyrics-test) - Live running test project. (Not in included in docker-compose)
+-   [favourite-lyrics-test](./favourite-lyrics-test) - Live running test project. (Not in included in docker compose)
 -   [favourite-lyrics-gui](./favourite-lyrics-gui) - Front end application to better visualize and understand the project (Not associated with Hexagonal architecture directly, but it is part of the Outside)
 
 ---
@@ -92,6 +92,19 @@ make docker-clean-build-start
 #### Swagger UI
 
 -   [Homepage Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+---
+
+## Claude
+
+Prompt claude with the following:
+
+### Run all skills
+```text
+please run skills angular, annotations, docker, java, jee, jvm, kotlin, parallel, readme, spring, and spring-test on this project
+```
+
+---
 
 ## References
 
