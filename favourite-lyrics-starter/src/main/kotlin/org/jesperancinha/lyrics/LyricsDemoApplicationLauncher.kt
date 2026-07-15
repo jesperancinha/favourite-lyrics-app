@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 @EnableTransactionManagement
 @OpenAPIDefinition(
     info = Info(title = "OpenAPI definition"),
-    servers = [Server(url = "\${fla.server.url}", description = "Server URL")]
+    servers = [Server(url = $$"${fla.server.url}", description = "Server URL")]
 )
 class LyricsDemoApplicationLauncher
 

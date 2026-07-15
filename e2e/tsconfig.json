@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
     "baseUrl": "http://fla-nginx:8080",
   },
   "include": ["**/*.ts"]

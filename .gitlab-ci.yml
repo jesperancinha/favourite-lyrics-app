@@ -7,7 +7,7 @@ stages:
   - e2e
   - reporting
   - test
-  - docker-compose
+  - docker-compose-stage
   - update
 
 variables:
@@ -31,7 +31,7 @@ before_script:
   - apt-get upgrade -y
   - apt-get install build-essential -y
   - bash latest-compose.sh
-#  - apt-get install -y docker-compose
+#  - apt-get install -y docker-compose-plugin
 #  - apt-get install -y npm
 #  - npm install --global yarn
 #  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
