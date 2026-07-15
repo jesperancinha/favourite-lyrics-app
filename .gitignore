@@ -58,3 +58,5 @@ screenshots
 
 # Automation
 dependabot.yml.bak
+yarn.lock
+package-lock.json
