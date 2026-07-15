@@ -6,7 +6,12 @@ import org.jesperancinha.lyrics.domain.exception.LyricsNotFoundException
 import org.jesperancinha.lyrics.domain.port.LyricsPersistencePort
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity
 import org.jesperancinha.lyrics.jpa.repository.LyricsRepository
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.Mockito
@@ -16,6 +21,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.util.*
 
 @SpringBootTest(classes = [LyricsJpaAdapter::class, LyricsPersistencePort::class])
+@TestMethodOrder(OrderAnnotation::class)
 class LyricsJpaAdapterTest @Autowired constructor(
     private val lyricsPersistencePort: LyricsPersistencePort,
     @MockitoBean private val mockLyricsRepository: LyricsRepository,
@@ -24,6 +30,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(1)
     fun givenLyrics_whenAddLyrics_thenEntityIsPortedToRepository() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
@@ -40,6 +48,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(2)
     fun givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToRepository() {
         val testLyricsDto = LyricsDto(
             participatingArtist = TEST_AUTHOR,
@@ -52,6 +62,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(3)
     fun givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToRepository() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
@@ -69,6 +81,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(4)
     fun givenArtisId_whenCallingGetLyricsById_thenFindByIdToRepository() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
@@ -84,6 +98,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(5)
     fun givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToRepositoryFails() {
         val testId = UUID.randomUUID()
         Mockito.`when`(mockLyricsRepository.findById(testId)).thenReturn(Optional.empty())
@@ -95,6 +111,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(6)
     fun givenAnExistingParticipatingArtist_whenUpdateLyrics_thenUpdateLyrics() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,
@@ -120,6 +138,8 @@ class LyricsJpaAdapterTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(7)
     fun givenAnExistingLyrics_whenUpdateLyrics_thenUpdateParticipatingArtist() {
         val testLyrics = LyricsEntity(
             participatingArtist = TEST_AUTHOR,

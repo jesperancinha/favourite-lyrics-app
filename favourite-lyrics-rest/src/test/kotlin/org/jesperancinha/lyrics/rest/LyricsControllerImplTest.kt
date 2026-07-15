@@ -3,8 +3,13 @@ package org.jesperancinha.lyrics.rest
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.jesperancinha.lyrics.core.service.LyricsService
 import org.jesperancinha.lyrics.domain.data.LyricsDto
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -20,6 +25,7 @@ import java.util.*
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(LyricsControllerImpl::class)
 @ContextConfiguration(classes = [LyricsController::class, LyricsControllerImpl::class])
+@TestMethodOrder(OrderAnnotation::class)
 class LyricsControllerImplTest @Autowired constructor(
     private val mvc: MockMvc,
     @MockitoBean private val lyricsService: LyricsService,
@@ -27,6 +33,8 @@ class LyricsControllerImplTest @Autowired constructor(
     private val objectMapper = ObjectMapper()
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(1)
     @Throws(Exception::class)
     fun givenLyrics_whenAddLyrics_thenEntityIsPortedToService() {
         val testLyricsDto = LyricsDto(
@@ -45,6 +53,8 @@ class LyricsControllerImplTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(2)
     @Throws(Exception::class)
     fun givenLyrics_whenUpdateLyrics_thenEntityUpdateIsPortedToService() {
         val testLyricsDto = LyricsDto(
@@ -63,6 +73,8 @@ class LyricsControllerImplTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(3)
     @Throws(Exception::class)
     fun givenLyrics_whenRemoveLyrics_thenEntityRemovalIsPortedToService() {
         val testLyricsDto = LyricsDto(
@@ -81,6 +93,8 @@ class LyricsControllerImplTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(4)
     @Throws(Exception::class)
     fun givenCallToAllLyricss_whenNoParams_thenFindAllIsPortedToService() {
         val testLyricsDto = LyricsDto(
@@ -114,6 +128,8 @@ class LyricsControllerImplTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(5)
     @Throws(Exception::class)
     fun givenArtisId_whenCallingGetLyricsById_thenFindByIdToService() {
         val testLyricsDto = LyricsDto(
@@ -148,6 +164,8 @@ class LyricsControllerImplTest @Autowired constructor(
     }
 
     @Test
+    @Execution(SAME_THREAD)
+    @Order(6)
     @Throws(Exception::class)
     fun givenUnexistingArtisId_whenCallingGetLyricsById_thenFindByIdToServiceFails() {
         val id = UUID.randomUUID()
