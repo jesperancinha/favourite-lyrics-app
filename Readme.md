@@ -101,7 +101,7 @@ Prompt claude with the following:
 
 ### Run all skills
 ```text
-please run skills annotations, kotlin, angular, parallel, docker, and spring-integration-test-wiring on this project
+please run skills angular, annotations, docker, java, jee, jvm, kotlin, parallel, readme, spring, and spring-test on this project
 ```
 
 ---
