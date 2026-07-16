@@ -29,8 +29,6 @@
         <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
         <kotlinx-coroutines-debug.version>1.10.2</kotlinx-coroutines-debug.version>
 
-        <junit-jupiter.version>5.5.2</junit-jupiter.version>
-        <assertj-core.version>3.13.2</assertj-core.version>
         <mockito-all.version>1.10.19</mockito-all.version>
         <testcontainers.version>1.21.4</testcontainers.version>
 
