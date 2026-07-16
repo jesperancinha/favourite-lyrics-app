@@ -28,6 +28,7 @@
         <versions-maven-plugin.version>2.19.1</versions-maven-plugin.version>
         <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
         <kotlinx-coroutines-debug.version>1.10.2</kotlinx-coroutines-debug.version>
+        <flyway-maven-plugin.version>11.20.1</flyway-maven-plugin.version>
 
         <mockito-all.version>1.10.19</mockito-all.version>
         <testcontainers.version>1.21.4</testcontainers.version>
