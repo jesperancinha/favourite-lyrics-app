@@ -13,21 +13,20 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
 import org.mockito.ArgumentCaptor
-import org.mockito.Captor
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.util.*
 
-@SpringBootTest(classes = [LyricsJpaAdapter::class, LyricsPersistencePort::class])
+@SpringBootTest(classes = [LyricsJpaAdapter::class, LyricsPersistencePort::class, LyricsRepository::class])
 @TestMethodOrder(OrderAnnotation::class)
 class LyricsJpaAdapterTest @Autowired constructor(
     private val lyricsPersistencePort: LyricsPersistencePort,
     @MockitoBean private val mockLyricsRepository: LyricsRepository,
 ) {
-    @Captor
-    lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
+    private val lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity> =
+        ArgumentCaptor.forClass(LyricsEntity::class.java)
 
     @Test
     @Execution(SAME_THREAD)
@@ -70,7 +69,7 @@ class LyricsJpaAdapterTest @Autowired constructor(
             lyrics = TEST_LYRICS
         )
 
-        val testListLyricss: List<LyricsEntity?> = listOf(testLyrics)
+        val testListLyricss: List<LyricsEntity> = listOf(testLyrics)
         Mockito.`when`(mockLyricsRepository.findAll()).thenReturn(testListLyricss)
         val allLyricsDtos = lyricsPersistencePort.getAllLyrics()
         Mockito.verify(mockLyricsRepository, Mockito.only()).findAll()
@@ -125,6 +124,7 @@ class LyricsJpaAdapterTest @Autowired constructor(
         )
 
         Mockito.`when`(mockLyricsRepository.findByParticipatingArtist(TEST_AUTHOR)).thenReturn(testLyrics)
+        Mockito.`when`(mockLyricsRepository.save(Mockito.any())).thenReturn(testLyrics)
         lyricsPersistencePort.updateLyrics(testLyricsDto)
         Mockito.verify(mockLyricsRepository, Mockito.times(1)).findByParticipatingArtist(TEST_AUTHOR)
         Mockito.verify(mockLyricsRepository, Mockito.times(1)).save(
@@ -152,6 +152,7 @@ class LyricsJpaAdapterTest @Autowired constructor(
         )
 
         Mockito.`when`(mockLyricsRepository.findByLyrics(TEST_LYRICS_3)).thenReturn(testLyrics)
+        Mockito.`when`(mockLyricsRepository.save(Mockito.any())).thenReturn(testLyrics)
         lyricsPersistencePort.updateLyrics(testLyricsDto)
         Mockito.verify(mockLyricsRepository, Mockito.times(1)).findByParticipatingArtist(TEST_AUTHOR_2)
         Mockito.verify(mockLyricsRepository, Mockito.times(1)).findByLyrics(TEST_LYRICS_3)

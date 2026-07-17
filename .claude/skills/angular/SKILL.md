@@ -65,7 +65,11 @@ Add provideHttpClientTesting() to your providers instead.
 
 Use both definitions to make the changes wherever possible.
 
-## 5. Checklist
+## 6. Update the build system, if necessary
+
+Follow the documentation on https://angular.dev/tools/cli/build-system-migration to  make a successful build migration
+
+## 7. Checklist
 
 [] All targets in `tsconfig.json` files should be set to `esnext`
 [] No target should remain with old target compiler option versions

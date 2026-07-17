@@ -1,7 +1,7 @@
 package org.jesperancinha.lyrics.rest
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.jesperancinha.lyrics.core.service.LyricsService
+import org.jesperancinha.lyrics.core.service.LyricsServiceImpl
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.bean.override.mockito.MockitoBean
@@ -20,18 +20,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import tools.jackson.databind.ObjectMapper
 import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(LyricsControllerImpl::class)
-@ContextConfiguration(classes = [LyricsController::class, LyricsControllerImpl::class])
+@ContextConfiguration(classes = [LyricsController::class, LyricsControllerImpl::class, LyricsServiceImpl::class])
 @TestMethodOrder(OrderAnnotation::class)
 class LyricsControllerImplTest @Autowired constructor(
     private val mvc: MockMvc,
     @MockitoBean private val lyricsService: LyricsService,
+    private val objectMapper: ObjectMapper,
 ) {
-    private val objectMapper = ObjectMapper()
-
     @Test
     @Execution(SAME_THREAD)
     @Order(1)
