@@ -254,12 +254,14 @@ Since the `spring`, or the `all-open` plugins make methods, functions, and class
 In maven projects, there should be a node called `spring-boot-starter-parent.version` in the `pom.xml` or something similar that indicates the parent version of `spring-boot` it is being used.
 That version should match the latest stable version.
 Make sure to follow the migration rules to migrate to the latest version of spring-boot.
+If the axon framework is being used, make sure to migrate it to be compatible with the latest spring version.
 
 For reference, please follow the following documents:
 
 1. https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.5-Release-Notes
 2. https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide
 3. https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.1-Release-Notes
+4. https://docs.axoniq.io/axon-framework-reference/5.2/migration/
 
 ## 12. Checklist
 
