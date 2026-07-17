@@ -245,10 +245,27 @@ The `org.springframework.lang.Nullable` is deprecated, please use `org.jspecify.
 
 Replace all usages of `management.metrics.export.statsd.host` with `management.statsd.metrics.export.host`
 
-## 10. Checklist
+## 10. There should be no `open` use when the spring kotlin plugin is being used
 
-[ ] All old security configurations have been updated to the new style. 
+Since the `spring`, or the `all-open` plugins make methods, functions, and classes open by default, the `open` keyword should not be used.
+
+## 11. Migrate to the latest version of spring-boot
+
+In maven projects, there should be a node called `spring-boot-starter-parent.version` in the `pom.xml` or something similar that indicates the parent version of `spring-boot` it is being used.
+That version should match the latest stable version.
+Make sure to follow the migration rules to migrate to the latest version of spring-boot.
+
+For reference, please follow the following documents:
+
+1. https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.5-Release-Notes
+2. https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide
+3. https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.1-Release-Notes
+
+## 12. Checklist
+
+[ ] All old security configurations have been updated to the new style.
 [ ] All usages of `NestedServletException` have been replaced with `ServletException`.
-[ ] All usages of `DataBuffer.toByteBuffer` have been replaced with a more explicit way of creating a ByteBuffer and getting the byte array.
+[ ] All usages of `DataBuffer.toByteBuffer` have been replaced with a more explicit ay of creating a ByteBuffer and getting the byte array.
 [ ] There should be no `override fun run(args: ApplicationArguments?)` left
 [ ] There should be no `import org.springframework.boot.env.EnvironmentPostProcessor` left
+[ ] There should be no usage of the keyword `open`, when using plugins `spring` or `all-open`

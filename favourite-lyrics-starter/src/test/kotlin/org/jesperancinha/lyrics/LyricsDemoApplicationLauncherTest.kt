@@ -1,6 +1,5 @@
 package org.jesperancinha.lyrics
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.hamcrest.collection.IsCollectionWithSize
 import org.jesperancinha.lyrics.domain.data.LyricsDto
 import org.jesperancinha.lyrics.jpa.model.LyricsEntity
@@ -12,10 +11,9 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD
 import org.mockito.ArgumentCaptor
-import org.mockito.Captor
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.DynamicPropertyRegistry
@@ -30,6 +28,7 @@ import org.testcontainers.containers.Network
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import tools.jackson.databind.ObjectMapper
 import java.util.*
 
 @SpringBootTest
@@ -40,9 +39,10 @@ import java.util.*
 class LyricsDemoApplicationLauncherTest @Autowired constructor(
     private val mvc: MockMvc,
     @MockitoSpyBean private val lyricsRepository: LyricsRepository,
+    private val objectMapper: ObjectMapper,
 ) {
-    @Captor
-    lateinit var lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity>
+    private val lyricsEntityArgumentCaptor: ArgumentCaptor<LyricsEntity> =
+        ArgumentCaptor.forClass(LyricsEntity::class.java)
 
     @Test
     @Transactional
@@ -183,7 +183,6 @@ class LyricsDemoApplicationLauncherTest @Autowired constructor(
         private const val TEST_ARTIST_NAME = "Florence and the Machine"
         private const val TEST_LYRICS = "Sweet Nothings"
         private const val TEST_LYRICS_2 = "You've got the love I need to see me through"
-        private val objectMapper = ObjectMapper()
 
         @Container
         @JvmStatic
