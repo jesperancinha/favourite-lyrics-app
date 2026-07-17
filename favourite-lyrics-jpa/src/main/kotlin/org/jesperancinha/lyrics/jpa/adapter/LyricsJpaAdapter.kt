@@ -23,12 +23,12 @@ class LyricsJpaAdapter(private val lyricsRepository: LyricsRepository) : LyricsP
     override fun updateLyrics(lyricsDto: LyricsDto) {
         val byParticipatingArtist =
             lyricsRepository.findByParticipatingArtist(requireNotNull(lyricsDto.participatingArtist))
-        if (isOnlyNullValues(byParticipatingArtist)) {
+        if (Objects.nonNull(byParticipatingArtist)) {
             lyricsRepository.save(byParticipatingArtist.copy(lyrics = lyricsDto.lyrics))
         } else {
-            val findByLyrics: LyricsEntity = lyricsRepository.findByLyrics(requireNotNull(lyricsDto.lyrics))
-            if (!isOnlyNullValues(findByLyrics)) {
-                lyricsRepository.save(findByLyrics.copy(participatingArtist = lyricsDto.participatingArtist))
+            val byLyrics = lyricsRepository.findByLyrics(requireNotNull(lyricsDto.lyrics))
+            if (Objects.nonNull(byLyrics)) {
+                lyricsRepository.save(byLyrics.copy(participatingArtist = lyricsDto.participatingArtist))
             }
         }
     }
