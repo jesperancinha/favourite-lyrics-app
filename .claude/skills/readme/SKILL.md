@@ -55,3 +55,11 @@ with
 </div>
 
 ```
+
+## 3. Remove obsolete badges
+
+Some badges are no longer usable and don't work because some of the frameworks they used have been discontinued.
+For all `.md` files, or other markdown files, please remove badges from the following list:
+
+1. [![codebeat badge]()]() - All codebeat badges should be removed, along with any references to using it.
+2. [![BCH compliance]()]() - All BCH badges should be removed, along with any references to using it.
