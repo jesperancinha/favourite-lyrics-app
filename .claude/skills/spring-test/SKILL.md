@@ -143,8 +143,15 @@ Changes in `MockKBean`
 
 Replace `@MockkBean(classes = [DataSource::class])` with `@MockkBean(types = [DataSource::class])`
 
+## 6. There should be no integration/unit/other tests creating entities with an assigned id
 
-## 6. Test class checklist
+Creating entities via JPA should assume the usage of an ID autogeneration engine.
+It could be a sequence, or something else, like a counter, entity, or any other strategy
+If creating an entity like this, somehow works and is used in the test, the test should be updated so that it does not use a fixed ID on the entity creation and persistence to the database.
+
+Updates and other CRUD methods should be left as is. Only on creation should the above be considered.
+
+## 7. Test class checklist
 
 Before submitting/reviewing an integration test class, confirm:
 
