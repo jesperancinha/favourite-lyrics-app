@@ -69,7 +69,20 @@ Use both definitions to make the changes wherever possible.
 
 Follow the documentation on https://angular.dev/tools/cli/build-system-migration to  make a successful build migration
 
-## 7. Checklist
+## 7. Use scss/css standards for scss files
+
+In old projects, very little attention was given to scss standards.
+Here we want to make sure that all scss is being applied according to the scss documents over at:
+
+1. https://sass-lang.com/documentation/syntax/
+2. https://sass-lang.com/documentation/
+
+When possible, make sure to optimize the use of scss for grids.
+Documentation can be found here:
+
+1. https://css-tricks.com/complete-guide-css-grid-layout/
+
+## 8. Checklist
 
 [] All targets in `tsconfig.json` files should be set to `esnext`
 [] No target should remain with old target compiler option versions
